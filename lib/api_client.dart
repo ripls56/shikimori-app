@@ -102,7 +102,7 @@ class ApiClient {
           "target_id": "15",
           "target_type": "Anime",
           "text": "test",
-          "user_id": "23456789",
+          "user_id": "1156346",
           "volumes": "3"
         }
       },

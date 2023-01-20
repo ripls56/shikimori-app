@@ -45,17 +45,17 @@ class Home extends StatelessWidget {
           onPageFinished: (String url) async {
             if (url.startsWith(apiClient.tokenEndpoint.toString())) {
               if (apiClient.code != "") apiClient.getCreditionals();
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: ((context) => Scaffold(
-                        floatingActionButton: FloatingActionButton(
-                            onPressed: () => apiClient.getRateList()),
-                        body: Center(
-                          child: Text('work'),
-                        ),
-                      )),
-                ),
-              ); // home window
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: ((context) => Scaffold(
+              //           floatingActionButton: FloatingActionButton(
+              //               onPressed: () => apiClient.getRateList()),
+              //           body: Center(
+              //             child: Text('work'),
+              //           ),
+              //         )),
+              //   ),
+              // ); // home window
               apiClient.code = url.split('/')[5];
             }
           },
@@ -74,7 +74,9 @@ class Home extends StatelessWidget {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Container(),
-          onPressed: () {},
+          onPressed: () {
+            apiClient.getRateList();
+          },
         ),
         body: Center(child: WebViewWidget(controller: controller)),
       ),
