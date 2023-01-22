@@ -13,8 +13,18 @@ class ApiClient {
     grant = oauth2.AuthorizationCodeGrant(
         identifier, authorizationEndpoint, tokenEndpoint,
         secret: secret);
+
     authorizationUrl = grant.getAuthorizationUrl(_redirectUri,
         scopes: ['user_rates', 'comments', 'topics']);
+
+    _dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 90));
   }
 
   static const _host = 'https://shikimori.one/api';
@@ -31,19 +41,12 @@ class ApiClient {
 
   String code = "";
 
+  final Dio _dio = Dio();
+
   Future<String> getAccessToken() async {
-    //var a = authorizationUrl.queryParameters;
-    Dio dio = Dio();
-    dio.interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90));
+    //var a = authorizationUrl.queryParameters
     var response =
-        await dio.post('https://shikimori.one/oauth/token', queryParameters: {
+        await _dio.post('https://shikimori.one/oauth/token', queryParameters: {
       'grant_type': 'authorization_code',
       'client_id': identifier,
       'client_secret': secret,
@@ -57,18 +60,9 @@ class ApiClient {
   String accessToken = '';
 
   Future<void> getCreditionals() async {
-    Dio dio = Dio();
-    dio.interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90));
     getAccessToken().then((value) async => {
           accessToken = value,
-          await dio.get(
+          await _dio.get(
             '$_host/users/whoami',
             options: Options(
               headers: {
@@ -80,17 +74,8 @@ class ApiClient {
         });
   }
 
-  Future<void> getRateList() async {
-    Dio dio = Dio();
-    dio.interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90));
-    await dio.post(
+  Future<void> addAnimeInRateList() async {
+    await _dio.post(
       '$_hostV2/user_rates/',
       data: {
         "user_rate": {

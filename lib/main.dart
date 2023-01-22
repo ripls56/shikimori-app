@@ -75,7 +75,7 @@ class Home extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: Container(),
           onPressed: () {
-            apiClient.getRateList();
+            apiClient.addAnimeInRateList();
           },
         ),
         body: Center(child: WebViewWidget(controller: controller)),
