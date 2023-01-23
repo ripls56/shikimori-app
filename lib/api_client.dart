@@ -2,7 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:oauth2/oauth2.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shikimori_app/auth.dart';
+import 'package:shikimori_app/models/auth.dart';
+import 'package:shikimori_app/models/user_rates.dart';
 
 class ApiClient {
   late AuthorizationCodeGrant grant;
@@ -60,18 +61,20 @@ class ApiClient {
   String accessToken = '';
 
   Future<void> getCreditionals() async {
-    getAccessToken().then((value) async => {
-          accessToken = value,
-          await _dio.get(
-            '$_host/users/whoami',
-            options: Options(
-              headers: {
-                'User-Agent': 'mpt coursework',
-                'Authorization': 'Bearer $value'
-              },
-            ),
+    getAccessToken().then(
+      (value) async => {
+        accessToken = value,
+        await _dio.get(
+          '$_host/users/whoami',
+          options: Options(
+            headers: {
+              'User-Agent': 'mpt coursework',
+              'Authorization': 'Bearer $value'
+            },
           ),
-        });
+        ),
+      },
+    );
   }
 
   Future<void> addAnimeInRateList() async {
@@ -98,5 +101,15 @@ class ApiClient {
         },
       ),
     );
+  }
+
+  Future<List<UserRates>> getAnimeRateList() async {
+    final response = await _dio
+        .get('$_hostV2/user_rates/', queryParameters: {'user_id': 1156346});
+    return UserRates.fromJson(response.data);
+  }
+
+  Future<void> getAnimeById() async {
+    await _dio.get('$_host/animes/53111');
   }
 }

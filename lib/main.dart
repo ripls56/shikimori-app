@@ -1,12 +1,6 @@
-import 'dart:async';
-import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shikimori_app/api_client.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:shikimori_app/view/nav_drawer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
@@ -45,17 +39,15 @@ class Home extends StatelessWidget {
           onPageFinished: (String url) async {
             if (url.startsWith(apiClient.tokenEndpoint.toString())) {
               if (apiClient.code != "") apiClient.getCreditionals();
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: ((context) => Scaffold(
-              //           floatingActionButton: FloatingActionButton(
-              //               onPressed: () => apiClient.getRateList()),
-              //           body: Center(
-              //             child: Text('work'),
-              //           ),
-              //         )),
-              //   ),
-              // ); // home window
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => Scaffold(
+                        floatingActionButton: FloatingActionButton(
+                            onPressed: () => apiClient.addAnimeInRateList()),
+                        body: const NavigationDrawer(),
+                      )),
+                ),
+              ); // home window
               apiClient.code = url.split('/')[5];
             }
           },
