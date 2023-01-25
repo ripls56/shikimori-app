@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimori_app/api_client.dart';
-import 'package:shikimori_app/view/nav_drawer.dart';
+import 'package:shikimori_app/cubit/home_cubit_cubit.dart';
+import 'package:shikimori_app/view/home_screen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
@@ -12,12 +14,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: ((context) => HomeCubit()),
         ),
-        home: const Home());
+      ],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            useMaterial3: true,
+            primarySwatch: Colors.blue,
+          ),
+          home: const Home()),
+    );
   }
 }
 
@@ -42,9 +52,9 @@ class Home extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: ((context) => Scaffold(
-                        floatingActionButton: FloatingActionButton(
-                            onPressed: () => apiClient.addAnimeInRateList()),
-                        body: const NavigationDrawer(),
+                        floatingActionButton:
+                            FloatingActionButton(onPressed: () {}),
+                        body: const HomeScreen(),
                       )),
                 ),
               ); // home window
@@ -64,12 +74,6 @@ class Home extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Container(),
-          onPressed: () {
-            apiClient.addAnimeInRateList();
-          },
-        ),
         body: Center(child: WebViewWidget(controller: controller)),
       ),
     );
