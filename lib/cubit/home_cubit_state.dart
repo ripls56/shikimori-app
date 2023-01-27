@@ -1,7 +1,7 @@
-import 'package:shikimori_app/models/user_rate.dart';
+import 'package:shikimori_app/models/anime/anime.dart';
 
 class HomeState {
-  final List<UserRate> userRatesList;
+  final List<Anime> animeList;
 
-  HomeState(this.userRatesList);
+  HomeState(this.animeList);
 }

@@ -2,16 +2,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:shikimori_app/api_client.dart';
 import 'package:shikimori_app/cubit/home_cubit_state.dart';
-import 'package:shikimori_app/models/user_rate.dart';
+import '../models/anime/anime.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeState([]));
 
-  List<UserRate> rates = [];
+  List<Anime> animes = [];
 
-  Future<void> getRateList(int id) async {
+  Future<void> getAnimes(int page) async {
     final apiClient = ApiClient();
-    rates = await apiClient.getAnimeRateList(id);
-    emit(HomeState(rates));
+    animes = await apiClient.getAnimes(page);
+    emit(HomeState(animes));
   }
 }

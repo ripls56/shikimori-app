@@ -1,18 +1,33 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:oauth2/oauth2.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shikimori_app/models/anime%20details/anime_details.dart';
+import 'package:shikimori_app/models/anime/anime.dart';
 import 'package:shikimori_app/models/auth.dart';
+import 'package:shikimori_app/models/creditional/creditional.dart';
 import 'package:shikimori_app/models/user_rate.dart';
 
 class ApiClient {
   late AuthorizationCodeGrant grant;
-
   late Uri authorizationUrl;
+  static const shikimoriUrl = 'https://shikimori.one/';
+  static const _host = 'https://shikimori.one/api';
+  static const _hostV2 = 'https://shikimori.one/api/v2';
+  final _redirectUri = Uri.parse('urn:ietf:wg:oauth:2.0:oob');
+  final authorizationEndpoint =
+      Uri.parse('https://shikimori.one/oauth/authorize');
+  final tokenEndpoint = Uri.parse('https://shikimori.one/oauth/authorize/');
+  static const identifier = 'jWeRpE8bKQ6eT3fTw2yDYS3hup04Zx5v4CMJ9hMqDk4';
+  static const secret = 'jwKxAkVNoOvJqcgro1dsAndXQr0ijJAwxWlNy-ML-ic';
+  String code = "";
+  final Dio _dio = Dio();
+  String accessToken = '';
 
-  ApiClient() {
+  static final ApiClient _singleton = ApiClient._internal();
+
+  ApiClient._internal() {
     grant = oauth2.AuthorizationCodeGrant(
         identifier, authorizationEndpoint, tokenEndpoint,
         secret: secret);
@@ -30,26 +45,11 @@ class ApiClient {
         maxWidth: 90));
   }
 
-  static const _host = 'https://shikimori.one/api';
-  static const _hostV2 = 'https://shikimori.one/api/v2';
-
-  final _redirectUri = Uri.parse('urn:ietf:wg:oauth:2.0:oob');
-
-  final authorizationEndpoint =
-      Uri.parse('https://shikimori.one/oauth/authorize');
-  final tokenEndpoint = Uri.parse('https://shikimori.one/oauth/authorize/');
-
-  static const identifier = 'jWeRpE8bKQ6eT3fTw2yDYS3hup04Zx5v4CMJ9hMqDk4';
-  static const secret = 'jwKxAkVNoOvJqcgro1dsAndXQr0ijJAwxWlNy-ML-ic';
-
-  String code = "";
-
-  final Dio _dio = Dio();
-
-  String accessToken = '';
+  factory ApiClient() {
+    return _singleton;
+  }
 
   Future<String> getAccessToken() async {
-    //var a = authorizationUrl.queryParameters
     var response =
         await _dio.post('https://shikimori.one/oauth/token', queryParameters: {
       'grant_type': 'authorization_code',
@@ -58,25 +58,27 @@ class ApiClient {
       'code': code,
       'redirect_uri': _redirectUri.toString()
     });
-    final String token = Auth.fromJson(response.data).accessToken;
-    return token;
+    if (response.statusCode == 200) {
+      return Auth.fromJson(response.data).accessToken;
+    } else {
+      throw HttpException;
+    }
   }
 
-  Future<void> getCreditionals() async {
-    getAccessToken().then(
-      (value) async => {
-        accessToken = value,
-        await _dio.get(
-          '$_host/users/whoami',
-          options: Options(
-            headers: {
-              'User-Agent': 'mpt coursework',
-              'Authorization': 'Bearer $value'
-            },
-          ),
-        ),
-      },
+  Future<Creditional> getCreditionals() async {
+    var token = await getAccessToken();
+    _dio.options.headers = {
+      'User-Agent': 'mpt coursework',
+      'Authorization': 'Bearer $token'
+    };
+    var response = await _dio.get(
+      '$_host/users/whoami',
     );
+    if (response.statusCode == 200) {
+      return Creditional.fromJson(response.data);
+    } else {
+      throw HttpException;
+    }
   }
 
   Future<void> addAnimeInRateList(UserRate rate) async {
@@ -96,12 +98,6 @@ class ApiClient {
           "volumes": "3"
         }
       },
-      options: Options(
-        headers: {
-          'User-Agent': 'mpt coursework',
-          'Authorization': 'Bearer $accessToken'
-        },
-      ),
     );
   }
 
@@ -117,7 +113,23 @@ class ApiClient {
     }
   }
 
-  Future<void> getAnimeById(int id) async {
-    await _dio.get('$_host/animes/53111');
+  Future<List<Anime>> getAnimes(int page,
+      {String order = "ranked", int limit = 50}) async {
+    var response = await _dio.get(
+      '$_host/animes',
+      queryParameters: {
+        'order': order,
+        'page': page,
+        'limit': limit,
+      },
+    );
+    return (response.data as List<dynamic>)
+        .map((e) => Anime.fromJson((e as Map<String, dynamic>)))
+        .toList();
+  }
+
+  Future<AnimeDetails> getAnimeById(int id) async {
+    var response = await _dio.get('$_host/animes/$id');
+    return AnimeDetails.fromJson(response.data);
   }
 }
