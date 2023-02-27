@@ -3,6 +3,7 @@
 const SHIKIMORI_URL = 'https://shikimori.one/';
 const HOST = 'https://shikimori.one/api';
 const HOSTV2 = 'https://shikimori.one/api/v2';
+String TOKEN = "";
 final REDIRECT_URL = Uri.parse(
     'com.example.shikimori://shikimori.one/oauth/token'); //urn:ietf:wg:oauth:2.0:oob
 final AUTHORIZATION_ENDPOINT =

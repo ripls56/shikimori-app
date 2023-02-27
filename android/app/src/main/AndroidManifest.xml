@@ -32,7 +32,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="shikimori.one"/>
+                <data android:scheme="http" android:host="ripls.online"/>
                 <data android:scheme="poc"/>
             </intent-filter>
         </activity>

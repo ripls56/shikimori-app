@@ -1,6 +1,7 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:oauth2/oauth2.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -30,12 +31,12 @@ class ApiClient {
   static final ApiClient _singleton = ApiClient._internal();
 
   ApiClient._internal() {
-    grant = oauth2.AuthorizationCodeGrant(
-        _identifier, authorizationEndpoint, tokenEndpoint,
-        secret: _secret);
+    // grant = oauth2.AuthorizationCodeGrant(
+    //     _identifier, authorizationEndpoint, tokenEndpoint,
+    //     secret: _secret);
 
-    authorizationUrl = grant.getAuthorizationUrl(redirectUri,
-        scopes: ['user_rates', 'comments', 'topics']);
+    // authorizationUrl = grant.getAuthorizationUrl(redirectUri,
+    //     scopes: ['user_rates', 'comments', 'topics']);
 
     _dio.interceptors.add(PrettyDioLogger(
         requestHeader: true,
@@ -50,7 +51,7 @@ class ApiClient {
   factory ApiClient() {
     return _singleton;
   }
-
+//perenes
   Future<String> getAccessToken() async {
     var response =
         await _dio.post('https://shikimori.one/oauth/token', queryParameters: {
@@ -67,6 +68,7 @@ class ApiClient {
     }
   }
 
+//perenec
   Future<CreditionalModel> getCreditionals() async {
     var token = await getAccessToken();
     _dio.options.headers = {

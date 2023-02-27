@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimori_app/api_client.dart';
-import 'package:shikimori_app/main.dart';
 import 'package:shikimori_app/musor/view/home_screen.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,7 +31,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         ));
       }
     });
-    launchUrl(Uri.parse('https://dfiosjgoisdfjgsfiod.com'),
+    launchUrl(Uri.parse('http://dfiosjgoisdfjgsfiod.com'),
         mode: LaunchMode.externalApplication);
   }
 }

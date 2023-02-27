@@ -10,6 +10,5 @@ class RatesScoresStat extends Equatable {
   final int value;
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }

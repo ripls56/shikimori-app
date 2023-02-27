@@ -1,13 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shikimori_app/api_client.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
 import 'musor/cubit/cubit/anime_detail_cubit.dart';
 import 'musor/cubit/home_cubit_cubit.dart';
 import 'musor/cubit/profile_cubit.dart';

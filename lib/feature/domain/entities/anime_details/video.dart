@@ -20,6 +20,5 @@ class Video extends Equatable {
   final String hosting;
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }

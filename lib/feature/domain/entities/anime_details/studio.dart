@@ -16,6 +16,5 @@ class Studio extends Equatable {
   final String image;
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }

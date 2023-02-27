@@ -32,6 +32,5 @@ class Creditional extends Equatable {
   final String locale;
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }

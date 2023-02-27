@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:shikimori_app/feature/domain/entities/creditional/creditional.dart';
 
 part 'image.dart';

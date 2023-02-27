@@ -10,6 +10,5 @@ class Screenshot extends Equatable {
   final String preview;
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }

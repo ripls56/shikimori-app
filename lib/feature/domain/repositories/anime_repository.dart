@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:shikimori_app/core/error/failure.dart';
 import 'package:shikimori_app/feature/domain/entities/anime/anime.dart';
+import 'package:shikimori_app/feature/domain/entities/anime_details/anime_details.dart';
 
 abstract class AnimeRepository {
   ///Get anime list with page
@@ -8,5 +9,5 @@ abstract class AnimeRepository {
       {String? order = "ranked", int? limit = 50, int? score});
 
   ///Get anime details with id
-  Future<Either<Failure, Anime>> getAnimeById(int id);
+  Future<Either<Failure, AnimeDetails>> getAnimeById(int id);
 }
