@@ -3,11 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:oauth2/oauth2.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shikimori_app/models/anime%20details/anime_details.dart';
-import 'package:shikimori_app/models/anime/anime.dart';
-import 'package:shikimori_app/models/auth.dart';
-import 'package:shikimori_app/models/creditional/creditional.dart';
-import 'package:shikimori_app/models/user_rate.dart';
+
+import 'feature/data/models/anime/anime.dart';
+import 'feature/data/models/anime_details/anime_details.dart';
+import 'feature/data/models/creditional/creditional.dart';
+import 'feature/data/models/user_auth/user_auth.dart';
+import 'feature/data/models/user_rate/user_rate.dart';
 
 class ApiClient {
   late AuthorizationCodeGrant grant;
@@ -15,12 +16,13 @@ class ApiClient {
   static const shikimoriUrl = 'https://shikimori.one/';
   static const _host = 'https://shikimori.one/api';
   static const _hostV2 = 'https://shikimori.one/api/v2';
-  final _redirectUri = Uri.parse('urn:ietf:wg:oauth:2.0:oob');
+  final redirectUri =
+      Uri.parse('https://shikimori.sheme'); //urn:ietf:wg:oauth:2.0:oob
   final authorizationEndpoint =
       Uri.parse('https://shikimori.one/oauth/authorize');
   final tokenEndpoint = Uri.parse('https://shikimori.one/oauth/authorize/');
-  static const identifier = 'jWeRpE8bKQ6eT3fTw2yDYS3hup04Zx5v4CMJ9hMqDk4';
-  static const secret = 'jwKxAkVNoOvJqcgro1dsAndXQr0ijJAwxWlNy-ML-ic';
+  static const _identifier = 'jWeRpE8bKQ6eT3fTw2yDYS3hup04Zx5v4CMJ9hMqDk4';
+  static const _secret = 'jwKxAkVNoOvJqcgro1dsAndXQr0ijJAwxWlNy-ML-ic';
   String code = "";
   final Dio _dio = Dio();
   String accessToken = '';
@@ -29,10 +31,10 @@ class ApiClient {
 
   ApiClient._internal() {
     grant = oauth2.AuthorizationCodeGrant(
-        identifier, authorizationEndpoint, tokenEndpoint,
-        secret: secret);
+        _identifier, authorizationEndpoint, tokenEndpoint,
+        secret: _secret);
 
-    authorizationUrl = grant.getAuthorizationUrl(_redirectUri,
+    authorizationUrl = grant.getAuthorizationUrl(redirectUri,
         scopes: ['user_rates', 'comments', 'topics']);
 
     _dio.interceptors.add(PrettyDioLogger(
@@ -53,19 +55,19 @@ class ApiClient {
     var response =
         await _dio.post('https://shikimori.one/oauth/token', queryParameters: {
       'grant_type': 'authorization_code',
-      'client_id': identifier,
-      'client_secret': secret,
+      'client_id': _identifier,
+      'client_secret': _secret,
       'code': code,
-      'redirect_uri': _redirectUri.toString()
+      'redirect_uri': redirectUri.toString()
     });
     if (response.statusCode == 200) {
-      return Auth.fromJson(response.data).accessToken;
+      return UserAuthModel.fromJson(response.data).accessToken;
     } else {
       throw HttpException;
     }
   }
 
-  Future<Creditional> getCreditionals() async {
+  Future<CreditionalModel> getCreditionals() async {
     var token = await getAccessToken();
     _dio.options.headers = {
       'User-Agent': 'mpt coursework',
@@ -75,13 +77,13 @@ class ApiClient {
       '$_host/users/whoami',
     );
     if (response.statusCode == 200) {
-      return Creditional.fromJson(response.data);
+      return CreditionalModel.fromJson(response.data);
     } else {
       throw HttpException;
     }
   }
 
-  Future<void> addAnimeInRateList(UserRate rate) async {
+  Future<void> addAnimeInRateList(UserRateModel rate) async {
     await _dio.post(
       '$_hostV2/user_rates/',
       data: {
@@ -101,19 +103,19 @@ class ApiClient {
     );
   }
 
-  Future<List<UserRate>> getAnimeRateList(int id) async {
+  Future<List<UserRateModel>> getAnimeRateList(int id) async {
     final response = await _dio
         .get('$_hostV2/user_rates/', queryParameters: {'user_id': id});
     if (response.statusCode! == 200) {
       return (response.data as List<dynamic>)
-          .map((e) => UserRate.fromJson((e as Map<String, dynamic>)))
+          .map((e) => UserRateModel.fromJson((e as Map<String, dynamic>)))
           .toList();
     } else {
       throw HttpException;
     }
   }
 
-  Future<List<Anime>> getAnimes(int page,
+  Future<List<AnimeModel>> getAnimes(int page,
       {String order = "ranked", int limit = 50}) async {
     var response = await _dio.get(
       '$_host/animes',
@@ -124,12 +126,12 @@ class ApiClient {
       },
     );
     return (response.data as List<dynamic>)
-        .map((e) => Anime.fromJson((e as Map<String, dynamic>)))
+        .map((e) => AnimeModel.fromJson((e as Map<String, dynamic>)))
         .toList();
   }
 
-  Future<AnimeDetails> getAnimeById(int id) async {
+  Future<AnimeDetailsModel> getAnimeById(int id) async {
     var response = await _dio.get('$_host/animes/$id');
-    return AnimeDetails.fromJson(response.data);
+    return AnimeDetailsModel.fromJson(response.data);
   }
 }
