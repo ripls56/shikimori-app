@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:shikimori_app/features.dart';
+import 'package:shikimori_app/core/helpers/helper.dart';
 part 'image.dart';
 part 'kind.dart';
 part 'status.dart';

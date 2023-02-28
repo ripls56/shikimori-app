@@ -20,6 +20,10 @@ class CreditionalRemoteDataSourceImpl implements CreditionalRemoteDataSource {
         error: true,
         compact: true,
         maxWidth: 90));
+    _dio.options.headers = {
+      'User-Agent': 'mpt coursework',
+      'Authorization': 'Bearer $TOKEN'
+    };
   }
 
   @override

@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shikimori_app/constants.dart';
 import 'package:shikimori_app/core/error/exception.dart';
 import 'package:shikimori_app/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
 import 'package:shikimori_app/feature/data/models/user_auth/user_auth.dart';

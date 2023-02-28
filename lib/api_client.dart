@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:oauth2/oauth2.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -18,7 +19,7 @@ class ApiClient {
   static const _host = 'https://shikimori.one/api';
   static const _hostV2 = 'https://shikimori.one/api/v2';
   final redirectUri =
-      Uri.parse('https://shikimori.sheme'); //urn:ietf:wg:oauth:2.0:oob
+      Uri.parse('https://shiki.dfgdf'); //urn:ietf:wg:oauth:2.0:oob
   final authorizationEndpoint =
       Uri.parse('https://shikimori.one/oauth/authorize');
   final tokenEndpoint = Uri.parse('https://shikimori.one/oauth/authorize/');
@@ -31,12 +32,12 @@ class ApiClient {
   static final ApiClient _singleton = ApiClient._internal();
 
   ApiClient._internal() {
-    // grant = oauth2.AuthorizationCodeGrant(
-    //     _identifier, authorizationEndpoint, tokenEndpoint,
-    //     secret: _secret);
+    grant = oauth2.AuthorizationCodeGrant(
+        _identifier, authorizationEndpoint, tokenEndpoint,
+        secret: _secret);
 
-    // authorizationUrl = grant.getAuthorizationUrl(redirectUri,
-    //     scopes: ['user_rates', 'comments', 'topics']);
+    authorizationUrl = grant.getAuthorizationUrl(redirectUri,
+        scopes: ['user_rates', 'comments', 'topics']);
 
     _dio.interceptors.add(PrettyDioLogger(
         requestHeader: true,
