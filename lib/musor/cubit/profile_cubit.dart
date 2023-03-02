@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimori_app/api_client.dart';
-import 'package:shikimori_app/musor/view/home_screen.dart';
+import 'package:shikimori_app/presentation/home_screen/view/home_screen.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../feature/data/models/creditional/creditional.dart';

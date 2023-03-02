@@ -36,7 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons:
   flutter_bloc:
-  dio:
+  dio: ^5.0.1
   equatable:
   dartz:
   url_launcher:
@@ -47,10 +47,16 @@ dependencies:
   pretty_dio_logger:
   cached_network_image:
   flutter_neumorphic:
+  json_annotation:
+  flutter_staggered_animations:
+  shimmer:
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  json_serializable:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -12,20 +12,21 @@ class GetAnimes extends UseCase<List<Anime>, GetAnimesParams> {
 
   @override
   Future<Either<Failure, List<Anime>>> call(GetAnimesParams params) async {
-    return await animeRepository.getAnimes(params.page);
+    return await animeRepository.getAnimes(params
+        .page); //order: params.order, limit: params.limit, score: params.score
   }
 }
 
 class GetAnimesParams extends Equatable {
   final int page;
-  final String order;
-  final int limit;
-  final int score;
+  final String? order;
+  final int? limit;
+  final int? score;
 
-  const GetAnimesParams(
+  const GetAnimesParams({
     this.order,
     this.limit,
-    this.score, {
+    this.score,
     required this.page,
   });
 

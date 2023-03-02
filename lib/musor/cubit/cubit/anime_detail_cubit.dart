@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimori_app/api_client.dart';
 import 'package:shikimori_app/feature/data/models/anime_details/anime_details.dart';
-
 part 'anime_detail_state.dart';
 
 class AnimeDetailCubit extends Cubit<AnimeDetailState> {

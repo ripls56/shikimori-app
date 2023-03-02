@@ -1,5 +1,6 @@
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:shikimori_app/core/helpers/images.dart';
+import 'package:shikimori_app/presentation/login_screen/widgets/login_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -8,29 +9,17 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Image.asset(
             AppImages.loagingPageBg,
-            color: Colors.white,
+            color: Colors.black,
           ),
-          const LoginButton(),
+          LoginButton(
+            onTap: () {},
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  const LoginButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return NeumorphicButton(
-      onPressed: () {},
-      child: const Text(
-        'Войти',
-        style: TextStyle(color: Colors.black),
       ),
     );
   }

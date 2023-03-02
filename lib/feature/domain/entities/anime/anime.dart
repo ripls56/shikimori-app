@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:shikimori_app/core/helpers/helper.dart';
 part 'image.dart';
 part 'kind.dart';
 part 'status.dart';
@@ -25,9 +24,9 @@ class Anime extends Equatable {
   final String russian;
   final Image image;
   final String url;
-  final Kind kind;
+  final String kind;
   final String score;
-  final Status status;
+  final String status;
   final int episodes;
   final int episodesAired;
   final DateTime airedOn;

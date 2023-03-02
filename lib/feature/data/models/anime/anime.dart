@@ -1,8 +1,5 @@
 import 'package:shikimori_app/feature/domain/entities/anime/anime.dart';
-import 'package:shikimori_app/core/helpers/helper.dart';
 part 'image.dart';
-part 'kind.dart';
-part 'status.dart';
 
 class AnimeModel extends Anime {
   const AnimeModel({
@@ -37,9 +34,9 @@ class AnimeModel extends Anime {
         russian: json["russian"],
         image: ImageModel.fromJson(json["image"]),
         url: json["url"],
-        kind: kindValues.map[json["kind"]]!,
+        kind: json["kind"],
         score: json["score"],
-        status: statusValues.map[json["status"]]!,
+        status: json["status"],
         episodes: json["episodes"],
         episodesAired: json["episodes_aired"],
         airedOn: DateTime.parse(json["aired_on"]),
@@ -54,9 +51,9 @@ class AnimeModel extends Anime {
         "russian": russian,
         "image": image,
         "url": url,
-        "kind": kindValues.reverse[kind],
+        "kind": kind,
         "score": score,
-        "status": statusValues.reverse[status],
+        "status": status,
         "episodes": episodes,
         "episodes_aired": episodesAired,
         "aired_on":

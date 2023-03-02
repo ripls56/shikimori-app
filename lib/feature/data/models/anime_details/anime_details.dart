@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:shikimori_app/feature/domain/entities/anime_details/anime_details.dart';
 part 'genre.dart';
 part 'image.dart';
@@ -93,7 +92,7 @@ class AnimeDetailsModel extends AnimeDetails {
         id: json["id"],
         name: json["name"],
         russian: json["russian"],
-        image: Image.fromJson(json["image"]),
+        image: ImageModel.fromJson(json["image"]),
         url: json["url"],
         kind: json["kind"],
         score: json["score"],

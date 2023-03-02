@@ -1,19 +1,14 @@
 part of 'anime_details.dart';
 
-class Image extends Equatable {
-  const Image({
-    required this.original,
-    required this.preview,
-    required this.x96,
-    required this.x48,
+class ImageModel extends Image {
+  const ImageModel({
+    required super.original,
+    required super.preview,
+    required super.x96,
+    required super.x48,
   });
 
-  final String original;
-  final String preview;
-  final String x96;
-  final String x48;
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
         original: json["original"],
         preview: json["preview"],
         x96: json["x96"],

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shikimori_app/constants.dart';
 
 import '../cubit/cubit/anime_detail_cubit.dart';
 
@@ -25,10 +27,21 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
       body: BlocBuilder<AnimeDetailCubit, AnimeDetailState>(
         builder: (context, state) {
           if (state is AnimeDetailInitial) {
-            return ListView(
-              children: [
-                Text(state.animeDetails.name),
-              ],
+            var animeDetails = state.animeDetails;
+            return Scaffold(
+              body: ListView(
+                children: [
+                  Row(
+                    children: [
+                      CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          width: MediaQuery.of(context).size.width / 2,
+                          imageUrl:
+                              '$SHIKIMORI_URL${animeDetails.image.original}')
+                    ],
+                  )
+                ],
+              ),
             );
           }
           return const Center(

@@ -47,6 +47,10 @@ class ApiClient {
         error: true,
         compact: true,
         maxWidth: 90));
+
+    _dio.options.headers = {
+      'User-Agent': 'mpt coursework',
+    };
   }
 
   factory ApiClient() {
