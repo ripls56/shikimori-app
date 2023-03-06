@@ -37,7 +37,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                           fit: BoxFit.fill,
                           width: MediaQuery.of(context).size.width / 2,
                           imageUrl:
-                              '$SHIKIMORI_URL${animeDetails.image.original}')
+                              '$SHIKIMORI_URL${animeDetails.image.original}'),
                     ],
                   )
                 ],

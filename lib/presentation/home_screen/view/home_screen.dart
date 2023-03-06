@@ -8,6 +8,8 @@ import 'package:shikimori_app/presentation/home_screen/controller/anime_cubit.da
 import 'package:shikimori_app/presentation/home_screen/controller/anime_page_state.dart';
 import 'package:shikimori_app/presentation/home_screen/widgets/anime_card.dart';
 import 'package:shikimori_app/presentation/home_screen/widgets/loading_card.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -36,7 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          launchUrl(Uri.parse('https://ripls.ru'),
+              mode: LaunchMode.externalApplication);
+          var _sub = linkStream.listen((String? link) {
+            debugPrint(link);
+          }, onError: (err) {
+            // Handle exception by warning the user their action did not succeed
+          });
+          var sub = uriLinkStream.listen((Uri? uri) {
+            debugPrint(uri?.host.toString());
+          }, onError: (err) {
+            // Handle exception by warning the user their action did not succeed
+          });
+        },
         child: const Icon(Icons.add),
       ),
       body: PageView(
@@ -180,20 +195,20 @@ class _AnimeScreenBuilderState extends State<_AnimeScreenBuilder> {
           return Center(child: Text(state.errorMessage));
         }
         if (state is AnimePageEmptyState) {
-          return const _HomeEmptyWidget();
+          return const _AnimeEmptyWidget();
         }
         if (state is AnimePageLoadedState) {
           var animes = context.select((AnimeCubit cubit) => state.animeList);
-          return _HomeLoadedWidget(animes: animes);
+          return _AnimeLoadedWidget(animes: animes);
         }
-        return const _HomeEmptyWidget();
+        return const _AnimeEmptyWidget();
       },
     );
   }
 }
 
-class _HomeLoadedWidget extends StatelessWidget {
-  const _HomeLoadedWidget({
+class _AnimeLoadedWidget extends StatelessWidget {
+  const _AnimeLoadedWidget({
     required this.animes,
   });
 
@@ -204,7 +219,7 @@ class _HomeLoadedWidget extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(vertical: 20),
       shrinkWrap: true,
-      itemExtent: 319,
+      itemExtent: 200,
       itemCount: animes.length,
       itemBuilder: ((context, index) {
         return AnimationConfiguration.staggeredList(
@@ -215,7 +230,7 @@ class _HomeLoadedWidget extends StatelessWidget {
             child: FadeInAnimation(
               duration: const Duration(milliseconds: 500),
               child: AnimeCardWidget(
-                imageUrl: animes[index].image.original,
+                imageUrl: animes[index].image.preview,
                 title: animes[index].name,
                 score: animes[index].score,
                 episodes: animes[index].episodes,
@@ -229,8 +244,8 @@ class _HomeLoadedWidget extends StatelessWidget {
   }
 }
 
-class _HomeEmptyWidget extends StatelessWidget {
-  const _HomeEmptyWidget({
+class _AnimeEmptyWidget extends StatelessWidget {
+  const _AnimeEmptyWidget({
     super.key,
   });
 
@@ -239,7 +254,7 @@ class _HomeEmptyWidget extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(vertical: 20),
       shrinkWrap: true,
-      itemExtent: 319,
+      itemExtent: 200,
       itemCount: 15,
       itemBuilder: ((context, index) {
         return AnimationConfiguration.staggeredList(
