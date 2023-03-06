@@ -1,8 +1,8 @@
-import 'package:shikimori_app/core/error/failure.dart';
+import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:shikimori_app/feature/data/datasources/anime/anime_remote_data_source.dart';
-import 'package:shikimori_app/feature/data/datasources/anime/anime_remote_data_source_impl.dart';
-import 'package:shikimori_app/feature/domain/entities/anime_details/anime_details.dart';
+import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source.dart';
+import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source_impl.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
 import '../../domain/entities/anime/anime.dart';
 import '../../domain/repositories/anime_repository.dart';
 

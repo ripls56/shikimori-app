@@ -1,4 +1,4 @@
-# shikimori_app
+# shikimoriapp
 
 A new Flutter project.
 

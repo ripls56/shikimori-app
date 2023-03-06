@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "shikimori_app",
+            "name": "shikimoriapp",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -13,13 +13,13 @@
                ]
         },
         {
-            "name": "shikimori_app (profile mode)",
+            "name": "shikimoriapp (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "shikimori_app (release mode)",
+            "name": "shikimoriapp (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

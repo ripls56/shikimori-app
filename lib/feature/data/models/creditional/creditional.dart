@@ -1,4 +1,4 @@
-import 'package:shikimori_app/feature/domain/entities/creditional/creditional.dart';
+import 'package:shikimoriapp/feature/domain/entities/creditional/creditional.dart';
 
 part 'image.dart';
 

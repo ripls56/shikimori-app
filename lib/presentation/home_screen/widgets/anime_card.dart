@@ -3,8 +3,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:shikimori_app/api_client.dart';
-import 'package:shikimori_app/musor/view/anime_details.dart';
+import 'package:shikimoriapp/api_client.dart';
+import 'package:shikimoriapp/musor/view/anime_details.dart';
 
 class AnimeCardWidget extends StatelessWidget {
   const AnimeCardWidget({

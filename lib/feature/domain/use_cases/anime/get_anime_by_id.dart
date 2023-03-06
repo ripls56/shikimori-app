@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shikimori_app/core/error/failure.dart';
-import 'package:shikimori_app/core/usecase/usecase.dart';
-import 'package:shikimori_app/feature/domain/entities/anime_details/anime_details.dart';
-import 'package:shikimori_app/feature/domain/repositories/anime_repository.dart';
+import 'package:shikimoriapp/core/error/failure.dart';
+import 'package:shikimoriapp/core/usecase/usecase.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
+import 'package:shikimoriapp/feature/domain/repositories/anime_repository.dart';
 
 class GetAnimeById extends UseCase<AnimeDetails, GetAnimeByIdParams> {
   final AnimeRepository animeRepository;

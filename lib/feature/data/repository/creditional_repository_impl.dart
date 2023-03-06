@@ -1,9 +1,9 @@
-import 'package:shikimori_app/feature/data/datasources/creditional/creditional_remote_data_source.dart';
-import 'package:shikimori_app/feature/data/datasources/creditional/creditional_remote_data_source_impl.dart';
-import 'package:shikimori_app/feature/domain/entities/creditional/creditional.dart';
-import 'package:shikimori_app/core/error/failure.dart';
+import 'package:shikimoriapp/feature/data/datasources/creditional/creditional_remote_data_source.dart';
+import 'package:shikimoriapp/feature/data/datasources/creditional/creditional_remote_data_source_impl.dart';
+import 'package:shikimoriapp/feature/domain/entities/creditional/creditional.dart';
+import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:shikimori_app/feature/domain/repositories/creditional_repository.dart';
+import 'package:shikimoriapp/feature/domain/repositories/creditional_repository.dart';
 
 class CreditionalRepositoryImpl implements CreditionalRepository {
   CreditionalRemoteDataSource creditional = CreditionalRemoteDataSourceImpl();

@@ -1,4 +1,4 @@
-package com.example.shikimori_app
+package com.example.shikimoriapp
 
 import io.flutter.embedding.android.FlutterActivity
 

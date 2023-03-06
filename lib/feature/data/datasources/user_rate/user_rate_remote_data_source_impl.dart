@@ -2,11 +2,11 @@
 
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shikimori_app/constants.dart';
-import 'package:shikimori_app/core/error/exception.dart';
-import 'package:shikimori_app/feature/data/datasources/user_rate/user_rate_remote_data_source.dart';
-import 'package:shikimori_app/feature/data/models/user_rate/user_rate.dart';
-import 'package:shikimori_app/feature/domain/entities/user_rate/user_rate.dart';
+import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/core/error/exception.dart';
+import 'package:shikimoriapp/feature/data/datasources/user_rate/user_rate_remote_data_source.dart';
+import 'package:shikimoriapp/feature/data/models/user_rate/user_rate.dart';
+import 'package:shikimoriapp/feature/domain/entities/user_rate/user_rate.dart';
 
 class UserRateRemoteDataSourceImpl implements UserRateRemoteDataSource {
   final _dio = Dio();

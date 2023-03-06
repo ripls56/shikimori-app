@@ -1,4 +1,4 @@
-import 'package:shikimori_app/feature/domain/entities/user_auth/user_auth.dart';
+import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
 
 class UserAuthModel extends UserAuth {
   const UserAuthModel({

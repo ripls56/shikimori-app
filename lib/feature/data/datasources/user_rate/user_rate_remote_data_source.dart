@@ -1,4 +1,4 @@
-import 'package:shikimori_app/feature/domain/entities/user_rate/user_rate.dart';
+import 'package:shikimoriapp/feature/domain/entities/user_rate/user_rate.dart';
 
 abstract class UserRateRemoteDataSource {
   ///Get user rate by id

@@ -1,4 +1,4 @@
-name: shikimori_app
+name: shikimoriapp
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -51,6 +51,7 @@ dependencies:
   flutter_staggered_animations:
   shimmer:
   flutter_rating_bar:
+  app_links: ^3.4.2
 
 dev_dependencies:
   flutter_test:

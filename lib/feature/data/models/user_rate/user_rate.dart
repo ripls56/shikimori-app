@@ -1,4 +1,4 @@
-import 'package:shikimori_app/feature/domain/entities/user_rate/user_rate.dart';
+import 'package:shikimoriapp/feature/domain/entities/user_rate/user_rate.dart';
 
 class UserRateModel extends UserRate {
   const UserRateModel({

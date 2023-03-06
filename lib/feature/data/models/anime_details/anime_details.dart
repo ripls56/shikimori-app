@@ -1,4 +1,4 @@
-import 'package:shikimori_app/feature/domain/entities/anime_details/anime_details.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
 part 'genre.dart';
 part 'image.dart';
 part 'rates_score_stat.dart';

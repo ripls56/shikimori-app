@@ -2,12 +2,11 @@
 
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shikimori_app/constants.dart';
-import 'package:shikimori_app/core/error/exception.dart';
-import 'package:shikimori_app/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
-import 'package:shikimori_app/feature/data/models/user_auth/user_auth.dart';
+import 'package:shikimoriapp/core/error/exception.dart';
+import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
+import 'package:shikimoriapp/feature/data/models/user_auth/user_auth.dart';
 
-class UserAuthRemoteDataSourceImpl implements UserAuthRemoteDataSource {
+class UserAuthRemoteDataSourceImpl implements GetAccessTokenRemoteDataSource {
   final _dio = Dio();
   UserAuthRemoteDataSourceImpl() {
     _dio.interceptors.add(PrettyDioLogger(
@@ -21,11 +20,11 @@ class UserAuthRemoteDataSourceImpl implements UserAuthRemoteDataSource {
   }
 
   @override
-  Future<UserAuthModel> auth(
-      String identifier, String secret, String code, Uri redirectUri) async {
+  Future<UserAuthModel> getAccessToken(String grantType, String identifier,
+      String secret, String code, Uri redirectUri) async {
     var response =
         await _dio.post('https://shikimori.one/oauth/token', queryParameters: {
-      'grant_type': 'authorization_code',
+      'grant_type': grantType,
       'client_id': identifier,
       'client_secret': secret,
       'code': code,

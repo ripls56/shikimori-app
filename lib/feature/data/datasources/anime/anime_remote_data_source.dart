@@ -1,5 +1,5 @@
-import 'package:shikimori_app/feature/domain/entities/anime/anime.dart';
-import 'package:shikimori_app/feature/domain/entities/anime_details/anime_details.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
 
 abstract class AnimeRemoteDataSource {
   ///Get anime list with page

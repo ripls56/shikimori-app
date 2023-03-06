@@ -3,11 +3,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shikimori_app/constants.dart';
-import 'package:shikimori_app/core/error/exception.dart';
-import 'package:shikimori_app/feature/data/datasources/creditional/creditional_remote_data_source.dart';
-import 'package:shikimori_app/feature/data/models/creditional/creditional.dart';
-import 'package:shikimori_app/feature/domain/entities/creditional/creditional.dart';
+import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/core/error/exception.dart';
+import 'package:shikimoriapp/feature/data/datasources/creditional/creditional_remote_data_source.dart';
+import 'package:shikimoriapp/feature/data/models/creditional/creditional.dart';
+import 'package:shikimoriapp/feature/domain/entities/creditional/creditional.dart';
 
 class CreditionalRemoteDataSourceImpl implements CreditionalRemoteDataSource {
   final _dio = Dio();

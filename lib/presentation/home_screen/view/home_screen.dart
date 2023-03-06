@@ -2,14 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:shikimori_app/feature/domain/entities/anime/anime.dart';
-import 'package:shikimori_app/musor/cubit/profile_cubit.dart';
-import 'package:shikimori_app/presentation/home_screen/controller/anime_cubit.dart';
-import 'package:shikimori_app/presentation/home_screen/controller/anime_page_state.dart';
-import 'package:shikimori_app/presentation/home_screen/widgets/anime_card.dart';
-import 'package:shikimori_app/presentation/home_screen/widgets/loading_card.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
+import 'package:shikimoriapp/musor/cubit/profile_cubit.dart';
+import 'package:shikimoriapp/presentation/home_screen/controller/anime/anime_cubit.dart';
+import 'package:shikimoriapp/presentation/home_screen/controller/anime/anime_page_state.dart';
+import 'package:shikimoriapp/presentation/home_screen/widgets/anime_card.dart';
+import 'package:shikimoriapp/presentation/home_screen/widgets/loading_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -38,20 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          launchUrl(Uri.parse('https://ripls.ru'),
-              mode: LaunchMode.externalApplication);
-          var _sub = linkStream.listen((String? link) {
-            debugPrint(link);
-          }, onError: (err) {
-            // Handle exception by warning the user their action did not succeed
-          });
-          var sub = uriLinkStream.listen((Uri? uri) {
-            debugPrint(uri?.host.toString());
-          }, onError: (err) {
-            // Handle exception by warning the user their action did not succeed
-          });
-        },
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
       body: PageView(
@@ -191,13 +176,13 @@ class _AnimeScreenBuilderState extends State<_AnimeScreenBuilder> {
   Widget build(BuildContext context) {
     return BlocBuilder<AnimeCubit, AnimePageState>(
       builder: (context, state) {
-        if (state is AnimePageErrorState) {
+        if (state is AnimePageError) {
           return Center(child: Text(state.errorMessage));
         }
-        if (state is AnimePageEmptyState) {
+        if (state is AnimePageEmpty) {
           return const _AnimeEmptyWidget();
         }
-        if (state is AnimePageLoadedState) {
+        if (state is AnimePageLoaded) {
           var animes = context.select((AnimeCubit cubit) => state.animeList);
           return _AnimeLoadedWidget(animes: animes);
         }

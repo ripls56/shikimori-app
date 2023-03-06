@@ -1,4 +1,4 @@
-import 'package:shikimori_app/feature/domain/entities/anime/anime.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 part 'image.dart';
 
 class AnimeModel extends Anime {
