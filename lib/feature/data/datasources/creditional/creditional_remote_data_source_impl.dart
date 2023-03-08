@@ -22,7 +22,7 @@ class CreditionalRemoteDataSourceImpl implements CreditionalRemoteDataSource {
         maxWidth: 90));
     _dio.options.headers = {
       'User-Agent': 'mpt coursework',
-      'Authorization': 'Bearer $TOKEN'
+      'Authorization': 'Bearer $ACCESS_TOKEN'
     };
   }
 
@@ -31,11 +31,6 @@ class CreditionalRemoteDataSourceImpl implements CreditionalRemoteDataSource {
     var response = await _dio.get(
       '$HOST/users/whoami',
     );
-    _dio.options.headers = {
-      'User-Agent': 'mpt coursework',
-      'Authorization': 'Bearer $token'
-    };
-    TOKEN = token;
     if (response.statusCode == 200) {
       return CreditionalModel.fromJson(response.data);
     } else {

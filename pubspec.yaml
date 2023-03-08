@@ -48,10 +48,10 @@ dependencies:
   cached_network_image:
   flutter_neumorphic:
   json_annotation:
+  shared_preferences:
   flutter_staggered_animations:
   shimmer:
   flutter_rating_bar:
-  app_links: ^3.4.2
 
 dev_dependencies:
   flutter_test:

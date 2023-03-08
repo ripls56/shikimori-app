@@ -21,7 +21,7 @@ class UserRateRemoteDataSourceImpl implements UserRateRemoteDataSource {
         maxWidth: 90));
     _dio.options.headers = {
       'User-Agent': 'mpt coursework',
-      'Authorization': 'Bearer $TOKEN'
+      'Authorization': 'Bearer $ACCESS_TOKEN'
     };
   }
 
@@ -31,16 +31,16 @@ class UserRateRemoteDataSourceImpl implements UserRateRemoteDataSource {
       '$HOSTV2/user_rates/',
       data: {
         "user_rate": {
-          "chapters": "4",
-          "episodes": "2",
-          "rewatches": "5",
-          "score": "10",
-          "status": "completed",
-          "target_id": "15",
-          "target_type": "Anime",
-          "text": "test",
-          "user_id": "1156346",
-          "volumes": "3"
+          "chapters": rate.chapters,
+          "episodes": rate.episodes,
+          "rewatches": rate.rewatches,
+          "score": rate.score,
+          "status": rate.status,
+          "target_id": rate.targetId,
+          "target_type": rate.targetType,
+          "text": rate.text,
+          "user_id": rate.userId,
+          "volumes": rate.volumes
         }
       },
     );

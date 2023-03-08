@@ -23,7 +23,7 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
         maxWidth: 90));
     _dio.options.headers = {
       'User-Agent': 'mpt coursework',
-      'Authorization': 'Bearer $TOKEN'
+      'Authorization': 'Bearer $ACCESS_TOKEN'
     };
   }
 

@@ -4,7 +4,8 @@ const SHIKIMORI_URL = 'https://shikimori.one/';
 const HOST = 'https://shikimori.one/api';
 const HOSTV2 = 'https://shikimori.one/api/v2';
 const GRANT_TYPE = 'authorization_code';
-String TOKEN = "";
+const String SCROLL_POSITION_KEY_NAME = 'HOME_SCROLL_POSITION';
+String ACCESS_TOKEN = "";
 final REDIRECT_URL = Uri.parse('https://ripls.ru'); //urn:ietf:wg:oauth:2.0:oob
 final AUTHORIZATION_ENDPOINT =
     Uri.parse('https://shikimori.one/oauth/authorize');
