@@ -39,4 +39,19 @@ class AnimeRepositoryImpl implements AnimeRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<Video>>> getVideos(int id) async {
+    return await _getVideos(() => animeRemoteDataSource.getVideos(id));
+  }
+
+  Future<Either<Failure, List<Video>>> _getVideos(
+      Future<List<Video>> Function() videos) async {
+    try {
+      final model = await videos();
+      return Right(model);
+    } catch (_) {
+      return Left(ServerFailure());
+    }
+  }
 }

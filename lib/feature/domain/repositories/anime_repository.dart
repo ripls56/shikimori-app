@@ -10,4 +10,7 @@ abstract class AnimeRepository {
 
   ///Get anime details with id
   Future<Either<Failure, AnimeDetails>> getAnimeById(int id);
+
+  ///Get all anime videos by id
+  Future<Either<Failure, List<Video>>> getVideos(int id);
 }

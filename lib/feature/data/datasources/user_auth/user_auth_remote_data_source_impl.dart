@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/models/user_auth/user_auth.dart';
@@ -17,6 +18,10 @@ class UserAuthRemoteDataSourceImpl implements GetAccessTokenRemoteDataSource {
         error: true,
         compact: true,
         maxWidth: 90));
+    _dio.options.headers = {
+      'User-Agent': 'mpt coursework',
+      'Authorization': 'Bearer $ACCESS_TOKEN'
+    };
   }
 
   @override

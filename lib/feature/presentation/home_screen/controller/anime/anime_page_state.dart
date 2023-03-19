@@ -16,6 +16,8 @@ class AnimePageLoaded extends AnimePageState {
 
 class AnimePageEmpty extends AnimePageState {}
 
+class AnimePageLoading extends AnimePageState {}
+
 class AnimePageError extends AnimePageState {
   final String errorMessage;
 

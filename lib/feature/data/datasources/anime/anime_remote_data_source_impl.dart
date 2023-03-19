@@ -23,7 +23,6 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
         maxWidth: 90));
     _dio.options.headers = {
       'User-Agent': 'mpt coursework',
-      'Authorization': 'Bearer $ACCESS_TOKEN'
     };
   }
 
@@ -51,6 +50,20 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
     if (response.statusCode == 200) {
       return (response.data as List<dynamic>)
           .map((e) => AnimeModel.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<Video>> getVideos(int id) async {
+    var response = await _dio.get(
+      '$HOST/animes/$id/videos',
+    );
+    if (response.statusCode == 200) {
+      return (response.data as List<dynamic>)
+          .map((e) => VideoModel.fromJson((e as Map<String, dynamic>)))
           .toList();
     } else {
       throw ServerException();
