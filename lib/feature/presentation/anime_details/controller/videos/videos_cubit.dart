@@ -12,6 +12,7 @@ class VideosCubit extends Cubit<VideosState> {
 
   Future<void> getAllVideos(int id) async {
     try {
+      emit(VideosEmpty());
       final loadedOrFailure = await getVideos.call(GetVideosParams(id: id));
       loadedOrFailure.fold(
         (error) => {emit(VideosError(errorMessage: error.toString()))},

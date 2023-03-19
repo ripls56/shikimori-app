@@ -54,4 +54,20 @@ class AnimeRepositoryImpl implements AnimeRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<Screenshot>>> getScreenshots(int id) async {
+    return await _getScreenshots(
+        () => animeRemoteDataSource.getScreenshots(id));
+  }
+
+  Future<Either<Failure, List<Screenshot>>> _getScreenshots(
+      Future<List<Screenshot>> Function() screenshots) async {
+    try {
+      final model = await screenshots();
+      return Right(model);
+    } catch (_) {
+      return Left(ServerFailure());
+    }
+  }
 }

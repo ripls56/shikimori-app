@@ -16,15 +16,6 @@ class GetVideos extends UseCase<List<Video>, GetVideosParams> {
   }
 }
 
-class GetAnimeByIdParams extends Equatable {
-  final int id;
-
-  const GetAnimeByIdParams({required this.id});
-
-  @override
-  List<Object?> get props => [id];
-}
-
 class GetVideosParams extends Equatable {
   final int id;
 

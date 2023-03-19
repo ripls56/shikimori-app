@@ -13,4 +13,7 @@ abstract class AnimeRepository {
 
   ///Get all anime videos by id
   Future<Either<Failure, List<Video>>> getVideos(int id);
+
+  ///Get all screenshot videos by id
+  Future<Either<Failure, List<Screenshot>>> getScreenshots(int id);
 }

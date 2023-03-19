@@ -17,4 +17,9 @@ abstract class AnimeRemoteDataSource {
   ///
   ///Throws [ServerException] for all code errors
   Future<List<Video>> getVideos(int id);
+
+  ///Get anime videos with id
+  ///
+  ///Throws [ServerException] for all code errors
+  Future<List<Screenshot>> getScreenshots(int id);
 }

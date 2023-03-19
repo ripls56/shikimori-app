@@ -69,4 +69,18 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
       throw ServerException();
     }
   }
+
+  @override
+  Future<List<Screenshot>> getScreenshots(int id) async {
+    var response = await _dio.get(
+      '$HOST/animes/$id/screenshots',
+    );
+    if (response.statusCode == 200) {
+      return (response.data as List<dynamic>)
+          .map((e) => ScreenshotModel.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    } else {
+      throw ServerException();
+    }
+  }
 }

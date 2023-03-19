@@ -52,7 +52,8 @@ dependencies:
   flutter_staggered_animations:
   shimmer:
   flutter_rating_bar:
-  video_player:
+  palette_generator:
+  flutter_cache_manager:
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class VideosPage extends StatefulWidget {
   const VideosPage({super.key, required this.id});
@@ -21,16 +22,63 @@ class _VideosPageState extends State<VideosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Видео"),
+        centerTitle: true,
+      ),
       body: BlocBuilder<VideosCubit, VideosState>(
         builder: (context, state) {
           if (state is VideosError) {
             return Center(child: Text(state.errorMessage));
           }
           if (state is VideosLoaded) {
-            return ListView.builder(
+            return GridView.builder(
+              padding: const EdgeInsets.all(12),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 14 / 8),
               itemCount: state.videos.length,
               itemBuilder: (context, index) {
-                return Text(state.videos[index].playerUrl);
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: Image.network(
+                          state.videos[index].imageUrl,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              backgroundColor: Colors.transparent,
+                              child: SizedBox(
+                                height: MediaQuery.of(context).size.width / 2,
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: WebViewWidget(
+                                    controller: WebViewController()
+                                      ..setJavaScriptMode(
+                                        JavaScriptMode.unrestricted,
+                                      )
+                                      ..loadRequest(
+                                        Uri.parse(
+                                            state.videos[index].playerUrl),
+                                      ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               },
             );
           }
