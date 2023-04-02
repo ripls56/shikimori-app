@@ -1,13 +1,13 @@
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
-import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
 import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:shikimoriapp/feature/domain/repositories/access_token_repository.dart';
 
 class GetAccessTokenRepositoryImpl implements GetAccessTokenRepository {
-  GetAccessTokenRemoteDataSource tokenRemoteDataSource =
-      UserAuthRemoteDataSourceImpl();
+  final UserAuthRemoteDataSource tokenRemoteDataSource;
+
+  GetAccessTokenRepositoryImpl(this.tokenRemoteDataSource);
   @override
   Future<Either<Failure, UserAuth>> getAccessToken(String grantType,
       String identifier, String secret, String code, Uri redirectUri) async {

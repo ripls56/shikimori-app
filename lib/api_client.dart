@@ -39,14 +39,16 @@ class ApiClient {
     authorizationUrl = grant.getAuthorizationUrl(redirectUri,
         scopes: ['user_rates', 'comments', 'topics']);
 
-    _dio.interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90));
+    _dio.interceptors.add(
+      PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: false,
+          error: true,
+          compact: true,
+          maxWidth: 90),
+    );
 
     _dio.options.headers = {
       'User-Agent': 'mpt coursework',

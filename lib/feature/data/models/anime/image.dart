@@ -1,4 +1,4 @@
-part of 'anime.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime/image.dart';
 
 class ImageModel extends Image {
   const ImageModel({

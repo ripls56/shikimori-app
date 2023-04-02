@@ -1,13 +1,15 @@
 import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source.dart';
-import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source_impl.dart';
+import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
-import '../../domain/entities/anime/anime.dart';
-import '../../domain/repositories/anime_repository.dart';
+import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
+import 'package:shikimoriapp/feature/domain/repositories/anime_repository.dart';
 
 class AnimeRepositoryImpl implements AnimeRepository {
-  AnimeRemoteDataSource animeRemoteDataSource = AnimeRemoteDataSourceImpl();
+  final AnimeRemoteDataSource animeRemoteDataSource;
+
+  AnimeRepositoryImpl(this.animeRemoteDataSource);
   @override
   Future<Either<Failure, AnimeDetails>> getAnimeById(int id) async {
     return await _getAnimeById(() => animeRemoteDataSource.getAnimeById(id));
@@ -65,6 +67,21 @@ class AnimeRepositoryImpl implements AnimeRepository {
       Future<List<Screenshot>> Function() screenshots) async {
     try {
       final model = await screenshots();
+      return Right(model);
+    } catch (_) {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Related>>> getRelated(int id) async {
+    return await _getRelated(() => animeRemoteDataSource.getRelatedAnime(id));
+  }
+
+  Future<Either<Failure, List<Related>>> _getRelated(
+      Future<List<Related>> Function() relateds) async {
+    try {
+      final model = await relateds();
       return Right(model);
     } catch (_) {
       return Left(ServerFailure());

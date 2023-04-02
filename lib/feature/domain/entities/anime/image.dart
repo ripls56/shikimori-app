@@ -1,4 +1,4 @@
-part of 'anime.dart';
+import 'package:equatable/equatable.dart';
 
 class Image extends Equatable {
   const Image({

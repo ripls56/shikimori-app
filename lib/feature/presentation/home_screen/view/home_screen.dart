@@ -6,7 +6,7 @@ import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anime_screen_builder.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/home/home_nav_drawer.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/widgets/manga/manga_builder_widget.dart';
+import 'package:shikimoriapp/feature/presentation/home_screen/widgets/manga/manga_screen_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           AnimeScreenBuilder(
             position: _position,
           ),
-          const MangaScreenBuilder(),
+          // const MangaScreenBuilder(),
         ],
       ),
       appBar: AppBar(

@@ -28,10 +28,10 @@ class MangaLoadedWidget extends StatelessWidget {
             child: FadeInAnimation(
               duration: const Duration(milliseconds: 500),
               child: AnimeCardWidget(
-                imageUrl: animes[index].image.preview,
+                imageUrl: animes[index].image?.preview ?? '',
                 title: animes[index].name,
-                score: animes[index].score,
-                episodes: animes[index].episodes,
+                score: animes[index].score ?? '',
+                episodes: animes[index].episodes ?? 1,
                 animeId: animes[index].id,
               ),
             ),

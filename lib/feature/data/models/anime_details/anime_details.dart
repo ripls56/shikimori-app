@@ -1,3 +1,4 @@
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
 part 'genre.dart';
 part 'image.dart';
@@ -20,7 +21,7 @@ class AnimeDetailsModel extends AnimeDetails {
     required episodes,
     required episodesAired,
     required airedOn,
-    required releasedOn,
+    required DateTime? releasedOn,
     required rating,
     required english,
     required japanese,
@@ -100,11 +101,19 @@ class AnimeDetailsModel extends AnimeDetails {
         episodes: json["episodes"],
         episodesAired: json["episodes_aired"],
         airedOn: DateTime.parse(json["aired_on"]),
-        releasedOn: DateTime.parse(json["released_on"]),
+        releasedOn: json["released_on"] != null
+            ? DateTime.parse(json["released_on"])
+            : null,
         rating: json["rating"],
-        english: List<String>.from(json["english"].map((x) => x)),
-        japanese: List<String>.from(json["japanese"].map((x) => x)),
-        synonyms: List<String>.from(json["synonyms"].map((x) => x)),
+        english: json["english"] != null
+            ? List<String>.from(json["english"].map((x) => x))
+            : null,
+        japanese: json["japanese"] != null
+            ? List<String>.from(json["japanese"].map((x) => x))
+            : null,
+        synonyms: json["synonyms"] != null
+            ? List<String>.from(json["synonyms"].map((x) => x))
+            : null,
         licenseNameRu: json["license_name_ru"],
         duration: json["duration"],
         description: json["description"],
@@ -117,24 +126,41 @@ class AnimeDetailsModel extends AnimeDetails {
         threadId: json["thread_id"],
         topicId: json["topic_id"],
         myanimelistId: json["myanimelist_id"],
-        ratesScoresStats: List<RatesScoresStat>.from(json["rates_scores_stats"]
-            .map((x) => RatesScoresStatModel.fromJson(x))),
-        ratesStatusesStats: List<RatesStatusesStat>.from(
-            json["rates_statuses_stats"]
-                .map((x) => RatesStatusesStatModel.fromJson(x))),
+        ratesScoresStats: json["rates_scores_stats"] != null
+            ? List<RatesScoresStat>.from(json["rates_scores_stats"]
+                .map((x) => RatesScoresStatModel.fromJson(x)))
+            : null,
+        ratesStatusesStats: json["rates_statuses_stats"] != null
+            ? List<RatesStatusesStat>.from(json["rates_statuses_stats"]
+                .map((x) => RatesStatusesStatModel.fromJson(x)))
+            : null,
         updatedAt: DateTime.parse(json["updated_at"]),
         nextEpisodeAt: json["next_episode_at"],
-        fansubbers: List<String>.from(json["fansubbers"].map((x) => x)),
-        fandubbers: List<String>.from(json["fandubbers"].map((x) => x)),
-        licensors: List<dynamic>.from(json["licensors"].map((x) => x)),
-        genres:
-            List<Genre>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
-        studios: List<Studio>.from(
-            json["studios"].map((x) => StudioModel.fromJson(x))),
-        videos:
-            List<Video>.from(json["videos"].map((x) => VideoModel.fromJson(x))),
-        screenshots: List<Screenshot>.from(
-            json["screenshots"].map((x) => ScreenshotModel.fromJson(x))),
+        fansubbers: json["fansubbers"] != null
+            ? List<String>.from(json["fansubbers"].map((x) => x))
+            : null,
+        fandubbers: json["fandubbers"] != null
+            ? List<String>.from(json["fandubbers"].map((x) => x))
+            : null,
+        licensors: json["licensors"] != null
+            ? List<String>.from(json["licensors"].map((x) => x))
+            : null,
+        genres: json["genres"] != null
+            ? List<Genre>.from(
+                json["genres"].map((x) => GenreModel.fromJson(x)))
+            : null,
+        studios: json["studios"] != null
+            ? List<Studio>.from(
+                json["studios"].map((x) => StudioModel.fromJson(x)))
+            : null,
+        videos: json["videos"] != null
+            ? List<Video>.from(
+                json["videos"].map((x) => VideoModel.fromJson(x)))
+            : null,
+        screenshots: json["screenshots"] != null
+            ? List<Screenshot>.from(
+                json["screenshots"].map((x) => ScreenshotModel.fromJson(x)))
+            : null,
         userRate: json["user_rate"],
       );
 

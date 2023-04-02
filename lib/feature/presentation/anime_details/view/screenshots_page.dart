@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/screenshots/screenshots_cubit.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:shikimoriapp/feature/presentation/widgets/custom_loading_bar.dart';
 
 class ScreenshotsPage extends StatefulWidget {
   const ScreenshotsPage({super.key, required this.id});
@@ -81,7 +80,7 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
               },
             );
           }
-          return const Center(child: CircularProgressIndicator());
+          return const CustomLoadingBar();
         },
       ),
     );

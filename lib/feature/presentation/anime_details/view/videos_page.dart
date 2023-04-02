@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
+import 'package:shikimoriapp/feature/presentation/widgets/custom_loading_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class VideosPage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _VideosPageState extends State<VideosPage> {
               padding: const EdgeInsets.all(12),
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 14 / 8),
+                  crossAxisCount: 2, childAspectRatio: 1.75),
               itemCount: state.videos.length,
               itemBuilder: (context, index) {
                 return Padding(
@@ -82,7 +83,7 @@ class _VideosPageState extends State<VideosPage> {
               },
             );
           }
-          return const Center(child: CircularProgressIndicator());
+          return const CustomLoadingBar();
         },
       ),
     );

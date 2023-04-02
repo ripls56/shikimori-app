@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/feature/domain/entities/creditional/creditional.dart';
+import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/creditional/get_creditional.dart';
+import 'package:shikimoriapp/injection.container.dart' as di;
 
 part 'profile_state.dart';
 
@@ -12,8 +13,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> getCreditionals() async {
     try {
-      final loadedOrFailure = await getCreditional
-          .call(GetCreditionalParams(accessToken: ACCESS_TOKEN));
+      final loadedOrFailure = await getCreditional.call(
+          GetCreditionalParams(accessToken: di.sl<UserAuth>().accessToken));
       loadedOrFailure.fold(
           (error) => {
                 emit(

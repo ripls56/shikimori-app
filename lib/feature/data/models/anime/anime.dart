@@ -1,5 +1,6 @@
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
-part 'image.dart';
+
+import 'image.dart';
 
 class AnimeModel extends Anime {
   const AnimeModel({
@@ -57,7 +58,7 @@ class AnimeModel extends Anime {
         "episodes": episodes,
         "episodes_aired": episodesAired,
         "aired_on":
-            "${airedOn.year.toString().padLeft(4, '0')}-${airedOn.month.toString().padLeft(2, '0')}-${airedOn.day.toString().padLeft(2, '0')}",
+            "${airedOn?.year.toString().padLeft(4, '0')}-${airedOn?.month.toString().padLeft(2, '0')}-${airedOn?.day.toString().padLeft(2, '0')}",
         "released_on":
             "${releasedOn!.year.toString().padLeft(4, '0')}-${releasedOn!.month.toString().padLeft(2, '0')}-${releasedOn!.day.toString().padLeft(2, '0')}",
       };

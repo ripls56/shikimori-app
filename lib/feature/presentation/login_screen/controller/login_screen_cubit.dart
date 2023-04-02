@@ -1,7 +1,6 @@
-// ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
@@ -10,6 +9,7 @@ import 'package:shikimoriapp/feature/presentation/home_screen/view/home_screen.d
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:oauth2/oauth2.dart';
+import 'package:shikimoriapp/injection.container.dart' as di;
 part 'login_screen_state.dart';
 
 class LoginScreenCubit extends Cubit<LoginScreenState> {
@@ -34,7 +34,6 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
         if (link == null) return;
         if (link.contains('code')) {
           var token = Uri.parse(link).queryParameters['code']!;
-          debugPrint(token);
           final loadedOrFailure = await getAccessToken.call(
               GetAccessTokenParams(
                   grantType: GRANT_TYPE,
@@ -47,7 +46,8 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
             (loaded) => {
               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                 builder: (context) {
-                  ACCESS_TOKEN = loaded.accessToken;
+                  di.sl.unregister<UserAuth>();
+                  di.sl.registerSingleton<UserAuth>(loaded);
                   return const HomeScreen();
                 },
               ), (Route<dynamic> route) => false)

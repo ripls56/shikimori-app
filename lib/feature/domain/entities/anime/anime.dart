@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
-part 'image.dart';
-part 'kind.dart';
-part 'status.dart';
+import 'image.dart';
 
 class Anime extends Equatable {
   const Anime({
@@ -21,15 +19,15 @@ class Anime extends Equatable {
 
   final int id;
   final String name;
-  final String russian;
-  final Image image;
-  final String url;
-  final String kind;
-  final String score;
-  final String status;
-  final int episodes;
-  final int episodesAired;
-  final DateTime airedOn;
+  final String? russian;
+  final Image? image;
+  final String? url;
+  final String? kind;
+  final String? score;
+  final String? status;
+  final int? episodes;
+  final int? episodesAired;
+  final DateTime? airedOn;
   final DateTime? releasedOn;
 
   @override
