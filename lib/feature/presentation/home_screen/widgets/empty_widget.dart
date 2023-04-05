@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'loading_card.dart';
+import '../../../../core/widgets/loading_card.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({super.key});

@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
-import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
 import 'package:shikimoriapp/feature/domain/repositories/anime_repository.dart';
 
 class AnimeRepositoryImpl implements AnimeRepository {
@@ -73,15 +72,34 @@ class AnimeRepositoryImpl implements AnimeRepository {
     }
   }
 
+  // @override
+  // Future<Either<Failure, List<Related>>> getRelated(int id) async {
+  //   return await _getRelated(() => animeRemoteDataSource.getRelatedAnime(id));
+  // }
+
+  // Future<Either<Failure, List<Related>>> _getRelated(
+  //     Future<List<Related>> Function() relateds) async {
+  //   try {
+  //     final model = await relateds();
+  //     return Right(model);
+  //   } catch (_) {
+  //     return Left(ServerFailure());
+  //   }
+  // }
+
   @override
-  Future<Either<Failure, List<Related>>> getRelated(int id) async {
-    return await _getRelated(() => animeRemoteDataSource.getRelatedAnime(id));
+  Future<Either<Failure, List<Anime>>> getAnimesByName(String phrase,
+      {String? order = "ranked", int? limit = 50, int? score}) async {
+    return await _getAnimesByName(
+      () => animeRemoteDataSource.getAnimesByName(phrase,
+          order: order, limit: limit, score: score),
+    );
   }
 
-  Future<Either<Failure, List<Related>>> _getRelated(
-      Future<List<Related>> Function() relateds) async {
+  Future<Either<Failure, List<Anime>>> _getAnimesByName(
+      Future<List<Anime>> Function() animes) async {
     try {
-      final model = await relateds();
+      final model = await animes();
       return Right(model);
     } catch (_) {
       return Left(ServerFailure());

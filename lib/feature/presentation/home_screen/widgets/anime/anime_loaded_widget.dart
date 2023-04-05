@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anime_card.dart';
+import 'package:shikimoriapp/core/widgets/anime_card.dart';
 
 class AnimeLoadedWidget extends StatelessWidget {
   const AnimeLoadedWidget(

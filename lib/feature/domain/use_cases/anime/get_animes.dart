@@ -12,8 +12,9 @@ class GetAnimes extends UseCase<List<Anime>, GetAnimesParams> {
 
   @override
   Future<Either<Failure, List<Anime>>> call(GetAnimesParams params) async {
-    return await animeRepository.getAnimes(params
-        .page); //order: params.order, limit: params.limit, score: params.score
+    return await animeRepository.getAnimes(params.page,
+        order: params
+            .order); //order: params.order, limit: params.limit, score: params.score
   }
 }
 

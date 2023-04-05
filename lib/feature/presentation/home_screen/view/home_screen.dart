@@ -1,12 +1,11 @@
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anime_screen_builder.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/home/home_nav_drawer.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/widgets/manga/manga_screen_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,7 +16,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late PageController _pageController;
+
   int _page = 0;
+
   double? _position;
 
   List drawerItems = [
@@ -31,6 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
+  late int selectedRadioTile;
+
+  final orderVariants = [
+    'popularity',
+    'ranked',
+    'name',
+    'random',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,16 +51,64 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           AnimeScreenBuilder(
             position: _position,
+            order: orderVariants[selectedRadioTile],
           ),
           // const MangaScreenBuilder(),
         ],
       ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              filterModalBotomSheet(context);
+            },
+            icon: const Icon(Icons.filter_alt),
+          )
+        ],
         centerTitle: true,
         title: Text(drawerItems[_page]['name']),
       ),
       drawer: HomeNavDrawer(
           drawerItems: drawerItems, page: _page, controller: _pageController),
+    );
+  }
+
+  void filterModalBotomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => StatefulBuilder(builder: (context, state) {
+        return ListView(
+          padding: const EdgeInsets.all(12),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Сортировка:',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ),
+            Column(
+              children: orderVariants
+                  .map(
+                    (order) => RadioListTile(
+                      value: orderVariants
+                          .indexWhere((element) => element == order),
+                      groupValue: selectedRadioTile,
+                      title: Text(order),
+                      onChanged: (index) {
+                        BlocProvider.of<AnimePageCubit>(context)
+                            .getAnimeList(1, order: orderVariants[index ?? 0]);
+                        state(() {
+                          selectedRadioTile = index ?? 0;
+                        });
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
+        );
+      }),
     );
   }
 
@@ -60,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    selectedRadioTile = 0;
     _getScrollPosition();
     _pageController = PageController(initialPage: 0);
     context.read<ProfileCubit>().getCreditionals();

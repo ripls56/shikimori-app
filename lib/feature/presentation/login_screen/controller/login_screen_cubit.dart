@@ -46,7 +46,9 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
             (loaded) => {
               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                 builder: (context) {
-                  di.sl.unregister<UserAuth>();
+                  if (di.sl.isRegistered<UserAuth>()) {
+                    di.sl.unregister<UserAuth>();
+                  }
                   di.sl.registerSingleton<UserAuth>(loaded);
                   return const HomeScreen();
                 },

@@ -41,12 +41,15 @@ class TopWidget extends StatelessWidget {
                 Column(
                   children: [
                     const HeadlineWidget(title: 'Студия', height: 30),
-                    CachedNetworkImage(
-                        errorWidget: (context, url, error) => const Center(
-                              child: Text('Картинка отсутсвует'),
-                            ),
-                        imageUrl:
-                            '$SHIKIMORI_URL${animeDetails.studios.first?.image}'),
+                    Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: CachedNetworkImage(
+                          errorWidget: (context, url, error) => const Center(
+                                child: Text('Картинка отсутсвует'),
+                              ),
+                          imageUrl:
+                              '$SHIKIMORI_URL${animeDetails.studios.first?.image}'),
+                    ),
                   ],
                 ),
               const HeadlineWidget(title: 'Рейтинг', height: 30),
@@ -80,6 +83,99 @@ class TopWidget extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 8,
+              ),
+              FutureBuilder(
+                  future: generator(
+                      '$SHIKIMORI_URL${animeDetails.image?.original}'),
+                  builder: (context, snapshot) {
+                    return AspectRatio(
+                      aspectRatio: 1.1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: BarChart(
+                          BarChartData(
+                            gridData: FlGridData(show: false),
+                            borderData: FlBorderData(show: false),
+                            barTouchData: BarTouchData(
+                              touchTooltipData: BarTouchTooltipData(
+                                tooltipPadding: const EdgeInsets.all(8),
+                                tooltipBgColor:
+                                    Theme.of(context).colorScheme.onBackground,
+                                getTooltipItem:
+                                    (group, groupIndex, rod, rodIndex) =>
+                                        BarTooltipItem(
+                                  rod.toY.round().toString(),
+                                  Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background),
+                                ),
+                              ),
+                            ),
+                            titlesData: FlTitlesData(
+                              show: true,
+                              topTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              leftTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              rightTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                                  showTitles: true,
+                                  getTitlesWidget: (value, meta) => Text(
+                                    value.round().toString(),
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            barGroups: animeDetails.ratesScoresStats
+                                .map(
+                                  (e) => BarChartGroupData(
+                                    x: e?.name ?? -1,
+                                    barRods: [
+                                      BarChartRodData(
+                                        backDrawRodData:
+                                            BackgroundBarChartRodData(
+                                                show: true,
+                                                toY: animeDetails
+                                                        .ratesScoresStats
+                                                        .first
+                                                        ?.value
+                                                        .toDouble() ??
+                                                    0,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondaryContainer
+                                                    .withOpacity(.3)),
+                                        toY: e?.value.toDouble() ?? 0,
+                                        color: snapshot
+                                                .data?.dominantColor?.color ??
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                        width: 11,
+                                        borderRadius: BorderRadius.zero,
+                                      )
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
             ],
           ),
         ),

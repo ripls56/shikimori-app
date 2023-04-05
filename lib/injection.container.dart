@@ -19,6 +19,7 @@ import 'package:shikimoriapp/feature/domain/repositories/creditional_repository.
 import 'package:shikimoriapp/feature/domain/repositories/related_repository.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/access_token/get_access_token.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_anime_by_id.dart';
+import 'package:shikimoriapp/feature/domain/use_cases/anime/get_anime_by_name.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_animes.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_related.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_screenshots.dart';
@@ -30,6 +31,7 @@ import 'package:shikimoriapp/feature/presentation/anime_details/controller/video
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
+import 'package:shikimoriapp/feature/presentation/search/controller/search_cubit.dart';
 
 final sl = GetIt.asNewInstance();
 
@@ -56,12 +58,14 @@ Future<void> init() async {
   sl.registerFactory(() => AnimeDetailCubit(sl(), sl()));
   sl.registerFactory(() => LoginScreenCubit(sl()));
   sl.registerFactory(() => ScreenshotsCubit(sl()));
+  sl.registerFactory(() => SearchCubit(sl()));
 
   //UseCases
   sl.registerLazySingleton(() => GetAnimes(sl()));
   sl.registerLazySingleton(() => GetVideos(sl()));
   sl.registerLazySingleton(() => GetCreditional(sl()));
   sl.registerLazySingleton(() => GetAnimeById(sl()));
+  sl.registerLazySingleton(() => GetAnimeByName(sl()));
   sl.registerLazySingleton(() => GetRelatedAnimes(sl()));
   sl.registerLazySingleton(() => GetAccessToken(sl()));
   sl.registerLazySingleton(() => GetScreenshots(sl()));

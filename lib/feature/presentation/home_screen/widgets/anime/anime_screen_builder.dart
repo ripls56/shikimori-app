@@ -7,9 +7,11 @@ import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anim
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/empty_widget.dart';
 
 class AnimeScreenBuilder extends StatefulWidget {
-  const AnimeScreenBuilder({super.key, required this.position});
+  const AnimeScreenBuilder(
+      {super.key, required this.position, required this.order});
 
   final double? position;
+  final String order;
   @override
   State<AnimeScreenBuilder> createState() => _AnimeScreenBuilderState();
 }
@@ -23,7 +25,9 @@ class _AnimeScreenBuilderState extends State<AnimeScreenBuilder> {
   @override
   void initState() {
     _scrollController = ScrollController();
-    context.read<AnimePageCubit>().getAnimeList(animeListPage);
+    context
+        .read<AnimePageCubit>()
+        .getAnimeList(animeListPage, order: widget.order);
     _scrollController.addListener(_scrollListener);
     super.initState();
   }
@@ -58,6 +62,8 @@ class _AnimeScreenBuilderState extends State<AnimeScreenBuilder> {
               if (state is AnimePageLoading) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(const SnackBar(content: Text('Загружается')));
+              } else if (state is AnimePageEmpty) {
+                animes.clear();
               } else {
                 ScaffoldMessenger.of(context).removeCurrentSnackBar();
               }
@@ -66,7 +72,7 @@ class _AnimeScreenBuilderState extends State<AnimeScreenBuilder> {
               if (state is AnimePageError) {
                 return RefreshIndicator(
                     onRefresh: () async =>
-                        context.read<AnimePageCubit>().getAnimes,
+                        context.read<AnimePageCubit>().getAnimeList(1),
                     child: Center(child: Text(state.errorMessage)));
               }
               if (state is AnimePageLoaded || state is AnimePageLoading) {

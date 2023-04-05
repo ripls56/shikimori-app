@@ -84,4 +84,24 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
       throw ServerException();
     }
   }
+
+  @override
+  Future<List<Anime>> getAnimesByName(String phrase,
+      {String? order = "ranked", int? limit = 50, int? score}) async {
+    var response = await dio.get(
+      '$HOST/animes',
+      queryParameters: {
+        'search': phrase,
+        'order': order,
+        'limit': limit,
+      },
+    );
+    if (response.statusCode == 200) {
+      return (response.data as List<dynamic>)
+          .map((e) => AnimeModel.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    } else {
+      throw ServerException();
+    }
+  }
 }

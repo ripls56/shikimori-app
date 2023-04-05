@@ -9,6 +9,12 @@ abstract class AnimeRemoteDataSource {
   Future<List<Anime>> getAnimes(int page,
       {String? order = "ranked", int? limit = 50, int? score});
 
+  ///Get animes by name
+  ///
+  ///Throws [ServerException] for all code errors
+  Future<List<Anime>> getAnimesByName(String phrase,
+      {String? order = "ranked", int? limit = 50, int? score});
+
   ///Get anime details with id
   ///
   ///Throws [ServerException] for all code errors

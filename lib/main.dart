@@ -8,6 +8,8 @@ import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/a
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
+import 'package:shikimoriapp/feature/presentation/search/controller/search_cubit.dart';
+import 'package:shikimoriapp/feature/presentation/search/view/search_screen.dart';
 import 'injection.container.dart' as di;
 import 'injection.container.dart';
 
@@ -49,6 +51,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ScreenshotsCubit>(
           create: ((context) => sl<ScreenshotsCubit>()),
+        ),
+        BlocProvider<SearchCubit>(
+          create: ((context) => sl<SearchCubit>()),
         ),
       ],
       child: MaterialApp(
