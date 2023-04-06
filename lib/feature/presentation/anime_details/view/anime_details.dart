@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,6 +58,21 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                     context.read<AnimeDetailCubit>().getAnimeDetails(widget.id),
                 child: ListView(
                   children: [
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'skjkdhfisjafas',
+                            style: TextStyle(color: Colors.blue),
+                            recognizer: TapGestureRecognizer()..onTap = () {},
+                          ),
+                          const TextSpan(
+                            text: 'asdjhdfgjhdshgdsgjdsghjsdhjghdsgjsdjhogsdhj',
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                      ),
+                    ),
                     TopWidget(animeDetails: animeDetails),
                     InformationWidget(animeDetails: animeDetails),
                     DescriptionWidget(animeDetails: animeDetails),
