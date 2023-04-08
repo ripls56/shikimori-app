@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class VideosPage extends StatefulWidget {
@@ -61,15 +61,9 @@ class _VideosPageState extends State<VideosPage> {
                                 height: MediaQuery.of(context).size.width / 2,
                                 child: AspectRatio(
                                   aspectRatio: 16 / 9,
-                                  child: WebViewWidget(
-                                    controller: WebViewController()
-                                      ..setJavaScriptMode(
-                                        JavaScriptMode.unrestricted,
-                                      )
-                                      ..loadRequest(
-                                        Uri.parse(
-                                            state.videos[index].playerUrl),
-                                      ),
+                                  child: WebView(
+                                    javascriptMode: JavascriptMode.unrestricted,
+                                    initialUrl: state.videos[index].playerUrl,
                                   ),
                                 ),
                               ),

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/screenshots/screenshots_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 
 class ScreenshotsPage extends StatefulWidget {
   const ScreenshotsPage({super.key, required this.id});

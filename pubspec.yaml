@@ -58,6 +58,7 @@ dependencies:
   palette_generator:
   flutter_cache_manager:
   flutter_displaymode:
+  flutter_html:
 
 dev_dependencies:
   flutter_test:

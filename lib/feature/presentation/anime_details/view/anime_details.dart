@@ -1,11 +1,16 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/core/widgets/headline_button.dart';
+import 'package:shikimoriapp/core/widgets/headline_widget.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart'
     as anime_details;
@@ -14,16 +19,15 @@ import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/details/anime_detail_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/view/screenshots_page.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/view/videos_page.dart';
-import 'package:shikimoriapp/feature/presentation/anime_details/widgets/headline_button.dart';
-import 'package:shikimoriapp/feature/presentation/anime_details/widgets/headline_widget.dart';
-import 'package:shikimoriapp/feature/presentation/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/feature/presentation/character_screen/view/character_screen.dart';
 
-part '../widgets/details/top_widget.dart';
-part '../widgets/details/anime_information_widget.dart';
-part '../widgets/details/description.dart';
-part '../widgets/details/screenshot_widget.dart';
-part '../widgets/details/videos_widget.dart';
-part '../widgets/details/related_widget.dart';
+part '../widgets/top_widget.dart';
+part '../widgets/anime_information_widget.dart';
+part '../widgets/description.dart';
+part '../widgets/screenshot_widget.dart';
+part '../widgets/videos_widget.dart';
+part '../widgets/related_widget.dart';
 
 class AnimeDetailScreen extends StatefulWidget {
   const AnimeDetailScreen({Key? key, required this.id}) : super(key: key);

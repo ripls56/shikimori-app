@@ -42,7 +42,7 @@ class LoadingCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       maxLines: 2,
                     ),
-                    Text(''),
+                    const Text(''),
                   ],
                 ),
               ),
@@ -54,6 +54,5 @@ class LoadingCard extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

@@ -1,10 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shikimoriapp/core/widgets/anime_card.dart';
 import 'package:shikimoriapp/feature/presentation/search/controller/search_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

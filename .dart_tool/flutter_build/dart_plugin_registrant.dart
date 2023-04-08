@@ -9,11 +9,11 @@ import 'dart:io'; // flutter_ignore: dart_io_import.
 import 'package:path_provider_android/path_provider_android.dart';
 import 'package:shared_preferences_android/shared_preferences_android.dart';
 import 'package:url_launcher_android/url_launcher_android.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:video_player_android/video_player_android.dart';
 import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:shared_preferences_foundation/shared_preferences_foundation.dart';
 import 'package:url_launcher_ios/url_launcher_ios.dart';
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+import 'package:video_player_avfoundation/video_player_avfoundation.dart';
 import 'package:path_provider_linux/path_provider_linux.dart';
 import 'package:shared_preferences_linux/shared_preferences_linux.dart';
 import 'package:url_launcher_linux/url_launcher_linux.dart';
@@ -61,10 +61,10 @@ class _PluginRegistrant {
       }
 
       try {
-        AndroidWebViewPlatform.registerWith();
+        AndroidVideoPlayer.registerWith();
       } catch (err) {
         print(
-          '`webview_flutter_android` threw an error: $err. '
+          '`video_player_android` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
         rethrow;
@@ -102,10 +102,10 @@ class _PluginRegistrant {
       }
 
       try {
-        WebKitWebViewPlatform.registerWith();
+        AVFoundationVideoPlayer.registerWith();
       } catch (err) {
         print(
-          '`webview_flutter_wkwebview` threw an error: $err. '
+          '`video_player_avfoundation` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
         rethrow;
