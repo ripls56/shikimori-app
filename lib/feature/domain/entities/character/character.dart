@@ -26,23 +26,23 @@ class Character extends Equatable {
     required this.mangas,
   });
 
-  final int id;
-  final String name;
-  final String russian;
-  final Image image;
-  final String url;
+  final int? id;
+  final String? name;
+  final String? russian;
+  final Image? image;
+  final String? url;
   final dynamic altname;
-  final String japanese;
+  final String? japanese;
   final dynamic description;
-  final String descriptionHtml;
+  final String? descriptionHtml;
   final dynamic descriptionSource;
-  final bool favoured;
-  final int threadId;
-  final int topicId;
-  final DateTime updatedAt;
-  final List<Seyu> seyu;
-  final List<Anime> animes;
-  final List<dynamic> mangas;
+  final bool? favoured;
+  final int? threadId;
+  final int? topicId;
+  final DateTime? updatedAt;
+  final List<Seyu>? seyu;
+  final List<Anime>? animes;
+  final List<dynamic>? mangas;
 
   @override
   List<Object?> get props => [];

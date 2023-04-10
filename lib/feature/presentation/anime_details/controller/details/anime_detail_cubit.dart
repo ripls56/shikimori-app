@@ -21,7 +21,7 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
           await getAnimeById.call(GetAnimeByIdParams(id: id));
       loadedOrFailure.fold(
         (error) => {
-          emit(AnimeDetailEmpty()),
+          emit(AnimeDetailError(errorMessage: error.toString())),
         },
         (loaded) => {
           emit(
@@ -30,7 +30,7 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
         },
       );
     } catch (ex) {
-      emit(AnimeDetailEmpty());
+      emit(AnimeDetailError(errorMessage: ex.toString()));
     }
   }
 

@@ -1,7 +1,3 @@
-import 'dart:ffi';
-
-import 'package:url_launcher/link.dart';
-
 class EnumValues<T> {
   Map<String, T> map;
   late Map<T, String> reverseMap;

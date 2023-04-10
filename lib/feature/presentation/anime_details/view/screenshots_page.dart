@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/screenshots/screenshots_cubit.dart';
@@ -47,8 +49,14 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
                     children: [
                       Positioned.fill(
                         child: CachedNetworkImage(
-                          errorWidget: (context, url, error) =>
-                              Image.asset(AppImages.missing),
+                          errorWidget: (context, url, error) {
+                            return Tooltip(
+                              message: url,
+                              child: Center(
+                                child: Image.asset(AppImages.missing),
+                              ),
+                            );
+                          },
                           imageUrl:
                               '$SHIKIMORI_URL${state.screenshots[index].original}',
                           fit: BoxFit.fitWidth,
@@ -68,6 +76,11 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
                                 child: AspectRatio(
                                   aspectRatio: 16 / 9,
                                   child: CachedNetworkImage(
+                                    errorWidget: (context, url, error) {
+                                      return Center(
+                                        child: Image.asset(AppImages.missing),
+                                      );
+                                    },
                                     imageUrl:
                                         '$SHIKIMORI_URL${state.screenshots[index].original}',
                                   ),

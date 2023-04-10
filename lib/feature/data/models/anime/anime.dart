@@ -40,7 +40,8 @@ class AnimeModel extends Anime {
         status: json["status"],
         episodes: json["episodes"],
         episodesAired: json["episodes_aired"],
-        airedOn: DateTime.parse(json["aired_on"]),
+        airedOn:
+            json["aired_on"] == null ? null : DateTime.parse(json["aired_on"]),
         releasedOn: json["released_on"] == null
             ? null
             : DateTime.parse(json["released_on"]),

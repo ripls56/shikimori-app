@@ -11,6 +11,18 @@ class TopWidget extends StatelessWidget {
       return PaletteGenerator.fromImageProvider(Image.network(imgUrl).image);
     }
 
+    double findBigestScore() {
+      double bigestScore = 0;
+      for (var i = 0; i < animeDetails.ratesScoresStats.length; i++) {
+        if (animeDetails.ratesScoresStats[i]?.value != null) {
+          if (animeDetails.ratesScoresStats[i]!.value > bigestScore) {
+            bigestScore = animeDetails.ratesScoresStats[i]!.value.toDouble();
+          }
+        }
+      }
+      return bigestScore;
+    }
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -22,11 +34,14 @@ class TopWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: CachedNetworkImage(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
+                  height: 300,
                   width: MediaQuery.of(context).size.width / 2,
-                  errorWidget: (context, url, error) => const Center(
-                    child: Text('Картинка отсутсвует'),
-                  ),
+                  errorWidget: (context, url, error) {
+                    return Center(
+                      child: Image.asset(AppImages.missing),
+                    );
+                  },
                   imageUrl: '$SHIKIMORI_URL${animeDetails.image?.original}',
                 ),
               ),
@@ -46,9 +61,12 @@ class TopWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: CachedNetworkImage(
-                            errorWidget: (context, url, error) => const Center(
-                                  child: Text('Картинка отсутсвует'),
-                                ),
+                            height: 60,
+                            errorWidget: (context, url, error) {
+                              return Center(
+                                child: Image.asset(AppImages.missing),
+                              );
+                            },
                             imageUrl:
                                 '$SHIKIMORI_URL${animeDetails.studios.first?.image}'),
                       ),
@@ -152,17 +170,12 @@ class TopWidget extends StatelessWidget {
                                         BarChartRodData(
                                           backDrawRodData:
                                               BackgroundBarChartRodData(
-                                                  show: true,
-                                                  toY: animeDetails
-                                                          .ratesScoresStats
-                                                          .first
-                                                          ?.value
-                                                          .toDouble() ??
-                                                      0,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondaryContainer
-                                                      .withOpacity(.3)),
+                                            show: true,
+                                            toY: findBigestScore(),
+                                            color: snapshot.data
+                                                    ?.lightMutedColor?.color ??
+                                                Colors.grey.shade400,
+                                          ),
                                           toY: e?.value.toDouble() ?? 0,
                                           color: snapshot
                                                   .data?.dominantColor?.color ??

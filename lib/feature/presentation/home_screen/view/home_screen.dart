@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             order: orderVariants[selectedRadioTile],
           ),
           // const MangaScreenBuilder(),
+          Container(),
         ],
       ),
       appBar: AppBar(
@@ -63,6 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
               filterModalBotomSheet(context);
             },
             icon: const Icon(Icons.filter_alt),
+          ),
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: SearchSheet());
+            },
+            icon: const Icon(Icons.search),
           )
         ],
         centerTitle: true,
@@ -142,3 +150,63 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 }
+
+// class SearchSheet extends SearchDelegate {
+//   @override
+//   late String query;
+
+//   List<String> searchTerms = [
+//     "Apple",
+//     "Banana",
+//     "Mango",
+//     "Pear",
+//     "Watermelons",
+//     "Blueberries",
+//     "Pineapples",
+//     "Strawberries"
+//   ];
+
+//   @override
+//   List<Widget>? buildActions(BuildContext context) {
+//     return [
+//       IconButton(
+//         onPressed: () {
+//           query = '';
+//         },
+//         icon: Icon(Icons.clear),
+//       ),
+//     ];
+//   }
+
+//   @override
+//   Widget? buildLeading(BuildContext context) {
+//     return IconButton(
+//       onPressed: () {
+//         close(context, null);
+//       },
+//       icon: Icon(Icons.arrow_back),
+//     );
+//   }
+
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     List<String> matchQuery = [];
+//     for (var fruit in searchTerms) {
+//       if (fruit.toLowerCase().contains(query.toLowerCase())) {
+//         matchQuery.add(fruit);
+//       }
+//     }
+//     return Container();
+//   }
+
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     List<String> matchQuery = [];
+//     for (var fruit in searchTerms) {
+//       if (fruit.toLowerCase().contains(query.toLowerCase())) {
+//         matchQuery.add(fruit);
+//       }
+//     }
+//     return Container();
+//   }
+// }

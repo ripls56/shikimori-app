@@ -9,4 +9,10 @@ class AnimeDetailLoaded extends AnimeDetailState {
   AnimeDetailLoaded({required this.related, required this.animeDetails});
 }
 
+class AnimeDetailError extends AnimeDetailState {
+  final String errorMessage;
+
+  AnimeDetailError({required this.errorMessage});
+}
+
 class AnimeDetailEmpty extends AnimeDetailState {}

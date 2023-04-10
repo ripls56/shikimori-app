@@ -39,6 +39,11 @@ class VideosButton extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       child: CachedNetworkImage(
                         fit: BoxFit.fitWidth,
+                        errorWidget: (context, url, error) {
+                          return Center(
+                            child: Image.asset(AppImages.missing),
+                          );
+                        },
                         imageUrl: animeDetails.videos[index]?.imageUrl ?? '',
                       ),
                     ),

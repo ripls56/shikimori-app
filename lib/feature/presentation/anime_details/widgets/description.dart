@@ -17,20 +17,7 @@ class DescriptionWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Html(
-            style: {
-              'div': Style(textAlign: TextAlign.justify),
-            },
-            onLinkTap: (url, rcontext, attributes, element) {
-              Map<String, dynamic> data = jsonDecode(attributes['data-attrs']!);
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => CharacterScreen(id: data['id']),
-                ),
-              );
-            },
-            data: animeDetails.descriptionHtml,
-          ),
+          child: HtmlDescriptionWidget(data: animeDetails.descriptionHtml),
         ),
       ],
     );

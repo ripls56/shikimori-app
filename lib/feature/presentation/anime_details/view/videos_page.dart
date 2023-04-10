@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shikimoriapp/core/helpers/images.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
 import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -45,8 +47,13 @@ class _VideosPageState extends State<VideosPage> {
                   child: Stack(
                     children: [
                       Positioned.fill(
-                        child: Image.network(
-                          state.videos[index].imageUrl,
+                        child: CachedNetworkImage(
+                          errorWidget: (context, url, error) {
+                            return Center(
+                              child: Image.asset(AppImages.missing),
+                            );
+                          },
+                          imageUrl: state.videos[index].imageUrl,
                           fit: BoxFit.fitWidth,
                         ),
                       ),

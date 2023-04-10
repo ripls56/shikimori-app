@@ -44,7 +44,7 @@ class _AnimeCard extends StatelessWidget {
     debugPrint('$SHIKIMORI_URL${anime.image?.preview}');
     return GestureDetector(
       onTap: () {
-        HapticFeedback.selectionClick();
+        HapticFeedback.lightImpact();
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => AnimeDetailScreen(id: anime.id)));
       },
@@ -54,6 +54,11 @@ class _AnimeCard extends StatelessWidget {
           CachedNetworkImage(
             height: 226,
             imageUrl: '$SHIKIMORI_URL${anime.image?.original}',
+            errorWidget: (context, url, error) {
+              return Center(
+                child: Image.asset(AppImages.missing),
+              );
+            },
             fit: BoxFit.fitHeight,
           ),
           const SizedBox(
@@ -82,7 +87,7 @@ class _MangaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        HapticFeedback.selectionClick();
+        HapticFeedback.lightImpact();
         // Navigator.of(context).pushReplacement(MaterialPageRoute(
         //     builder: (context) => AnimeDetailScreen(id: manga.id ?? 1)));
       },
@@ -92,6 +97,11 @@ class _MangaCard extends StatelessWidget {
           CachedNetworkImage(
             height: 226,
             imageUrl: '$SHIKIMORI_URL${manga.image?.original}',
+            errorWidget: (context, url, error) {
+              return Center(
+                child: Image.asset(AppImages.missing),
+              );
+            },
             fit: BoxFit.fitHeight,
           ),
           const SizedBox(

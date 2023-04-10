@@ -39,6 +39,11 @@ class ScreenshotsWidget extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       child: CachedNetworkImage(
                         fit: BoxFit.fitWidth,
+                        errorWidget: (context, url, error) {
+                          return Center(
+                            child: Image.asset(AppImages.missing),
+                          );
+                        },
                         imageUrl:
                             '$SHIKIMORI_URL${animeDetails.screenshots[index]!.original}',
                       ),
