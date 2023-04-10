@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
 class EnumValues<T> {
   Map<String, T> map;
   late Map<T, String> reverseMap;
@@ -7,6 +11,22 @@ class EnumValues<T> {
   Map<T, String> get reverse {
     reverseMap = map.map((k, v) => MapEntry(v, k));
     return reverseMap;
+  }
+}
+
+class Debouncer {
+  final Duration duration;
+  VoidCallback? action;
+  Timer? _timer;
+
+  Debouncer({required this.duration});
+
+  run(VoidCallback action) {
+    if (null != _timer) {
+      debugPrint('cancel');
+      _timer!.cancel();
+    }
+    _timer = Timer(duration, action);
   }
 }
 

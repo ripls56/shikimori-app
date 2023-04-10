@@ -30,7 +30,8 @@ class TopWidget extends StatelessWidget {
           future: generator('$SHIKIMORI_URL${animeDetails.image?.original}'),
           builder: (context, snapshot) {
             return Container(
-              color: snapshot.data?.dominantColor?.color ?? Colors.transparent,
+              color: snapshot.data?.darkMutedColor?.color ??
+                  Theme.of(context).colorScheme.background,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: CachedNetworkImage(
@@ -83,12 +84,12 @@ class TopWidget extends StatelessWidget {
                           '$SHIKIMORI_URL${animeDetails.image?.original}'),
                       builder: (context, snapshot) => RatingBarIndicator(
                         unratedColor: snapshot.data?.lightMutedColor?.color ??
-                            Colors.grey.shade700,
+                            Theme.of(context).colorScheme.background,
                         rating: double.parse(animeDetails.score ?? '5') / 2,
                         itemBuilder: (context, index) => Icon(
                           Icons.star,
-                          color: snapshot.data?.dominantColor?.color ??
-                              Colors.transparent,
+                          color: snapshot.data?.darkMutedColor?.color ??
+                              Theme.of(context).colorScheme.onBackground,
                         ),
                         itemCount: 5,
                         itemSize: 24.0,
@@ -174,11 +175,13 @@ class TopWidget extends StatelessWidget {
                                             toY: findBigestScore(),
                                             color: snapshot.data
                                                     ?.lightMutedColor?.color ??
-                                                Colors.grey.shade400,
+                                                Theme.of(context)
+                                                    .colorScheme
+                                                    .background,
                                           ),
                                           toY: e?.value.toDouble() ?? 0,
-                                          color: snapshot
-                                                  .data?.dominantColor?.color ??
+                                          color: snapshot.data?.darkMutedColor
+                                                  ?.color ??
                                               Theme.of(context)
                                                   .colorScheme
                                                   .onBackground,

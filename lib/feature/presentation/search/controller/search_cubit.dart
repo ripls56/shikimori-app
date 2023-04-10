@@ -16,8 +16,8 @@ class SearchCubit extends Cubit<SearchState> {
       emit(SearchLoading());
       List<Anime> animes = [];
       List<Manga> mangas = [];
-      final loadedOrFailure =
-          await _getAnimeByName.call(GetAnimesByNameParams(phrase: name));
+      final loadedOrFailure = await _getAnimeByName
+          .call(GetAnimesByNameParams(phrase: name, limit: 50));
       loadedOrFailure.fold(
         (error) => {
           emit(SearchError(errorMessage: error.toString())),
