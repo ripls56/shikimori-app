@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:shikimoriapp/constants.dart';
@@ -23,8 +19,6 @@ import 'package:shikimoriapp/feature/presentation/anime_details/controller/detai
 import 'package:shikimoriapp/feature/presentation/anime_details/view/screenshots_page.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/view/videos_page.dart';
 import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
-import 'package:shikimoriapp/feature/presentation/character_screen/view/character_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 part '../widgets/top_widget.dart';
 part '../widgets/anime_information_widget.dart';
