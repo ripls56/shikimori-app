@@ -14,7 +14,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> getCreditionals() async {
     try {
       final loadedOrFailure = await getCreditional.call(
-          GetCreditionalParams(accessToken: di.sl<UserAuth>().accessToken));
+          GetCreditionalParams(accessToken: di.sl<UserAuth>().accessToken!));
       loadedOrFailure.fold(
           (error) => {
                 emit(

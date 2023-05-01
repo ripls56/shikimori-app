@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/details/anime_detail_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/screenshots/screenshots_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
@@ -9,13 +10,14 @@ import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/a
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
-import 'package:shikimoriapp/feature/presentation/search/controller/search_cubit.dart';
+import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
 import 'injection.container.dart' as di;
 import 'injection.container.dart';
 
 Future<void> main() async {
   di.init();
-  frameRate();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    frameRate();
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginScreenCubit>(
@@ -52,8 +55,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<ScreenshotsCubit>(
           create: ((context) => sl<ScreenshotsCubit>()),
         ),
-        BlocProvider<SearchCubit>(
-          create: ((context) => sl<SearchCubit>()),
+        BlocProvider<SearchBloc>(
+          create: ((context) => sl<SearchBloc>()),
         ),
         BlocProvider<CharacterCubit>(
           create: ((context) => sl<CharacterCubit>()),

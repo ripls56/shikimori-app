@@ -1,16 +1,12 @@
-import 'package:async/async.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shikimoriapp/constants.dart';
-import 'package:shikimoriapp/core/helpers/helper.dart';
-import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/core/widgets/search_delegate_impl.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anime_screen_builder.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/home/home_nav_drawer.dart';
-import 'package:shikimoriapp/feature/presentation/search/controller/search_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -152,111 +148,5 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _page = page;
     });
-  }
-}
-
-class SearchDelegateImpl extends SearchDelegate {
-  CancelableOperation? cancelableOperation;
-
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-        onPressed: () {
-          query = '';
-        },
-        icon: const Icon(Icons.clear),
-      ),
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        close(context, null);
-      },
-      icon: const Icon(Icons.arrow_back),
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    Debouncer(duration: const Duration(seconds: 3))
-        .run(() => context.read<SearchCubit>().searchAnimeAndManga(query));
-    // cancelableOperation?.cancel();
-    // start(context);
-    return BlocBuilder<SearchCubit, SearchState>(
-      builder: (context, state) {
-        if (state is SearchLoaded) {
-          return ListView.builder(
-            itemCount: state.animes.length,
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  CachedNetworkImage(
-                      imageUrl:
-                          '$SHIKIMORI_URL${state.animes[index].image?.x96}')
-                ],
-              );
-            },
-          );
-        }
-        return const Center(
-          child: CustomLoadingBar(),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    context.read<SearchCubit>().searchAnimeAndManga(query);
-    // cancelableOperation?.cancel();
-    // start(context);
-    return BlocBuilder<SearchCubit, SearchState>(
-      builder: (context, state) {
-        if (state is SearchLoaded) {
-          return ListView.builder(
-            itemCount: state.animes.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  children: [
-                    CachedNetworkImage(
-                        imageUrl:
-                            '$SHIKIMORI_URL${state.animes[index].image?.x48}'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      child: Text(
-                        state.animes[index].name,
-                        maxLines: 2,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        }
-        return const Center(
-          child: CustomLoadingBar(),
-        );
-      },
-    );
-  }
-
-  void start(BuildContext context) {
-    cancelableOperation ??= CancelableOperation.fromFuture(
-      Future.microtask(
-        () => context.read<SearchCubit>().searchAnimeAndManga(query),
-      ),
-      onCancel: () => {
-        debugPrint('onCancel'),
-      },
-    );
   }
 }

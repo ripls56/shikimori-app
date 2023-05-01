@@ -15,14 +15,14 @@ import 'feature/data/models/user_rate/user_rate.dart';
 class ApiClient {
   late AuthorizationCodeGrant grant;
   late Uri authorizationUrl;
-  static const shikimoriUrl = 'https://shikimori.one/';
-  static const _host = 'https://shikimori.one/api';
-  static const _hostV2 = 'https://shikimori.one/api/v2';
+  static const shikimoriUrl = 'https://shikimori.me/';
+  static const _host = 'https://shikimori.me/api';
+  static const _hostV2 = 'https://shikimori.me/api/v2';
   final redirectUri =
       Uri.parse('https://shiki.dfgdf'); //urn:ietf:wg:oauth:2.0:oob
   final authorizationEndpoint =
-      Uri.parse('https://shikimori.one/oauth/authorize');
-  final tokenEndpoint = Uri.parse('https://shikimori.one/oauth/authorize/');
+      Uri.parse('https://shikimori.me/oauth/authorize');
+  final tokenEndpoint = Uri.parse('https://shikimori.me/oauth/authorize/');
   static const _identifier = 'jWeRpE8bKQ6eT3fTw2yDYS3hup04Zx5v4CMJ9hMqDk4';
   static const _secret = 'jwKxAkVNoOvJqcgro1dsAndXQr0ijJAwxWlNy-ML-ic';
   String code = "";
@@ -61,7 +61,7 @@ class ApiClient {
 //perenes
   Future<String> getAccessToken() async {
     var response =
-        await _dio.post('https://shikimori.one/oauth/token', queryParameters: {
+        await _dio.post('https://shikimori.me/oauth/token', queryParameters: {
       'grant_type': 'authorization_code',
       'client_id': _identifier,
       'client_secret': _secret,
@@ -69,7 +69,7 @@ class ApiClient {
       'redirect_uri': redirectUri.toString()
     });
     if (response.statusCode == 200) {
-      return UserAuthModel.fromJson(response.data).accessToken;
+      return UserAuthModel.fromJson(response.data).accessToken!;
     } else {
       throw HttpException;
     }

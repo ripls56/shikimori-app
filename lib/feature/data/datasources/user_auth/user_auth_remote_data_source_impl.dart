@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/models/user_auth/user_auth.dart';
+import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
 
 class UserAuthRemoteDataSourceImpl implements UserAuthRemoteDataSource {
   final Dio dio;
@@ -10,18 +12,43 @@ class UserAuthRemoteDataSourceImpl implements UserAuthRemoteDataSource {
   @override
   Future<UserAuthModel> getAccessToken(String grantType, String identifier,
       String secret, String code, Uri redirectUri) async {
-    var response =
-        await dio.post('https://shikimori.one/oauth/token', queryParameters: {
-      'grant_type': grantType,
-      'client_id': identifier,
-      'client_secret': secret,
-      'code': code,
-      'redirect_uri': redirectUri.toString()
-    });
+    var response = await dio.post(
+      TOKEN_ENDPOINT.toString(),
+      queryParameters: {
+        'grant_type': grantType,
+        'client_id': identifier,
+        'client_secret': secret,
+        'code': code,
+        'redirect_uri': redirectUri.toString()
+      },
+    );
     if (response.statusCode == 200) {
       return UserAuthModel.fromJson(response.data);
-    } else {
+    } else if (response.statusCode! > 499 && response.statusCode! < 599) {
       throw ServerException();
+    } else {
+      throw ClientException();
+    }
+  }
+
+  @override
+  Future<UserAuth> refreshAccessToken(String grantType, String identifier,
+      String secret, String refreshToken) async {
+    var response = await dio.post(
+      TOKEN_ENDPOINT.toString(),
+      queryParameters: {
+        'grant_type': grantType,
+        'client_id': identifier,
+        'client_secret': secret,
+        'refresh_token': refreshToken
+      },
+    );
+    if (response.statusCode == 200) {
+      return UserAuthModel.fromJson(response.data);
+    } else if (response.statusCode! > 499 && response.statusCode! < 599) {
+      throw ServerException();
+    } else {
+      throw ClientException();
     }
   }
 }

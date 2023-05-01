@@ -8,9 +8,6 @@
             "name": "shikimoriapp",
             "request": "launch",
             "type": "dart",
-            "args": [
-                "--no-sound-null-safety"
-               ]
         },
         {
             "name": "shikimoriapp (profile mode)",

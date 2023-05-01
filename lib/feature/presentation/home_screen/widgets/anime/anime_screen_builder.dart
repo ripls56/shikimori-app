@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shikimoriapp/core/widgets/custom_snack_bar.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_state.dart';
@@ -60,8 +61,9 @@ class _AnimeScreenBuilderState extends State<AnimeScreenBuilder> {
           BlocConsumer<AnimePageCubit, AnimePageState>(
             listener: (context, state) {
               if (state is AnimePageLoading) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text('Загружается')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  loadingSnackBar('Занружается', context),
+                );
               } else if (state is AnimePageEmpty) {
                 animes.clear();
               } else {

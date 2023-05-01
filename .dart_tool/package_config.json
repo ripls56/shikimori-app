@@ -15,7 +15,7 @@
     },
     {
       "name": "archive",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.3.6",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/archive-3.3.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -34,6 +34,12 @@
     {
       "name": "bloc",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-8.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "bloc_concurrency",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/bloc_concurrency-0.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -225,13 +231,13 @@
     },
     {
       "name": "fl_chart",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.61.0",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.62.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter",
-      "rootUri": "file:///D:/tools/flutter-sdk/flutter/packages/flutter",
+      "rootUri": "file:///C:/src/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -284,6 +290,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_native_splash",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.2.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "flutter_neumorphic",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_neumorphic-3.2.0",
       "packageUri": "lib/",
@@ -294,6 +306,42 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_rating_bar-4.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "flutter_secure_storage",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_secure_storage-8.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_secure_storage_linux",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_secure_storage_linux-1.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_secure_storage_macos",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_secure_storage_macos-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_secure_storage_platform_interface",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_secure_storage_platform_interface-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_secure_storage_web",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_secure_storage_web-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_secure_storage_windows",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_secure_storage_windows-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_staggered_animations",
@@ -309,13 +357,13 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///D:/tools/flutter-sdk/flutter/packages/flutter_test",
+      "rootUri": "file:///C:/src/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///D:/tools/flutter-sdk/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -374,6 +422,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "image",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/image-3.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "io",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/io-1.0.4",
       "packageUri": "lib/",
@@ -396,6 +450,12 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/json_serializable-6.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "lint",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/lint-1.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "lints",
@@ -501,15 +561,15 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.0.24",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.0.25",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.2.1",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "path_provider_linux",
@@ -555,7 +615,7 @@
     },
     {
       "name": "pointycastle",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.2",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.3",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -615,13 +675,13 @@
     },
     {
       "name": "shared_preferences_android",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_android-2.1.0",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_android-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_foundation",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_foundation-2.2.0",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_foundation-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -669,7 +729,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///D:/tools/flutter-sdk/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -782,6 +842,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "universal_io",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/universal_io-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "url_launcher",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.1.10",
       "packageUri": "lib/",
@@ -789,9 +855,9 @@
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.0.26",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.0.27",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "url_launcher_ios",
@@ -807,7 +873,7 @@
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.0.4",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -909,9 +975,9 @@
     },
     {
       "name": "web_socket_channel",
-      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.3.0",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.4.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "webview_flutter",
@@ -968,7 +1034,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-04-10T10:00:03.274025Z",
+  "generated": "2023-05-01T17:11:43.494684Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

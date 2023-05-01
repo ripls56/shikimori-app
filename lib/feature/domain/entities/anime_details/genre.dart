@@ -8,10 +8,10 @@ class Genre extends Equatable {
     required this.kind,
   });
 
-  final int id;
-  final String name;
-  final String russian;
-  final String kind;
+  final int? id;
+  final String? name;
+  final String? russian;
+  final String? kind;
 
   @override
   List<Object?> get props => [];

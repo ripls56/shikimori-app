@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/screenshots/screenshots_cubit.dart';

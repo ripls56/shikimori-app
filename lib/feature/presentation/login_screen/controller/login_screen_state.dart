@@ -9,8 +9,4 @@ abstract class LoginScreenState extends Equatable {
 
 class LoginScreenEmpty extends LoginScreenState {}
 
-class LoginScreenLoaded extends LoginScreenState {
-  final UserAuth userAuthModel;
-
-  const LoginScreenLoaded(this.userAuthModel);
-}
+class LoginScreenLoaded extends LoginScreenState {}

@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class UserAuth extends Equatable {
-  final String accessToken;
-  final String tokenType;
-  final int expireIn;
-  final String refreshToken;
-  final String scope;
-  final int createdAt;
+  final String? accessToken;
+  final String? tokenType;
+  final int? expireIn;
+  final String? refreshToken;
+  final String? scope;
+  final int? createdAt;
   const UserAuth(
       {required this.accessToken,
       required this.tokenType,
