@@ -3,16 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oauth2/oauth2.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/feature/data/models/user_auth/user_auth.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/access_token/get_access_token.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/save_tokens/save_access_token.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/save_tokens/save_refresh_token.dart';
+import 'package:shikimoriapp/injection.container.dart' as di;
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:oauth2/oauth2.dart';
-import 'package:shikimoriapp/injection.container.dart' as di;
+
 part 'login_screen_state.dart';
 
 class LoginScreenCubit extends Cubit<LoginScreenState> {
@@ -36,7 +37,7 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
 
       if (!await checkTokensExist()) {
         FlutterNativeSplash.remove();
-        launchUrl((authorizationUrl),
+        launchUrl(authorizationUrl,
             mode: LaunchMode.externalNonBrowserApplication);
         linkStream.listen((String? link) async {
           if (link == null) return;

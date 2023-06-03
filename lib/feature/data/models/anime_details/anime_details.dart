@@ -105,7 +105,7 @@ class AnimeDetailsModel extends AnimeDetails {
             : null,
         rating: json["rating"],
         english: json["english"] != null
-            ? List<String>.from(json["english"].map((x) => x))
+            ? List<String?>.from(json["english"].map((x) => x))
             : null,
         japanese: json["japanese"] != null
             ? List<String>.from(json["japanese"].map((x) => x))

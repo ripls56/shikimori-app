@@ -9,11 +9,11 @@ class Studio extends Equatable {
     required this.image,
   });
 
-  final int id;
-  final String name;
-  final String filteredName;
-  final bool real;
-  final String image;
+  final int? id;
+  final String? name;
+  final String? filteredName;
+  final bool? real;
+  final String? image;
 
   @override
   List<Object?> get props => [];

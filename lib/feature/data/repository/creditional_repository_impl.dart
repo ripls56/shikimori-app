@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:shikimoriapp/feature/data/datasources/creditional/creditional_remote_data_source.dart';
 import 'package:shikimoriapp/feature/domain/entities/creditional/creditional.dart';
 import 'package:shikimoriapp/core/error/failure.dart';
@@ -18,7 +19,12 @@ class CreditionalRepositoryImpl implements CreditionalRepository {
     try {
       final model = await creditional();
       return Right(model);
-    } catch (_) {
+    } catch (e) {
+      if (e is DioError) {
+        if (e.error == "invalid_grant") {
+          return Left(AuthFailure());
+        }
+      }
       return Left(ServerFailure());
     }
   }

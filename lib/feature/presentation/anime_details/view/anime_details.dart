@@ -64,7 +64,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
               actions: [
                 PopupMenuButton(
                   itemBuilder: (context) => [
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       child: Text('Add to list'),
                     ),
                   ],

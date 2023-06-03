@@ -129,7 +129,6 @@ class _HomeScreenState extends State<HomeScreen> {
     selectedRadioTile = 0;
     _getScrollPosition();
     _pageController = PageController(initialPage: 0);
-    context.read<ProfileCubit>().getCreditionals();
     super.initState();
   }
 

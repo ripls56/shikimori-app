@@ -10,3 +10,5 @@ class ProfileInitial extends ProfileState {
 }
 
 class ProfileEmpty extends ProfileState {}
+
+class ProfileTokenException extends ProfileState {}

@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
+import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
+import 'package:shikimoriapp/injection.container.dart';
 
-class HomeNavDrawer extends StatelessWidget {
+class HomeNavDrawer extends StatefulWidget {
   const HomeNavDrawer({
     super.key,
     required this.drawerItems,
@@ -17,6 +20,17 @@ class HomeNavDrawer extends StatelessWidget {
   final PageController _controller;
 
   @override
+  State<HomeNavDrawer> createState() => _HomeNavDrawerState();
+}
+
+class _HomeNavDrawerState extends State<HomeNavDrawer> {
+  @override
+  void initState() {
+    context.read<ProfileCubit>().getCreditionals();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
@@ -24,7 +38,18 @@ class HomeNavDrawer extends StatelessWidget {
           Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-            child: BlocBuilder<ProfileCubit, ProfileState>(
+            child: BlocConsumer<ProfileCubit, ProfileState>(
+              listener: (context, state) => {
+                if (state is ProfileTokenException)
+                  {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                        (route) => false),
+                    sl<FlutterSecureStorage>().deleteAll(),
+                  }
+              },
               builder: (context, state) {
                 if (state is ProfileInitial) {
                   return Column(
@@ -57,9 +82,9 @@ class HomeNavDrawer extends StatelessWidget {
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: drawerItems.length,
+            itemCount: widget.drawerItems.length,
             itemBuilder: (BuildContext context, int index) {
-              Map item = drawerItems[index];
+              Map item = widget.drawerItems[index];
               return Column(
                 children: [
                   if (index == 0)
@@ -69,20 +94,20 @@ class HomeNavDrawer extends StatelessWidget {
                   ListTile(
                     leading: Icon(
                       item['icon'],
-                      color: _page == index
+                      color: widget._page == index
                           ? Theme.of(context).primaryColor
                           : Theme.of(context).textTheme.titleMedium?.color,
                     ),
                     title: Text(
                       item['name'],
                       style: TextStyle(
-                        color: _page == index
+                        color: widget._page == index
                             ? Theme.of(context).primaryColor
                             : Theme.of(context).textTheme.titleMedium?.color,
                       ),
                     ),
                     onTap: () {
-                      _controller.jumpToPage(index);
+                      widget._controller.jumpToPage(index);
                       Navigator.pop(context);
                     },
                   ),
@@ -91,6 +116,27 @@ class HomeNavDrawer extends StatelessWidget {
                   )
                 ],
               );
+            },
+          ),
+          const Spacer(),
+          ListTile(
+            leading: Icon(
+              Icons.exit_to_app,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            title: Text(
+              'Выйти',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+            onTap: () {
+              sl<FlutterSecureStorage>().deleteAll();
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                  (route) => false);
             },
           ),
         ],

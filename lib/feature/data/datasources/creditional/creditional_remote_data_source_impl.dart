@@ -19,6 +19,14 @@ class CreditionalRemoteDataSourceImpl implements CreditionalRemoteDataSource {
     dio.interceptors.add(
       InterceptorsWrapper(
         onError: (e, handler) async {
+          if (e.response?.statusCode == 400) {
+            if (e.response?.data['error'] == 'invalid_grant') {
+              handler.next(
+                DioError.requestCancelled(
+                    requestOptions: RequestOptions(), reason: 'invalid_grant'),
+              );
+            }
+          }
           if (e.response?.statusCode == 401) {
             if (e.response?.data['error'] == 'invalid_token') {
               final loadedOrFailed = await sl<RefreshAccessToken>().call(
@@ -30,7 +38,13 @@ class CreditionalRemoteDataSourceImpl implements CreditionalRemoteDataSource {
                 ),
               );
               loadedOrFailed.fold(
-                (error) {},
+                (error) {
+                  handler.next(
+                    DioError.requestCancelled(
+                        requestOptions: RequestOptions(),
+                        reason: 'invalid_grant'),
+                  );
+                },
                 (loaded) {
                   sl<FlutterSecureStorage>()
                       .write(key: 'access_token', value: loaded.accessToken);

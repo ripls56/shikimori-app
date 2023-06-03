@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
 import 'package:shikimoriapp/core/error/failure.dart';
@@ -24,6 +26,8 @@ class RefreshAccessTokenRepositoryImpl implements RefreshAccessTokenRepository {
     try {
       final model = await auth();
       return Right(model);
+    } on DioError {
+      return Left(AuthFailure());
     } catch (_) {
       return Left(ServerFailure());
     }

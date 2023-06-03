@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -127,10 +126,18 @@ class _CharacterScreenState extends State<CharacterScreen> {
                                       ),
                                     ),
                                     seyu?.russian != ''
-                                        ? Text(seyu?.russian ?? '',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall)
+                                        ? Tooltip(
+                                            message: seyu?.russian,
+                                            child: Text(
+                                              seyu?.russian ?? '',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          )
                                         : Container(),
                                   ],
                                 )
