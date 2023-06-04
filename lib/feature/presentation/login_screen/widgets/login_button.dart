@@ -1,4 +1,4 @@
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
   final Function() onTap;
@@ -10,7 +10,7 @@ class LoginButton extends StatelessWidget {
     return Container(
       height: 56,
       padding: EdgeInsets.symmetric(horizontal: size.width / 3),
-      child: NeumorphicButton(
+      child: MaterialButton(
         onPressed: onTap,
         child: Center(
           child: Text(

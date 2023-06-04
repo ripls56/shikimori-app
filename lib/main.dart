@@ -11,6 +11,7 @@ import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/pr
 import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
 import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
+
 import 'injection.container.dart' as di;
 import 'injection.container.dart';
 
