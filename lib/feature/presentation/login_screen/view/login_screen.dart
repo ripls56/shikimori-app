@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Image.asset(

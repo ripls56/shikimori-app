@@ -1,0 +1,542 @@
+@startuml
+set namespaceSeparator ::
+
+class "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailCubit" {
+  +GetAnimeById getAnimeById
+  +GetRelatedAnimes getRelatedAnimes
+  +dynamic getAnimeDetails()
+  -dynamic _getRelatedAnimes()
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailCubit" o-- "shikimoriapp::feature::domain::use_cases::anime::get_anime_by_id.dart::GetAnimeById"
+"shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailCubit" o-- "shikimoriapp::feature::domain::use_cases::anime::get_related.dart::GetRelatedAnimes"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailCubit"
+
+abstract class "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailState" {
+}
+
+class "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailLoaded" {
+  +AnimeDetails animeDetails
+  +List<Related> related
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailLoaded" o-- "shikimoriapp::feature::domain::entities::anime_details::anime_details.dart::AnimeDetails"
+"shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailLoaded"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailError" {
+  +String errorMessage
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailError"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailEmpty" {
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::details::anime_detail_cubit.dart::AnimeDetailEmpty"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsCubit" {
+  +GetScreenshots getScreenshots
+  +dynamic getAllScreenshots()
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsCubit" o-- "shikimoriapp::feature::domain::use_cases::anime::get_screenshots.dart::GetScreenshots"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsCubit"
+
+abstract class "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsState"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsEmpty" {
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsEmpty"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsError" {
+  +String errorMessage
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsError"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsLoaded" {
+  +List<Screenshot> screenshots
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::screenshots::screenshots_cubit.dart::ScreenshotsLoaded"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosCubit" {
+  +GetVideos getVideos
+  +dynamic getAllVideos()
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosCubit" o-- "shikimoriapp::feature::domain::use_cases::anime::get_videos.dart::GetVideos"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosCubit"
+
+abstract class "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosState"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosEmpty" {
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosEmpty"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosError" {
+  +String errorMessage
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosError"
+
+class "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosLoaded" {
+  +List<Video> videos
+}
+
+"shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosState" <|-- "shikimoriapp::feature::presentation::anime_details::controller::videos::videos_cubit.dart::VideosLoaded"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::AnimeDetailScreen" {
+  +int id
+  +State<AnimeDetailScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::AnimeDetailScreen"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_AnimeDetailScreenState" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_AnimeDetailScreenState"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::TopWidget" {
+  +AnimeDetails animeDetails
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::TopWidget" o-- "shikimoriapp::feature::domain::entities::anime_details::anime_details.dart::AnimeDetails"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::TopWidget"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::InformationWidget" {
+  +AnimeDetails animeDetails
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::InformationWidget" o-- "shikimoriapp::feature::domain::entities::anime_details::anime_details.dart::AnimeDetails"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::InformationWidget"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::DescriptionWidget" {
+  +AnimeDetails animeDetails
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::DescriptionWidget" o-- "shikimoriapp::feature::domain::entities::anime_details::anime_details.dart::AnimeDetails"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::DescriptionWidget"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::ScreenshotsWidget" {
+  +AnimeDetails animeDetails
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::ScreenshotsWidget" o-- "shikimoriapp::feature::domain::entities::anime_details::anime_details.dart::AnimeDetails"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::ScreenshotsWidget"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::VideosButton" {
+  +AnimeDetails animeDetails
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::VideosButton" o-- "shikimoriapp::feature::domain::entities::anime_details::anime_details.dart::AnimeDetails"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::VideosButton"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::RelatedWidget" {
+  +List<Related> relateds
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::RelatedWidget"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_AnimeCard" {
+  +Anime anime
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_AnimeCard" o-- "shikimoriapp::feature::domain::entities::anime::anime.dart::Anime"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_AnimeCard"
+
+class "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_MangaCard" {
+  +Manga manga
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_MangaCard" o-- "shikimoriapp::feature::domain::entities::manga::manga.dart::Manga"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::anime_details.dart::_MangaCard"
+
+class "shikimoriapp::feature::presentation::anime_details::view::screenshots_page.dart::ScreenshotsPage" {
+  +int id
+  +State<ScreenshotsPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::screenshots_page.dart::ScreenshotsPage"
+
+class "shikimoriapp::feature::presentation::anime_details::view::screenshots_page.dart::_ScreenshotsPageState" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::anime_details::view::screenshots_page.dart::_ScreenshotsPageState"
+
+class "shikimoriapp::feature::presentation::anime_details::view::videos_page.dart::VideosPage" {
+  +int id
+  +State<VideosPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::anime_details::view::videos_page.dart::VideosPage"
+
+class "shikimoriapp::feature::presentation::anime_details::view::videos_page.dart::_VideosPageState" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::anime_details::view::videos_page.dart::_VideosPageState"
+
+class "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterCubit" {
+  +GetCharacterById getCharacterById
+  +dynamic getCharacter()
+}
+
+"shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterCubit" o-- "shikimoriapp::feature::domain::use_cases::character::get_character_by_id.dart::GetCharacterById"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterCubit"
+
+abstract class "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterState"
+
+class "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterEmpty" {
+}
+
+"shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterState" <|-- "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterEmpty"
+
+class "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterError" {
+  +String errorMessage
+}
+
+"shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterState" <|-- "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterError"
+
+class "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterLoaded" {
+  +Character character
+}
+
+"shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterLoaded" o-- "shikimoriapp::feature::domain::entities::character::character.dart::Character"
+"shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterState" <|-- "shikimoriapp::feature::presentation::character_screen::controller::character_cubit.dart::CharacterLoaded"
+
+class "shikimoriapp::feature::presentation::character_screen::view::character_screen.dart::CharacterScreen" {
+  +int id
+  +State<CharacterScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::character_screen::view::character_screen.dart::CharacterScreen"
+
+class "shikimoriapp::feature::presentation::character_screen::view::character_screen.dart::_CharacterScreenState" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::character_screen::view::character_screen.dart::_CharacterScreenState"
+
+class "shikimoriapp::feature::presentation::character_screen::view::character_screen.dart::CharacterNameWidget" {
+  +String title
+  +String name
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::character_screen::view::character_screen.dart::CharacterNameWidget"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_cubit.dart::AnimePageCubit" {
+  +GetAnimes getAnimes
+  +List<Anime> animes
+  +dynamic getAnimeList()
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_cubit.dart::AnimePageCubit" o-- "shikimoriapp::feature::domain::use_cases::anime::get_animes.dart::GetAnimes"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_cubit.dart::AnimePageCubit"
+
+abstract class "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageState"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageLoaded" {
+  +List<Anime> animeList
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageLoaded"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageEmpty" {
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageEmpty"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageLoading" {
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageLoading"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageError" {
+  +String errorMessage
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::anime::anime_page_state.dart::AnimePageError"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileCubit" {
+  +GetCreditional getCreditional
+  +dynamic getCreditionals()
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileCubit" o-- "shikimoriapp::feature::domain::use_cases::creditional::get_creditional.dart::GetCreditional"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileCubit"
+
+abstract class "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileState" {
+}
+
+class "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileInitial" {
+  +Creditional creditional
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileInitial" o-- "shikimoriapp::feature::domain::entities::creditional::creditional.dart::Creditional"
+"shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileInitial"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileEmpty" {
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileEmpty"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileTokenException" {
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::home::profile_cubit.dart::ProfileTokenException"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageCubit" {
+  +GetMangas getMangas
+  +dynamic getAllMangas()
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageCubit" o-- "shikimoriapp::feature::domain::use_cases::manga::get_mangas.dart::GetMangas"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageCubit"
+
+abstract class "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageState"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageEmpty" {
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageEmpty"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageError" {
+  +String errorMessage
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageError"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageLoaded" {
+  +List<Manga> mangaList
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageLoaded"
+
+class "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageLoading" {
+}
+
+"shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageState" <|-- "shikimoriapp::feature::presentation::home_screen::controller::manga::manga_cubit.dart::MangaPageLoading"
+
+class "shikimoriapp::feature::presentation::home_screen::view::home_screen.dart::HomeScreen" {
+  +State<HomeScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::home_screen::view::home_screen.dart::HomeScreen"
+
+class "shikimoriapp::feature::presentation::home_screen::view::home_screen.dart::_HomeScreenState" {
+  -PageController _pageController
+  -int _page
+  -double? _position
+  +List<dynamic> drawerItems
+  +int selectedRadioTile
+  +List<String> orderVariants
+  +Widget build()
+  +void filterModalBotomSheet()
+  +void navigationTapped()
+  +void initState()
+  -void _getScrollPosition()
+  +void dispose()
+  -void _onPageChanged()
+}
+
+"shikimoriapp::feature::presentation::home_screen::view::home_screen.dart::_HomeScreenState" o-- "flutter::src::widgets::page_view.dart::PageController"
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::home_screen::view::home_screen.dart::_HomeScreenState"
+
+class "shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_loaded_widget.dart::AnimeLoadedWidget" {
+  -ScrollController _controller
+  +List<Anime> animes
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_loaded_widget.dart::AnimeLoadedWidget" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_loaded_widget.dart::AnimeLoadedWidget"
+
+class "shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_screen_builder.dart::AnimeScreenBuilder" {
+  +double? position
+  +String order
+  +State<AnimeScreenBuilder> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_screen_builder.dart::AnimeScreenBuilder"
+
+class "shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_screen_builder.dart::_AnimeScreenBuilderState" {
+  +double? scrollPosition
+  -ScrollController _scrollController
+  +List<Anime> animes
+  +int animeListPage
+  +void initState()
+  +void dispose()
+  -void _scrollListener()
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_screen_builder.dart::_AnimeScreenBuilderState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::home_screen::widgets::anime::anime_screen_builder.dart::_AnimeScreenBuilderState"
+
+class "shikimoriapp::feature::presentation::home_screen::widgets::empty_widget.dart::EmptyWidget" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::home_screen::widgets::empty_widget.dart::EmptyWidget"
+
+class "shikimoriapp::feature::presentation::home_screen::widgets::home::home_nav_drawer.dart::HomeNavDrawer" {
+  +List<dynamic> drawerItems
+  -int _page
+  -PageController _controller
+  +State<HomeNavDrawer> createState()
+}
+
+"shikimoriapp::feature::presentation::home_screen::widgets::home::home_nav_drawer.dart::HomeNavDrawer" o-- "flutter::src::widgets::page_view.dart::PageController"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::home_screen::widgets::home::home_nav_drawer.dart::HomeNavDrawer"
+
+class "shikimoriapp::feature::presentation::home_screen::widgets::home::home_nav_drawer.dart::_HomeNavDrawerState" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::home_screen::widgets::home::home_nav_drawer.dart::_HomeNavDrawerState"
+
+class "shikimoriapp::feature::presentation::home_screen::widgets::manga::manga_loaded_widget.dart::MangaLoadedWidget" {
+  -ScrollController _controller
+  +List<Anime> animes
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::home_screen::widgets::manga::manga_loaded_widget.dart::MangaLoadedWidget" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::home_screen::widgets::manga::manga_loaded_widget.dart::MangaLoadedWidget"
+
+class "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenCubit" {
+  +GetAccessToken getAccessToken
+  +SaveAccessToken saveAccessToken
+  +SaveRefreshToken saveRefreshToken
+  +void login()
+  +dynamic checkTokensExist()
+}
+
+"shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenCubit" o-- "shikimoriapp::feature::domain::use_cases::access_token::get_access_token.dart::GetAccessToken"
+"shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenCubit" o-- "shikimoriapp::feature::domain::use_cases::save_tokens::save_access_token.dart::SaveAccessToken"
+"shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenCubit" o-- "shikimoriapp::feature::domain::use_cases::save_tokens::save_refresh_token.dart::SaveRefreshToken"
+"bloc::src::cubit.dart::Cubit" <|-- "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenCubit"
+
+abstract class "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenState"
+
+class "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenEmpty" {
+}
+
+"shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenState" <|-- "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenEmpty"
+
+class "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenLoaded" {
+}
+
+"shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenState" <|-- "shikimoriapp::feature::presentation::login_screen::controller::login_screen_cubit.dart::LoginScreenLoaded"
+
+class "shikimoriapp::feature::presentation::login_screen::view::login_screen.dart::LoginScreen" {
+  +State<LoginScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "shikimoriapp::feature::presentation::login_screen::view::login_screen.dart::LoginScreen"
+
+class "shikimoriapp::feature::presentation::login_screen::view::login_screen.dart::_LoginScreenState" {
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "shikimoriapp::feature::presentation::login_screen::view::login_screen.dart::_LoginScreenState"
+
+class "shikimoriapp::feature::presentation::login_screen::widgets::login_button.dart::LoginButton" {
+  +dynamic Function() onTap
+  +Widget build()
+}
+
+"shikimoriapp::feature::presentation::login_screen::widgets::login_button.dart::LoginButton" o-- "null::dynamic Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "shikimoriapp::feature::presentation::login_screen::widgets::login_button.dart::LoginButton"
+
+class "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchBloc" {
+  -GetAnimeByName _getAnimeByName
+  -String _previousQuery
+  -dynamic _animeSearch()
+}
+
+"shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchBloc" o-- "shikimoriapp::feature::domain::use_cases::anime::get_anime_by_name.dart::GetAnimeByName"
+"bloc::src::bloc.dart::Bloc" <|-- "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchBloc"
+
+abstract class "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchEvent" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchEvent"
+
+class "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchAnimeEvent" {
+  +String query
+}
+
+"shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchEvent" <|-- "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchAnimeEvent"
+
+abstract class "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchState"
+
+class "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchLoaded" {
+  +List<Anime> animes
+}
+
+"shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchState" <|-- "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchLoaded"
+
+class "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchEmpty" {
+}
+
+"shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchState" <|-- "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchEmpty"
+
+class "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchError" {
+  +String errorMessage
+}
+
+"shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchState" <|-- "shikimoriapp::feature::presentation::search::bloc::search_bloc.dart::SearchError"
+
+
+@enduml
