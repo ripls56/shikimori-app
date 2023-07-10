@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/widgets/search_delegate_impl.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anime_screen_builder.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/home/home_nav_drawer.dart';
 

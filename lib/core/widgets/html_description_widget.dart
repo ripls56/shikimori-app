@@ -19,7 +19,7 @@ class HtmlDescriptionWidget extends StatelessWidget {
       style: {
         'div': Style(textAlign: TextAlign.justify),
       },
-      onLinkTap: (url, rcontext, attributes, element) {
+      onLinkTap: (url, attributes, element) {
         if (attributes['data-attrs'] != null) {
           Map<String, dynamic> data = jsonDecode(attributes['data-attrs']!);
 

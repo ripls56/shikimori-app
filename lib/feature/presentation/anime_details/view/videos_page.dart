@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
 import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class VideosPage extends StatefulWidget {
   const VideosPage({super.key, required this.id});
@@ -59,24 +58,7 @@ class _VideosPageState extends State<VideosPage> {
                       ),
                       Material(
                         color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () => showDialog(
-                            context: context,
-                            builder: (context) => Dialog(
-                              backgroundColor: Colors.transparent,
-                              child: SizedBox(
-                                height: MediaQuery.of(context).size.width / 2,
-                                child: AspectRatio(
-                                  aspectRatio: 16 / 9,
-                                  child: WebView(
-                                    javascriptMode: JavascriptMode.unrestricted,
-                                    initialUrl: state.videos[index].playerUrl,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: InkWell(onTap: () {}),
                       ),
                     ],
                   ),

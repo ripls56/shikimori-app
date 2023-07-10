@@ -119,7 +119,7 @@ class TopWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: BarChart(
                             BarChartData(
-                              gridData: FlGridData(show: false),
+                              gridData: const FlGridData(show: false),
                               borderData: FlBorderData(show: false),
                               barTouchData: BarTouchData(
                                 touchTooltipData: BarTouchTooltipData(
@@ -143,13 +143,13 @@ class TopWidget extends StatelessWidget {
                               ),
                               titlesData: FlTitlesData(
                                 show: true,
-                                topTitles: AxisTitles(
+                                topTitles: const AxisTitles(
                                   sideTitles: SideTitles(showTitles: false),
                                 ),
-                                leftTitles: AxisTitles(
+                                leftTitles: const AxisTitles(
                                   sideTitles: SideTitles(showTitles: false),
                                 ),
-                                rightTitles: AxisTitles(
+                                rightTitles: const AxisTitles(
                                   sideTitles: SideTitles(showTitles: false),
                                 ),
                                 bottomTitles: AxisTitles(

@@ -21,6 +21,7 @@ class CharacterCubit extends Cubit<CharacterState> {
       );
     } catch (e) {
       emit(CharacterError(errorMessage: e.toString()));
+      rethrow;
     }
   }
 }

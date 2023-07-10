@@ -20,6 +20,7 @@ class VideosCubit extends Cubit<VideosState> {
       );
     } catch (e) {
       emit(VideosError(errorMessage: e.toString()));
+      rethrow;
     }
   }
 }

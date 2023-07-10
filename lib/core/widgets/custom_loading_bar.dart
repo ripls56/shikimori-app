@@ -8,11 +8,12 @@ class CustomLoadingBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Center(
       child: Lottie.asset(
         AppImages.loadingAnimation,
-        width: MediaQuery.of(context).size.width / 2,
-        height: MediaQuery.of(context).size.width / 2,
+        width: size.width / 2,
+        height: size.width / 2,
       ),
     );
   }

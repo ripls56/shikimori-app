@@ -4,6 +4,7 @@ import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details
 import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_anime_by_id.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_related.dart';
+
 part 'anime_detail_state.dart';
 
 class AnimeDetailCubit extends Cubit<AnimeDetailState> {
@@ -31,6 +32,7 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
       );
     } catch (ex) {
       emit(AnimeDetailError(errorMessage: ex.toString()));
+      rethrow;
     }
   }
 
@@ -45,7 +47,7 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
       );
       return response;
     } catch (ex) {
-      throw ServerException();
+      rethrow;
     }
   }
 }

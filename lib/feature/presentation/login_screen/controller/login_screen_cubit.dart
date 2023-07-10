@@ -93,6 +93,7 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
     } catch (_) {
       FlutterNativeSplash.remove();
       emit(LoginScreenEmpty());
+      rethrow;
     }
   }
 

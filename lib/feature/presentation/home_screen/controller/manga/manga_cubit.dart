@@ -24,6 +24,7 @@ class MangaPageCubit extends Cubit<MangaPageState> {
       );
     } catch (_) {
       emit(const MangaPageError(errorMessage: 'error'));
+      rethrow;
     }
   }
 }

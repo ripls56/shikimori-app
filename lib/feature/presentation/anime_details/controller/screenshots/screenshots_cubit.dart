@@ -21,6 +21,7 @@ class ScreenshotsCubit extends Cubit<ScreenshotsState> {
       );
     } catch (e) {
       emit(ScreenshotsError(errorMessage: e.toString()));
+      rethrow;
     }
   }
 }

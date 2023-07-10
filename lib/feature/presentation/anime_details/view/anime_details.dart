@@ -7,7 +7,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
-import 'package:shikimoriapp/core/widgets/custom_snack_bar.dart';
 import 'package:shikimoriapp/core/widgets/headline_button.dart';
 import 'package:shikimoriapp/core/widgets/headline_widget.dart';
 import 'package:shikimoriapp/core/widgets/html_description_widget.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_animes.dart';
+
 import 'anime_page_state.dart';
 
 class AnimePageCubit extends Cubit<AnimePageState> {
@@ -24,6 +25,7 @@ class AnimePageCubit extends Cubit<AnimePageState> {
       );
     } catch (_) {
       emit(const AnimePageError(errorMessage: 'error'));
+      rethrow;
     }
   }
 }

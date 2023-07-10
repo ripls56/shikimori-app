@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shikimoriapp/core/helpers/crashlitycs.dart';
 import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/data/datasources/character/character_remote_data_source.dart';
@@ -14,13 +14,13 @@ import 'package:shikimoriapp/feature/data/datasources/token/token_local_data_sou
 import 'package:shikimoriapp/feature/data/datasources/token/token_local_data_source_impl.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source_impl.dart';
-import 'package:shikimoriapp/feature/data/repository/refresh_access_token_repository_impl.dart';
-import 'package:shikimoriapp/feature/data/repository/save_access_token_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/anime_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/character_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/creditional_repository_impl.dart';
+import 'package:shikimoriapp/feature/data/repository/refresh_access_token_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/refresh_token_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/related_repository_impl.dart';
+import 'package:shikimoriapp/feature/data/repository/save_access_token_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/user_auth_repository_impl.dart';
 import 'package:shikimoriapp/feature/domain/repositories/access_token_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/anime_repository.dart';
@@ -49,20 +49,26 @@ import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/a
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
+import 'package:talker_dio_logger/talker_dio_logger.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 final sl = GetIt.asNewInstance();
 
 Future<void> init() async {
+  //Talker
+  sl.registerLazySingleton(() => CrashlyticsTalkerObserver());
+  final talker = TalkerFlutter.init(
+    observer: sl<CrashlyticsTalkerObserver>(),
+  );
+  sl.registerLazySingleton(() => talker);
+
   //Dio
   final dio = Dio();
-  dio.interceptors.add(PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: false,
-      error: true,
-      compact: true,
-      maxWidth: 90));
+  dio.interceptors.add(
+    TalkerDioLogger(
+      talker: sl<Talker>(),
+    ),
+  );
   dio.options.headers = {
     'User-Agent': 'mpt coursework',
   };

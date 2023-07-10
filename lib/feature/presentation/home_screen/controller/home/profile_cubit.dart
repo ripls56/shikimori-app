@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:shikimoriapp/feature/domain/entities/creditional/creditional.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
@@ -33,6 +30,7 @@ class ProfileCubit extends Cubit<ProfileState> {
               });
     } catch (e) {
       emit(ProfileEmpty());
+      rethrow;
     }
   }
 }
