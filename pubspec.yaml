@@ -67,7 +67,8 @@ dependencies:
   flutter_svg:
   flutter_secure_storage:
   flutter_native_splash:
-#  crashlytics
+  json_serializable:
+  #  crashlytics
   firebase_core:
   talker_flutter:
   firebase_crashlytics:

@@ -18,17 +18,17 @@ class CreditionalRepositoryImpl implements CreditionalRepository {
   }
 
   Future<Either<Failure, Creditional>> _getCreditionals(
-      Future<Creditional> Function() creditional) async {
+      Future<Creditional> Function() creditional,) async {
     try {
       final model = await creditional();
       return Right(model);
     } catch (e) {
       if (e is DioException) {
         if (e.error == 'invalid_grant') {
-          return Left(AuthFailure());
+          return const Left(AuthFailure());
         }
       }
-      return Left(ServerFailure());
+      return const Left(ServerFailure());
     }
   }
 }

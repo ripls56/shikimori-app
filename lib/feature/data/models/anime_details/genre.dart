@@ -9,10 +9,10 @@ class GenreModel extends Genre {
   }) : super(id: id, name: name, russian: russian, kind: kind);
 
   factory GenreModel.fromJson(Map<String, dynamic> json) => GenreModel(
-        id: json["id"],
-        name: json["name"],
-        russian: json["russian"],
-        kind: json["kind"],
+        id: json['id'],
+        name: json['name'],
+        russian: json['russian'],
+        kind: json['kind'],
       );
 
   @override

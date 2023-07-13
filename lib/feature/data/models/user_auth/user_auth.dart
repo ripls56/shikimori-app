@@ -14,7 +14,7 @@ class UserAuthModel extends UserAuth {
             expireIn: expireIn,
             scope: scope,
             createdAt: createdAt,
-            refreshToken: refreshToken);
+            refreshToken: refreshToken,);
 
   factory UserAuthModel.fromJson(Map<String, dynamic> data) => UserAuthModel(
       accessToken: data['access_token'],
@@ -22,7 +22,7 @@ class UserAuthModel extends UserAuth {
       expireIn: data['expires_in'],
       scope: data['scope'],
       createdAt: data['created_at'],
-      refreshToken: data['refresh_token']);
+      refreshToken: data['refresh_token'],);
 
   @override
   List<Object?> get props => [];

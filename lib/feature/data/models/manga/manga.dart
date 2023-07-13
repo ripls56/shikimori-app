@@ -16,7 +16,7 @@ class MangaModel extends Manga {
     required volumes,
     required chapters,
     required airedOn,
-    required releasedOn,
+    required super.releasedOn,
   }) : super(
             id: id,
             name: name,
@@ -28,24 +28,23 @@ class MangaModel extends Manga {
             status: status,
             volumes: volumes,
             chapters: chapters,
-            releasedOn: releasedOn,
-            airedOn: airedOn);
+            airedOn: airedOn,);
 
   factory MangaModel.fromJson(Map<String, dynamic> json) => MangaModel(
-        id: json["id"],
-        name: json["name"],
-        russian: json["russian"],
-        image: ImageModel.fromJson(json["image"]),
-        url: json["url"],
-        kind: json["kind"],
-        score: json["score"],
-        status: json["status"],
-        volumes: json["volumes"],
-        chapters: json["chapters"],
-        airedOn: DateTime.parse(json["aired_on"]),
-        releasedOn: json["released_on"] == null
+        id: json['id'],
+        name: json['name'],
+        russian: json['russian'],
+        image: ImageModel.fromJson(json['image']),
+        url: json['url'],
+        kind: json['kind'],
+        score: json['score'],
+        status: json['status'],
+        volumes: json['volumes'],
+        chapters: json['chapters'],
+        airedOn: DateTime.parse(json['aired_on']),
+        releasedOn: json['released_on'] == null
             ? null
-            : DateTime.parse(json["released_on"]),
+            : DateTime.parse(json['released_on']),
       );
 
   @override

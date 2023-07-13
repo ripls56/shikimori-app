@@ -12,14 +12,14 @@ class StudioModel extends Studio {
             name: name,
             filteredName: filteredName,
             real: real,
-            image: image);
+            image: image,);
 
   factory StudioModel.fromJson(Map<String, dynamic> json) => StudioModel(
-        id: json["id"],
-        name: json["name"],
-        filteredName: json["filtered_name"],
-        real: json["real"],
-        image: json["image"],
+        id: json['id'],
+        name: json['name'],
+        filteredName: json['filtered_name'],
+        real: json['real'],
+        image: json['image'],
       );
 
   @override

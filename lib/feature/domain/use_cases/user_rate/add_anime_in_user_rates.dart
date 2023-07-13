@@ -7,21 +7,21 @@ import 'package:shikimoriapp/feature/domain/repositories/user_rate_repository.da
 
 class AddAnimeInUserRates
     extends UseCase<List<UserRate>, AddAnimeInUserRatesParams> {
-  final UserRateRepository userRateRepository;
 
   AddAnimeInUserRates(this.userRateRepository);
+  final UserRateRepository userRateRepository;
 
   @override
   Future<Either<Failure, List<UserRate>>> call(
-      AddAnimeInUserRatesParams params) async {
+      AddAnimeInUserRatesParams params,) async {
     return await userRateRepository.addAnimeInUserRates(params.userRate);
   }
 }
 
 class AddAnimeInUserRatesParams extends Equatable {
-  final UserRate userRate;
 
   const AddAnimeInUserRatesParams({required this.userRate});
+  final UserRate userRate;
 
   @override
   List<Object?> get props => [userRate];

@@ -2,7 +2,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
+import 'package:shikimoriapp/feature/anime/domain/anime_dto.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_anime_by_name.dart';
 
 part 'search_event.dart';
@@ -31,7 +31,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     try {
       if (event.query == _previousQuery) return;
       emit(SearchEmpty());
-      List<Anime> animes = [];
+      var animes = <Anime>[];
       final loadedOrFailure = await _getAnimeByName
           .call(GetAnimesByNameParams(phrase: event.query, limit: 50));
       loadedOrFailure.fold(

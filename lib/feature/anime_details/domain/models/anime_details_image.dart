@@ -1,0 +1,27 @@
+import 'package:equatable/equatable.dart';
+
+///Image model
+class AnimeDetailsImage extends Equatable {
+  ///Constructor
+  const AnimeDetailsImage({
+    required this.original,
+    required this.preview,
+    required this.x96,
+    required this.x48,
+  });
+
+  ///Image original
+  final String original;
+
+  ///Image preview
+  final String preview;
+
+  ///Image size x96
+  final String x96;
+
+  ///Image size x48
+  final String x48;
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}

@@ -4,17 +4,16 @@ import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
 
 class LoginButton extends StatelessWidget {
+  const LoginButton({required this.onTap, super.key});
   final Function() onTap;
-  const LoginButton({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const double borderRadius = 12;
-    double screenWidth = context.screenWidth;
+    const borderRadius = 12;
+    final screenWidth = context.screenWidth;
     return Stack(
       children: [
         Align(
-          alignment: Alignment.center,
           child: Material(
             clipBehavior: Clip.hardEdge,
             borderRadius: const BorderRadius.all(Radius.circular(borderRadius)),

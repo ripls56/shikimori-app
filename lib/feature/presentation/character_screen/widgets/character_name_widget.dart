@@ -2,9 +2,7 @@ part of '../view/character_screen.dart';
 
 class CharacterNameWidget extends StatelessWidget {
   const CharacterNameWidget({
-    super.key,
-    required this.title,
-    required this.name,
+    required this.title, required this.name, super.key,
   });
 
   final String title;

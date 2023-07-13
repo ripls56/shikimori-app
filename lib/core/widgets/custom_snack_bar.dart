@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 SnackBar loadingSnackBar(String title, BuildContext context) {
-  final double height = MediaQuery.of(context).size.height * 0.023 < 20
+  final height = MediaQuery.of(context).size.height * 0.023 < 20
       ? 20
       : MediaQuery.of(context).size.height * 0.023;
   return SnackBar(

@@ -6,9 +6,9 @@ import 'package:shikimoriapp/feature/domain/entities/creditional/creditional.dar
 import 'package:shikimoriapp/feature/domain/repositories/creditional_repository.dart';
 
 class GetCreditional extends UseCase<Creditional, GetCreditionalParams> {
-  final CreditionalRepository creditionalRepository;
 
   GetCreditional(this.creditionalRepository);
+  final CreditionalRepository creditionalRepository;
 
   @override
   Future<Either<Failure, Creditional>> call(GetCreditionalParams params) async {
@@ -17,9 +17,9 @@ class GetCreditional extends UseCase<Creditional, GetCreditionalParams> {
 }
 
 class GetCreditionalParams extends Equatable {
-  final String accessToken;
 
   const GetCreditionalParams({required this.accessToken});
+  final String accessToken;
 
   @override
   List<Object?> get props => [accessToken];

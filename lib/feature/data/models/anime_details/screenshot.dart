@@ -8,8 +8,8 @@ class ScreenshotModel extends Screenshot {
 
   factory ScreenshotModel.fromJson(Map<String, dynamic> json) =>
       ScreenshotModel(
-        original: json["original"],
-        preview: json["preview"],
+        original: json['original'],
+        preview: json['preview'],
       );
 
   @override

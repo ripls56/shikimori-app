@@ -8,10 +8,7 @@ import 'package:shikimoriapp/injection.container.dart';
 
 class HomeNavDrawer extends StatefulWidget {
   const HomeNavDrawer({
-    super.key,
-    required this.drawerItems,
-    required int page,
-    required PageController controller,
+    required this.drawerItems, required int page, required PageController controller, super.key,
   })  : _page = page,
         _controller = controller;
 
@@ -46,7 +43,7 @@ class _HomeNavDrawerState extends State<HomeNavDrawer> {
                         MaterialPageRoute(
                           builder: (context) => const LoginScreen(),
                         ),
-                        (route) => false),
+                        (route) => false,),
                     sl<FlutterSecureStorage>().deleteAll(),
                   }
               },
@@ -57,7 +54,6 @@ class _HomeNavDrawerState extends State<HomeNavDrawer> {
                       CircleAvatar(
                         radius: 70,
                         child: ClipOval(
-                          clipBehavior: Clip.antiAlias,
                           child: CachedNetworkImage(
                             imageUrl: state.creditional.image.x160,
                           ),
@@ -84,7 +80,7 @@ class _HomeNavDrawerState extends State<HomeNavDrawer> {
             shrinkWrap: true,
             itemCount: widget.drawerItems.length,
             itemBuilder: (BuildContext context, int index) {
-              Map item = widget.drawerItems[index];
+              final Map item = widget.drawerItems[index];
               return Column(
                 children: [
                   if (index == 0)
@@ -135,7 +131,7 @@ class _HomeNavDrawerState extends State<HomeNavDrawer> {
                   MaterialPageRoute(
                     builder: (context) => const LoginScreen(),
                   ),
-                  (route) => false);
+                  (route) => false,);
             },
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HeadlineWidget extends StatelessWidget {
-  HeadlineWidget({super.key, required this.title, this.height = 30});
+  HeadlineWidget({required this.title, super.key, this.height = 30});
 
   final String title;
   double? height;

@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/view/anime_details.dart';
 import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
-
-import 'custom_loading_bar.dart';
 
 class SearchDelegateImpl extends SearchDelegate {
   @override
@@ -50,7 +49,7 @@ class _SearchBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height;
     // final double width = MediaQuery.of(context).size.width;
     context.read<SearchBloc>().add(SearchAnimeEvent(query));
     return BlocBuilder<SearchBloc, SearchState>(
@@ -87,7 +86,7 @@ class _SearchBuilder extends StatelessWidget {
                         CachedNetworkImage(
                             height: height * 0.09,
                             imageUrl:
-                                '${Env.shikimoriUrl}${state.animes[index].image?.x48}'),
+                                '${Env.shikimoriUrl}${state.animes[index].image?.x48}',),
                         Expanded(
                           child: Transform.translate(
                             offset: const Offset(0, 5),

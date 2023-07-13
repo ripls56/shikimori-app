@@ -9,17 +9,17 @@ class ImageModel extends Image {
   });
 
   factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
-        original: json["original"],
-        preview: json["preview"],
-        x96: json["x96"],
-        x48: json["x48"],
+        original: json['original'],
+        preview: json['preview'],
+        x96: json['x96'],
+        x48: json['x48'],
       );
 
   Map<String, dynamic> toJson() => {
-        "original": original,
-        "preview": preview,
-        "x96": x96,
-        "x48": x48,
+        'original': original,
+        'preview': preview,
+        'x96': x96,
+        'x48': x48,
       };
 
   @override

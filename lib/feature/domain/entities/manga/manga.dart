@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'image.dart';
+import 'package:shikimoriapp/feature/domain/entities/manga/image.dart';
 
 class Manga extends Equatable {
   const Manga({

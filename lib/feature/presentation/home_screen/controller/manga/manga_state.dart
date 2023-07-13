@@ -10,15 +10,15 @@ abstract class MangaPageState extends Equatable {
 class MangaPageEmpty extends MangaPageState {}
 
 class MangaPageError extends MangaPageState {
-  final String errorMessage;
 
   const MangaPageError({required this.errorMessage});
+  final String errorMessage;
 }
 
 class MangaPageLoaded extends MangaPageState {
-  final List<Manga> mangaList;
 
   const MangaPageLoaded({required this.mangaList});
+  final List<Manga> mangaList;
 }
 
 class MangaPageLoading extends MangaPageState {}

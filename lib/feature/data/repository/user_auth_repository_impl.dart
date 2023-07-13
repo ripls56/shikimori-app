@@ -36,9 +36,9 @@ class UserAuthRepositoryImpl implements UserAuthRepository {
       final model = await auth();
       return Right(model);
     } on DioException {
-      return Left(AuthFailure());
+      return const Left(AuthFailure());
     } catch (_) {
-      return Left(ServerFailure());
+      return const Left(ServerFailure());
     }
   }
 
@@ -68,7 +68,7 @@ class UserAuthRepositoryImpl implements UserAuthRepository {
       final model = await auth();
       return Right(model);
     } catch (_) {
-      return Left(ServerFailure());
+      return const Left(ServerFailure());
     }
   }
 }

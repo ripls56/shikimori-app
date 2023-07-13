@@ -5,9 +5,9 @@ import 'package:shikimoriapp/core/usecase/usecase.dart';
 import 'package:shikimoriapp/feature/domain/repositories/tokens_repository.dart';
 
 class SaveAccessToken extends UseCase<void, SaveAccessTokenParams> {
-  final TokenLocalRepository tokenLocalRepository;
 
   SaveAccessToken(this.tokenLocalRepository);
+  final TokenLocalRepository tokenLocalRepository;
 
   @override
   Future<Either<Failure, void>> call(SaveAccessTokenParams params) async {
@@ -16,9 +16,9 @@ class SaveAccessToken extends UseCase<void, SaveAccessTokenParams> {
 }
 
 class SaveAccessTokenParams extends Equatable {
-  final String accessToken;
 
   const SaveAccessTokenParams({required this.accessToken});
+  final String accessToken;
 
   @override
   List<Object?> get props => [

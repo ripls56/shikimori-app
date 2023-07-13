@@ -6,7 +6,7 @@ import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anim
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/home/home_nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -21,12 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List drawerItems = [
     {
-      "icon": Icons.animation,
-      "name": "Аниме",
+      'icon': Icons.animation,
+      'name': 'Аниме',
     },
     {
-      "icon": Icons.book,
-      "name": "Манга",
+      'icon': Icons.book,
+      'name': 'Манга',
     },
   ];
 
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(drawerItems[_page]['name']),
       ),
       drawer: HomeNavDrawer(
-          drawerItems: drawerItems, page: _page, controller: _pageController),
+          drawerItems: drawerItems, page: _page, controller: _pageController,),
     );
   }
 
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(12),
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Text(
                 'Сортировка:',
                 style: Theme.of(context).textTheme.headlineSmall,
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         );
-      }),
+      },),
     );
   }
 
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     selectedRadioTile = 0;
-    _pageController = PageController(initialPage: 0);
+    _pageController = PageController();
     super.initState();
   }
 

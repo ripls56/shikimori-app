@@ -6,8 +6,8 @@ import 'package:shikimoriapp/feature/domain/use_cases/manga/get_mangas.dart';
 part 'manga_state.dart';
 
 class MangaPageCubit extends Cubit<MangaPageState> {
-  final GetMangas getMangas;
   MangaPageCubit(this.getMangas) : super(MangaPageEmpty());
+  final GetMangas getMangas;
 
   Future<void> getAllMangas(int page) async {
     try {

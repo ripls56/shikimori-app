@@ -16,16 +16,16 @@ class VideoModel extends Video {
             playerUrl: playerUrl,
             name: name,
             kind: kind,
-            hosting: hosting);
+            hosting: hosting,);
 
   factory VideoModel.fromJson(Map<String, dynamic> json) => VideoModel(
-        id: json["id"],
-        url: json["url"],
-        imageUrl: json["image_url"],
-        playerUrl: json["player_url"],
-        name: json["name"],
-        kind: json["kind"],
-        hosting: json["hosting"],
+        id: json['id'],
+        url: json['url'],
+        imageUrl: json['image_url'],
+        playerUrl: json['player_url'],
+        name: json['name'],
+        kind: json['kind'],
+        hosting: json['hosting'],
       );
 
   @override

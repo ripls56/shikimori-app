@@ -17,9 +17,8 @@ import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_
 import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
 import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
 import 'package:shikimoriapp/firebase_options.dart';
+import 'package:shikimoriapp/injection.container.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-
-import 'injection.container.dart';
 
 Future<void> main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -31,12 +30,12 @@ Future<void> main() async {
     return true;
   };
 
-  runZonedGuarded(() async {
-    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await runZonedGuarded(() async {
+    final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-    init();
+    await init();
     await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform);
+        options: DefaultFirebaseOptions.currentPlatform,);
     runApp(const MyApp());
   }, (error, stack) {
     sl<Talker>().handle(error, stack);
@@ -60,28 +59,28 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginScreenCubit>(
-          create: ((context) => sl<LoginScreenCubit>()),
+          create: (context) => sl<LoginScreenCubit>(),
         ),
         BlocProvider<AnimePageCubit>(
-          create: ((context) => sl<AnimePageCubit>()),
+          create: (context) => sl<AnimePageCubit>(),
         ),
         BlocProvider<ProfileCubit>(
-          create: ((context) => sl<ProfileCubit>()),
+          create: (context) => sl<ProfileCubit>(),
         ),
         BlocProvider<AnimeDetailCubit>(
-          create: ((context) => sl<AnimeDetailCubit>()),
+          create: (context) => sl<AnimeDetailCubit>(),
         ),
         BlocProvider<VideosCubit>(
-          create: ((context) => sl<VideosCubit>()),
+          create: (context) => sl<VideosCubit>(),
         ),
         BlocProvider<ScreenshotsCubit>(
-          create: ((context) => sl<ScreenshotsCubit>()),
+          create: (context) => sl<ScreenshotsCubit>(),
         ),
         BlocProvider<SearchBloc>(
-          create: ((context) => sl<SearchBloc>()),
+          create: (context) => sl<SearchBloc>(),
         ),
         BlocProvider<CharacterCubit>(
-          create: ((context) => sl<CharacterCubit>()),
+          create: (context) => sl<CharacterCubit>(),
         ),
       ],
       child: MaterialApp(
@@ -90,11 +89,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             pageTransitionsTheme: const PageTransitionsTheme(builders: {
               TargetPlatform.android: CupertinoPageTransitionsBuilder()
-            }),
+            },),
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.blue,
-              brightness: Brightness.light,
             ),
             textTheme: TextTheme(
               labelLarge: Theme.of(context)
@@ -105,7 +103,7 @@ class MyApp extends StatelessWidget {
           ),
           home: Provider(
               create: (context) => sl<Talker>(),
-              child: const SafeArea(child: LoginScreen()))),
+              child: const SafeArea(child: LoginScreen()),),),
     );
   }
 }

@@ -5,14 +5,12 @@ import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 import 'package:shikimoriapp/core/widgets/headline_widget.dart';
 import 'package:shikimoriapp/core/widgets/html_description_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
-import 'package:shikimoriapp/feature/domain/entities/character/character.dart'
-    as entity_character;
 import 'package:shikimoriapp/feature/presentation/character_screen/controller/character_cubit.dart';
 
 part '../widgets/character_name_widget.dart';
 
 class CharacterScreen extends StatefulWidget {
-  const CharacterScreen({Key? key, required this.id}) : super(key: key);
+  const CharacterScreen({required this.id, super.key});
 
   final int id;
 
@@ -40,7 +38,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
       },
       builder: (context, state) {
         if (state is CharacterLoaded) {
-          entity_character.Character character = state.character;
+          final character = state.character;
           return Scaffold(
             appBar: AppBar(
               title: Text(character.name ?? ''),
@@ -53,25 +51,25 @@ class _CharacterScreenState extends State<CharacterScreen> {
                     CachedNetworkImage(
                         width: 154,
                         height: 240,
-                        imageUrl: '${Env.host}${character.image?.preview}'),
+                        imageUrl: '${Env.host}${character.image?.preview}',),
                     Expanded(
                       child: Column(
                         children: [
-                          HeadlineWidget(title: 'Имя', height: 30),
+                          HeadlineWidget(title: 'Имя'),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: Column(
                               children: [
                                 CharacterNameWidget(
                                     title: 'RU: ',
-                                    name: character.russian ?? ''),
+                                    name: character.russian ?? '',),
                                 const Divider(),
                                 CharacterNameWidget(
                                     title: 'JP: ',
-                                    name: character.japanese ?? ''),
+                                    name: character.japanese ?? '',),
                                 const Divider(),
                                 CharacterNameWidget(
-                                    title: 'US: ', name: character.name ?? ''),
+                                    title: 'US: ', name: character.name ?? '',),
                                 const Divider(),
                               ],
                             ),
@@ -82,7 +80,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: HtmlDescriptionWidget(data: character.descriptionHtml),
                 ),
                 HeadlineWidget(
@@ -95,9 +93,9 @@ class _CharacterScreenState extends State<CharacterScreen> {
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        var seyu = character.seyu?[index];
+                        final seyu = character.seyu?[index];
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8),
                           child: Container(
                             padding: const EdgeInsets.all(8),
                             color:
@@ -126,8 +124,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                    seyu?.russian != ''
-                                        ? Tooltip(
+                                    if (seyu?.russian != '') Tooltip(
                                             message: seyu?.russian,
                                             child: Text(
                                               seyu?.russian ?? '',
@@ -138,8 +135,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                                                   .bodySmall,
                                               textAlign: TextAlign.center,
                                             ),
-                                          )
-                                        : Container(),
+                                          ) else Container(),
                                   ],
                                 )
                               ],
@@ -147,7 +143,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                           ),
                         );
                       },
-                      itemCount: character.seyu?.length),
+                      itemCount: character.seyu?.length,),
                 )
               ],
             ),

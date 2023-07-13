@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 
 class HeadlineButton extends StatelessWidget {
   HeadlineButton(
-      {super.key,
-      required this.title,
-      this.height,
-      required this.onPress,
-      required this.child});
+      {required this.title, required this.onPress, required this.child, super.key,
+      this.height,});
 
   final String title;
   final Widget child;

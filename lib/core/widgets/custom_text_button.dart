@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
+  const CustomTextButton(
+      {required this.text, required this.onTap, super.key,
+      this.color,
+      this.textColor,});
   final String text;
   final VoidCallback onTap;
   final Color? color;
   final Color? textColor;
-  const CustomTextButton(
-      {super.key,
-      required this.text,
-      required this.onTap,
-      this.color,
-      this.textColor});
 
   @override
   Widget build(BuildContext context) {

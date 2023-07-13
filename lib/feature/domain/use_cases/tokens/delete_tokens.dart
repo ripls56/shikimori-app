@@ -5,9 +5,9 @@ import 'package:shikimoriapp/core/usecase/usecase.dart';
 import 'package:shikimoriapp/feature/domain/repositories/tokens_repository.dart';
 
 class SaveRefreshToken extends UseCase<void, SaveRefreshTokenParams> {
-  final TokenLocalRepository tokenLocalRepository;
 
   SaveRefreshToken(this.tokenLocalRepository);
+  final TokenLocalRepository tokenLocalRepository;
 
   @override
   Future<Either<Failure, void>> call(SaveRefreshTokenParams params) async {
@@ -16,9 +16,9 @@ class SaveRefreshToken extends UseCase<void, SaveRefreshTokenParams> {
 }
 
 class SaveRefreshTokenParams extends Equatable {
-  final String refreshToken;
 
   const SaveRefreshTokenParams({required this.refreshToken});
+  final String refreshToken;
 
   @override
   List<Object?> get props => [refreshToken];

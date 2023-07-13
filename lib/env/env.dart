@@ -10,7 +10,7 @@ abstract class Env {
   @EnviedField(varName: 'HOST')
   static const String host = _Env.host;
 
-  @EnviedField(varName: 'HOST2')
+  @EnviedField(varName: 'HOSTV2')
   static const String hostV2 = _Env.hostV2;
 
   @EnviedField(varName: 'GRANT_TYPE')

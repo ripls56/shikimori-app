@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
 
   EnumValues(this.map);
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
 
   Map<T, String> get reverse {
     reverseMap = map.map((k, v) => MapEntry(v, k));
@@ -15,11 +15,11 @@ class EnumValues<T> {
 }
 
 class Debouncer {
+
+  Debouncer({required this.duration});
   final Duration duration;
   VoidCallback? action;
   Timer? _timer;
-
-  Debouncer({required this.duration});
 
   run(VoidCallback action) {
     if (null != _timer) {
@@ -56,8 +56,8 @@ extension StringEx on String {
     }
 
     var currentLine = '';
-    List<SText> lines = [];
-    var lineEntry = '[character';
+    final lines = <SText>[];
+    const lineEntry = '[character';
 
     void flushLast() {
       lines.add(SText(currentLine));
@@ -85,21 +85,21 @@ extension StringEx on String {
 }
 
 class SText {
+
+  SText(this.text);
   final String text;
 
   @override
   String toString() => text;
-
-  SText(this.text);
 }
 
 class Url extends SText {
-  @override
-  String toString() => "[$text:$id]";
-
-  final int id;
   Url(
     super.text,
     this.id,
   );
+  @override
+  String toString() => '[$text:$id]';
+
+  final int id;
 }

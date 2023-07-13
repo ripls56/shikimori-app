@@ -18,39 +18,39 @@ import 'package:url_launcher/url_launcher.dart';
 part 'login_screen_state.dart';
 
 class LoginScreenCubit extends Cubit<LoginScreenState> {
+
+  LoginScreenCubit(
+      this.getAccessToken, this.saveAccessToken, this.saveRefreshToken,)
+      : super(LoginScreenEmpty());
   final GetAccessToken getAccessToken;
   final SaveAccessToken saveAccessToken;
   final SaveRefreshToken saveRefreshToken;
 
-  LoginScreenCubit(
-      this.getAccessToken, this.saveAccessToken, this.saveRefreshToken)
-      : super(LoginScreenEmpty());
-
-  void login() async {
+  Future<void> login() async {
     try {
       emit(LoginScreenEmpty());
-      var grant = AuthorizationCodeGrant(Env.identifier,
+      final grant = AuthorizationCodeGrant(Env.identifier,
           Env.authorizationEndpoint.toUri, Env.tokenEndpoint.toUri,
-          secret: Env.secret);
+          secret: Env.secret,);
 
-      var authorizationUrl = grant.getAuthorizationUrl(Env.redirectUri.toUri,
-          scopes: ['user_rates', 'comments', 'topics']);
+      final authorizationUrl = grant.getAuthorizationUrl(Env.redirectUri.toUri,
+          scopes: ['user_rates', 'comments', 'topics'],);
 
       if (!await checkTokensExist()) {
         FlutterNativeSplash.remove();
-        launchUrl(authorizationUrl,
-            mode: LaunchMode.externalNonBrowserApplication);
+        await launchUrl(authorizationUrl,
+            mode: LaunchMode.externalNonBrowserApplication,);
         linkStream.listen((String? link) async {
           if (link == null) return;
           if (link.contains('code')) {
-            var token = Uri.parse(link).queryParameters['code']!;
+            final token = Uri.parse(link).queryParameters['code']!;
             final loadedOrFailure = await getAccessToken.call(
               GetAccessTokenParams(
                   grantType: Env.grantType,
                   code: token,
                   redirectUri: Env.redirectUri.toUri,
                   identifier: Env.identifier,
-                  secret: Env.secret),
+                  secret: Env.secret,),
             );
             loadedOrFailure.fold(
               (error) => emit(LoginScreenEmpty()),
@@ -60,28 +60,28 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
                 }
                 di.sl.registerSingleton<UserAuth>(loaded);
                 saveAccessToken.call(
-                    SaveAccessTokenParams(accessToken: loaded.accessToken!));
+                    SaveAccessTokenParams(accessToken: loaded.accessToken!),);
                 saveRefreshToken.call(
-                    SaveRefreshTokenParams(refreshToken: loaded.refreshToken!));
+                    SaveRefreshTokenParams(refreshToken: loaded.refreshToken!),);
                 emit(LoginScreenLoaded());
               },
             );
           }
         }, onError: (err) {
           Fluttertoast.showToast(msg: err);
-        });
+        },);
       } else {
-        var accessToken =
+        final accessToken =
             await di.sl<FlutterSecureStorage>().read(key: 'access_token');
-        var refreshToken =
+        final refreshToken =
             await di.sl<FlutterSecureStorage>().read(key: 'refresh_token');
-        var model = UserAuthModel(
+        final model = UserAuthModel(
             accessToken: accessToken,
             refreshToken: refreshToken,
-            tokenType: "Bearer",
+            tokenType: 'Bearer',
             scope: null,
             createdAt: null,
-            expireIn: null);
+            expireIn: null,);
         if (di.sl.isRegistered<UserAuth>()) {
           di.sl.unregister<UserAuth>();
         }

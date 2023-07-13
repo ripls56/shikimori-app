@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/core/widgets/anime_card.dart';
+import 'package:shikimoriapp/feature/anime/domain/animeime.dart';
 
 class MangaLoadedWidget extends StatelessWidget {
   const MangaLoadedWidget(
-      {super.key, required this.animes, required ScrollController controller})
+      {required this.animes, required ScrollController controller, super.key,})
       : _controller = controller;
   final ScrollController _controller;
   final List<Anime> animes;
@@ -19,7 +19,7 @@ class MangaLoadedWidget extends StatelessWidget {
       shrinkWrap: true,
       itemExtent: 200,
       itemCount: animes.length,
-      itemBuilder: ((context, index) {
+      itemBuilder: (context, index) {
         return AnimationConfiguration.staggeredList(
           delay: Duration.zero,
           position: index,
@@ -37,7 +37,7 @@ class MangaLoadedWidget extends StatelessWidget {
             ),
           ),
         );
-      }),
+      },
     );
   }
 }

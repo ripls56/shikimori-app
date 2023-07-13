@@ -15,28 +15,28 @@ class TokensLocalRepositoryImpl implements TokenLocalRepository {
   }
 
   Future<Either<Failure, void>> _saveAccessToken(
-      Future<void> Function() token) async {
+      Future<void> Function() token,) async {
     try {
       final model = await token();
       return Right(model);
     } catch (_) {
-      return Left(LocalFailure());
+      return const Left(LocalFailure());
     }
   }
 
   @override
   Future<Either<Failure, void>> saveRefreshToken(String token) async {
     return _saveRefreshToken(
-        () => _tokenLocalDataSource.saveRefreshToken(token));
+        () => _tokenLocalDataSource.saveRefreshToken(token),);
   }
 
   Future<Either<Failure, void>> _saveRefreshToken(
-      Future<void> Function() token) async {
+      Future<void> Function() token,) async {
     try {
       final model = await token();
       return Right(model);
     } catch (_) {
-      return Left(LocalFailure());
+      return const Left(LocalFailure());
     }
   }
 
@@ -47,12 +47,12 @@ class TokensLocalRepositoryImpl implements TokenLocalRepository {
   }
 
   Future<Either<Failure, void>> _deleteTokens(
-      Future<void> Function() token) async {
+      Future<void> Function() token,) async {
     try {
       final model = await token();
       return Right(model);
     } catch (_) {
-      return Left(LocalFailure());
+      return const Left(LocalFailure());
     }
   }
 }

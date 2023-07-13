@@ -8,7 +8,7 @@ abstract class SearchEvent extends Equatable {
 }
 
 class SearchAnimeEvent extends SearchEvent {
-  final String query;
 
   const SearchAnimeEvent(this.query);
+  final String query;
 }

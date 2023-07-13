@@ -25,7 +25,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       },
           (loaded) => {
                 emit(ProfileInitial(loaded)),
-              });
+              },);
     } catch (e) {
       emit(ProfileEmpty());
       rethrow;

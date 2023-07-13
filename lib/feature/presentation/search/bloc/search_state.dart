@@ -8,15 +8,15 @@ abstract class SearchState extends Equatable {
 }
 
 class SearchLoaded extends SearchState {
-  final List<Anime> animes;
 
   const SearchLoaded({required this.animes});
+  final List<Anime> animes;
 }
 
 class SearchEmpty extends SearchState {}
 
 class SearchError extends SearchState {
-  final String errorMessage;
 
   const SearchError({required this.errorMessage});
+  final String errorMessage;
 }

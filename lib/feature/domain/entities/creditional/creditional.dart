@@ -10,12 +10,8 @@ class Creditional extends Equatable {
     required this.image,
     required this.lastOnlineAt,
     required this.url,
-    this.name,
-    required this.sex,
-    required this.website,
+    required this.sex, required this.website, required this.fullYears, required this.locale, this.name,
     this.birthOn,
-    required this.fullYears,
-    required this.locale,
   });
 
   final int id;

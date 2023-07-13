@@ -10,13 +10,13 @@ abstract class CharacterState extends Equatable {
 class CharacterEmpty extends CharacterState {}
 
 class CharacterError extends CharacterState {
-  final String errorMessage;
 
   const CharacterError({required this.errorMessage});
+  final String errorMessage;
 }
 
 class CharacterLoaded extends CharacterState {
-  final Character character;
 
   const CharacterLoaded({required this.character});
+  final Character character;
 }

@@ -8,8 +8,8 @@ class RatesStatusesStatModel extends RatesStatusesStat {
 
   factory RatesStatusesStatModel.fromJson(Map<String, dynamic> json) =>
       RatesStatusesStatModel(
-        name: json["name"],
-        value: json["value"],
+        name: json['name'],
+        value: json['value'],
       );
 
   @override

@@ -6,9 +6,9 @@ import 'package:shikimoriapp/feature/domain/entities/character/character.dart';
 import 'package:shikimoriapp/feature/domain/repositories/character_repository.dart';
 
 class GetCharacterById extends UseCase<Character, GetCharacterByIdParams> {
-  final CharacterRepository characterRepository;
 
   GetCharacterById(this.characterRepository);
+  final CharacterRepository characterRepository;
 
   @override
   Future<Either<Failure, Character>> call(GetCharacterByIdParams params) async {
@@ -17,9 +17,9 @@ class GetCharacterById extends UseCase<Character, GetCharacterByIdParams> {
 }
 
 class GetCharacterByIdParams extends Equatable {
-  final int id;
 
   const GetCharacterByIdParams({required this.id});
+  final int id;
 
   @override
   List<Object?> get props => [id];

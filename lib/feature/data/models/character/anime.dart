@@ -12,8 +12,8 @@ class AnimeModel extends Anime {
     required status,
     required episodes,
     required episodesAired,
-    required airedOn,
-    required releasedOn,
+    required super.airedOn,
+    required super.releasedOn,
   }) : super(
             id: id,
             name: name,
@@ -24,26 +24,24 @@ class AnimeModel extends Anime {
             score: score,
             status: status,
             episodes: episodes,
-            episodesAired: episodesAired,
-            airedOn: airedOn,
-            releasedOn: releasedOn);
+            episodesAired: episodesAired,);
 
   factory AnimeModel.fromJson(Map<String, dynamic> json) => AnimeModel(
-        id: json["id"],
-        name: json["name"],
-        russian: json["russian"],
-        image: ImageModel.fromJson(json["image"]),
-        url: json["url"],
-        kind: json["kind"],
-        score: json["score"],
-        status: json["status"],
-        episodes: json["episodes"],
-        episodesAired: json["episodes_aired"],
+        id: json['id'],
+        name: json['name'],
+        russian: json['russian'],
+        image: ImageModel.fromJson(json['image']),
+        url: json['url'],
+        kind: json['kind'],
+        score: json['score'],
+        status: json['status'],
+        episodes: json['episodes'],
+        episodesAired: json['episodes_aired'],
         airedOn:
-            json["aired_on"] == null ? null : DateTime.parse(json["aired_on"]),
-        releasedOn: json["released_on"] == null
+            json['aired_on'] == null ? null : DateTime.parse(json['aired_on']),
+        releasedOn: json['released_on'] == null
             ? null
-            : DateTime.parse(json["released_on"]),
+            : DateTime.parse(json['released_on']),
       );
 
   @override

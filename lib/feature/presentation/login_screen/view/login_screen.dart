@@ -11,7 +11,7 @@ import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_
 import 'package:shikimoriapp/feature/presentation/login_screen/widgets/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context) {
               return const HomeScreen();
             },
-          ), (Route<dynamic> route) => false);
+          ), (Route<dynamic> route) => false,);
         }
       },
       child: Scaffold(

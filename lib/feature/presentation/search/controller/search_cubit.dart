@@ -1,6 +1,6 @@
 // import 'package:equatable/equatable.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
+// import 'package:shikimoriapp/feature/domain/entities/anime/anime_dto.dart';
 // import 'package:shikimoriapp/feature/domain/entities/manga/manga.dart';
 // import 'package:shikimoriapp/feature/domain/use_cases/anime/get_anime_by_name.dart';
 

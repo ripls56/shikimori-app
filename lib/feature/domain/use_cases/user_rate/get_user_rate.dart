@@ -6,9 +6,9 @@ import 'package:shikimoriapp/feature/domain/entities/user_rate/user_rate.dart';
 import 'package:shikimoriapp/feature/domain/repositories/user_rate_repository.dart';
 
 class GetUserRate extends UseCase<List<UserRate>, GetUserRateParams> {
-  final UserRateRepository userRateRepository;
 
   GetUserRate(this.userRateRepository);
+  final UserRateRepository userRateRepository;
 
   @override
   Future<Either<Failure, List<UserRate>>> call(GetUserRateParams params) async {
@@ -17,9 +17,9 @@ class GetUserRate extends UseCase<List<UserRate>, GetUserRateParams> {
 }
 
 class GetUserRateParams extends Equatable {
-  final int id;
 
   const GetUserRateParams({required this.id});
+  final int id;
 
   @override
   List<Object?> get props => [id];

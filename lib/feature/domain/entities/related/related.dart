@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
-import 'package:shikimoriapp/feature/domain/entities/manga/manga.dart';
+import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
+
+import '../manga/manga.dart';
 
 class Related extends Equatable {
   const Related({
