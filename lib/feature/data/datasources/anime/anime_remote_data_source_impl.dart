@@ -1,33 +1,41 @@
 import 'package:dio/dio.dart';
-import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/core/endpoints/api_endpoints.dart';
 import 'package:shikimoriapp/core/error/exception.dart';
+import 'package:shikimoriapp/core/error/failure.dart';
+import 'package:shikimoriapp/feature/data/datasources/anime/anime_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/models/anime/anime.dart';
-import 'package:shikimoriapp/feature/data/models/related/related.dart';
 import 'package:shikimoriapp/feature/data/models/anime_details/anime_details.dart';
+import 'package:shikimoriapp/feature/data/models/related/related.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
 import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
-import 'anime_remote_data_source.dart';
 
+///Anime remote data source implementation
 class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
-  final Dio dio;
-  AnimeRemoteDataSourceImpl(this.dio);
+  ///Need dio client to work
+  AnimeRemoteDataSourceImpl(this._dio);
+
+  final Dio _dio;
 
   @override
   Future<AnimeDetails> getAnimeById(int id) async {
-    var response = await dio.get('$HOST/animes/$id');
+    final response = await _dio.get(ApiEndpoints.animeById(id));
     if (response.statusCode == 200) {
-      return AnimeDetailsModel.fromJson(response.data);
+      return AnimeDetailsModel.fromJson(response.data as Map<String, dynamic>);
     } else {
       throw ServerException();
     }
   }
 
   @override
-  Future<List<Anime>> getAnimes(int page,
-      {String? order = "ranked", int? limit = 50, int? score}) async {
-    var response = await dio.get(
-      '$HOST/animes',
+  Future<List<Anime>> getAnimes(
+    int page, {
+    String? order = 'ranked',
+    int? limit = 50,
+    int? score,
+  }) async {
+    final response = await _dio.get(
+      ApiEndpoints.getAnimes,
       queryParameters: {
         'order': order,
         'page': page,
@@ -36,7 +44,7 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
     );
     if (response.statusCode == 200) {
       return (response.data as List<dynamic>)
-          .map((e) => AnimeModel.fromJson((e as Map<String, dynamic>)))
+          .map((e) => AnimeModel.fromJson(e as Map<String, dynamic>))
           .toList();
     } else {
       throw ServerException();
@@ -45,12 +53,12 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   @override
   Future<List<Video>> getVideos(int id) async {
-    var response = await dio.get(
-      '$HOST/animes/$id/videos',
+    final response = await _dio.get(
+      ApiEndpoints.animeVideos(id),
     );
     if (response.statusCode == 200) {
       return (response.data as List<dynamic>)
-          .map((e) => VideoModel.fromJson((e as Map<String, dynamic>)))
+          .map((e) => VideoModel.fromJson(e as Map<String, dynamic>))
           .toList();
     } else {
       throw ServerException();
@@ -59,12 +67,12 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   @override
   Future<List<Screenshot>> getScreenshots(int id) async {
-    var response = await dio.get(
-      '$HOST/animes/$id/screenshots',
+    final response = await _dio.get(
+      ApiEndpoints.animeScreenshots(id),
     );
     if (response.statusCode == 200) {
       return (response.data as List<dynamic>)
-          .map((e) => ScreenshotModel.fromJson((e as Map<String, dynamic>)))
+          .map((e) => ScreenshotModel.fromJson(e as Map<String, dynamic>))
           .toList();
     } else {
       throw ServerException();
@@ -73,23 +81,28 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   @override
   Future<List<Related>> getRelatedAnime(int id) async {
-    var response = await dio.get(
-      '$HOST/animes/$id/related',
+    final response = await _dio.get(
+      ApiEndpoints.animeRelateds(id),
     );
     if (response.statusCode == 200) {
       return (response.data as List<dynamic>)
-          .map((e) => RelatedModel.fromJson((e as Map<String, dynamic>)))
+          .map((e) => RelatedModel.fromJson(e as Map<String, dynamic>))
           .toList();
     } else {
+      var a = ServerFailure();
       throw ServerException();
     }
   }
 
   @override
-  Future<List<Anime>> getAnimesByName(String phrase,
-      {String? order = "ranked", int? limit = 50, int? score}) async {
-    var response = await dio.get(
-      '$HOST/animes',
+  Future<List<Anime>> getAnimesByName(
+    String phrase, {
+    String? order = 'ranked',
+    int? limit = 50,
+    int? score,
+  }) async {
+    var response = await _dio.get(
+      ApiEndpoints.getAnimes,
       queryParameters: {
         'search': phrase,
         'order': order,
@@ -98,7 +111,7 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
     );
     if (response.statusCode == 200) {
       return (response.data as List<dynamic>)
-          .map((e) => AnimeModel.fromJson((e as Map<String, dynamic>)))
+          .map((e) => AnimeModel.fromJson(e as Map<String, dynamic>))
           .toList();
     } else {
       throw ServerException();

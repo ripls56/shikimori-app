@@ -1,22 +1,69 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
-import 'package:shikimoriapp/core/error/failure.dart';
-import 'package:dartz/dartz.dart';
-import 'package:shikimoriapp/feature/domain/repositories/access_token_repository.dart';
+import 'package:shikimoriapp/feature/domain/repositories/user_auth_repository.dart';
 
-class GetAccessTokenRepositoryImpl implements GetAccessTokenRepository {
-  final UserAuthRemoteDataSource tokenRemoteDataSource;
+///User auth repository implementation
+class UserAuthRepositoryImpl implements UserAuthRepository {
+  ///Need data source to work
+  UserAuthRepositoryImpl(this._tokenRemoteDataSource);
 
-  GetAccessTokenRepositoryImpl(this.tokenRemoteDataSource);
+  final UserAuthRemoteDataSource _tokenRemoteDataSource;
+
   @override
-  Future<Either<Failure, UserAuth>> getAccessToken(String grantType,
-      String identifier, String secret, String code, Uri redirectUri) async {
-    return await _auth(() => tokenRemoteDataSource.getAccessToken(
-        grantType, identifier, secret, code, redirectUri));
+  Future<Either<Failure, UserAuth>> refreshAccessToken(
+    String grantType,
+    String identifier,
+    String secret,
+    String refreshToken,
+  ) async {
+    return _refreshAccessToken(
+      () => _tokenRemoteDataSource.refreshAccessToken(
+        grantType,
+        identifier,
+        secret,
+        refreshToken,
+      ),
+    );
   }
 
-  Future<Either<Failure, UserAuth>> _auth(
-      Future<UserAuth> Function() auth) async {
+  Future<Either<Failure, UserAuth>> _refreshAccessToken(
+    Future<UserAuth> Function() auth,
+  ) async {
+    try {
+      final model = await auth();
+      return Right(model);
+    } on DioException {
+      return Left(AuthFailure());
+    } catch (_) {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserAuth>> getAccessToken(
+    String grantType,
+    String identifier,
+    String secret,
+    String code,
+    Uri redirectUri,
+  ) async {
+    return _getAccessToken(
+      () => _tokenRemoteDataSource.getAccessToken(
+        grantType,
+        identifier,
+        secret,
+        code,
+        redirectUri,
+      ),
+    );
+  }
+
+  Future<Either<Failure, UserAuth>> _getAccessToken(
+    Future<UserAuth> Function() auth,
+  ) async {
     try {
       final model = await auth();
       return Right(model);

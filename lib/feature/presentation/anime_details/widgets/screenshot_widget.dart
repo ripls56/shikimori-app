@@ -45,7 +45,7 @@ class ScreenshotsWidget extends StatelessWidget {
                           );
                         },
                         imageUrl:
-                            '$SHIKIMORI_URL${animeDetails.screenshots[index]!.original}',
+                            '${Env.host}${animeDetails.screenshots[index]!.original}',
                       ),
                     ),
                   );
@@ -106,4 +106,3 @@ class ScreenshotsWidget extends StatelessWidget {
 //         ),
 //       ),
 //     );
-

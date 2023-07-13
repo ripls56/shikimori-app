@@ -2,10 +2,22 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "_fe_analyzer_shared",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/_fe_analyzer_shared-61.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "_flutterfire_internals",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/_flutterfire_internals-1.3.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "analyzer",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/analyzer-5.13.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "ansicolor",
@@ -50,6 +62,54 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "build",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/build-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "build_config",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/build_config-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "build_daemon",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/build_daemon-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "build_resolvers",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/build_resolvers-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "build_runner",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/build_runner-2.4.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "build_runner_core",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/build_runner_core-7.2.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "built_collection",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/built_collection-5.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "built_value",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/built_value-8.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "cached_network_image",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/cached_network_image-3.2.3",
       "packageUri": "lib/",
@@ -74,6 +134,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "checked_yaml",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/checked_yaml-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "chewie",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/chewie-1.7.0",
       "packageUri": "lib/",
@@ -84,6 +150,12 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "code_builder",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/code_builder-4.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "collection",
@@ -122,6 +194,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dart_style",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/dart_style-2.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "dartz",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/dartz-0.10.1",
       "packageUri": "lib/",
@@ -138,6 +216,18 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.2.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.15"
+    },
+    {
+      "name": "envied",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/envied-0.3.0+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "envied_generator",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/envied_generator-0.3.0+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "equatable",
@@ -192,6 +282,12 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_crashlytics_platform_interface-3.6.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "fixnum",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "fl_chart",
@@ -320,10 +416,22 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "frontend_server_client",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/frontend_server_client-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "get_it",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/get_it-7.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "glob",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/glob-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "graphs",
@@ -350,6 +458,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "http_multi_server",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/http_multi_server-3.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http_parser",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2",
       "packageUri": "lib/",
@@ -360,6 +474,12 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/image-4.0.17",
       "packageUri": "lib/",
       "languageVersion": "2.15"
+    },
+    {
+      "name": "io",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/io-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "js",
@@ -384,6 +504,12 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/list_counter-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "logging",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "lottie",
@@ -430,6 +556,12 @@
     {
       "name": "octo_image",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/octo_image-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "package_config",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/package_config-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -524,6 +656,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "pool",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/pool-1.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "process",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/process-4.2.4",
       "packageUri": "lib/",
@@ -534,6 +672,18 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "pub_semver",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/pub_semver-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "pubspec_parse",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/pubspec_parse-1.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "rive",
@@ -608,6 +758,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "shelf",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/shelf-1.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "shelf_web_socket",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_web_socket-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "shimmer",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/shimmer-3.0.0",
       "packageUri": "lib/",
@@ -616,6 +778,12 @@
     {
       "name": "sky_engine",
       "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "source_gen",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/source_gen-1.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -702,6 +870,12 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "timing",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/timing-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "typed_data",
@@ -812,6 +986,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "very_good_analysis",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/very_good_analysis-5.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "video_player",
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/video_player-2.7.0",
       "packageUri": "lib/",
@@ -852,6 +1032,18 @@
       "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/wakelock_plus_platform_interface-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "watcher",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/watcher-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "web_socket_channel",
+      "rootUri": "file:///C:/Users/ripls/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "webview_flutter",
@@ -908,7 +1100,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-07-10T21:59:50.206645Z",
+  "generated": "2023-07-12T22:09:31.691592Z",
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }

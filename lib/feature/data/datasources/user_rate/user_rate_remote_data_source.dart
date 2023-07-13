@@ -1,5 +1,7 @@
+import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_rate/user_rate.dart';
 
+///User rates remote data source
 abstract class UserRateRemoteDataSource {
   ///Get user rate by id
   ///

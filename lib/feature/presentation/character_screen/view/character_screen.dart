@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 import 'package:shikimoriapp/core/widgets/headline_widget.dart';
 import 'package:shikimoriapp/core/widgets/html_description_widget.dart';
+import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/domain/entities/character/character.dart'
     as entity_character;
-import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
 import 'package:shikimoriapp/feature/presentation/character_screen/controller/character_cubit.dart';
 
 part '../widgets/character_name_widget.dart';
@@ -53,7 +53,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                     CachedNetworkImage(
                         width: 154,
                         height: 240,
-                        imageUrl: '$SHIKIMORI_URL${character.image?.preview}'),
+                        imageUrl: '${Env.host}${character.image?.preview}'),
                     Expanded(
                       child: Column(
                         children: [
@@ -106,8 +106,9 @@ class _CharacterScreenState extends State<CharacterScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Flexible(
-                                  child: Image.network(
-                                    '$SHIKIMORI_URL${seyu?.image.original}',
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        '${Env.host}${seyu?.image.original}',
                                     height: 150,
                                     fit: BoxFit.fitHeight,
                                   ),

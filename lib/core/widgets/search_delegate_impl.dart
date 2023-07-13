@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/view/anime_details.dart';
 import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
 
@@ -87,7 +87,7 @@ class _SearchBuilder extends StatelessWidget {
                         CachedNetworkImage(
                             height: height * 0.09,
                             imageUrl:
-                                '$SHIKIMORI_URL${state.animes[index].image?.x48}'),
+                                '${Env.shikimoriUrl}${state.animes[index].image?.x48}'),
                         Expanded(
                           child: Transform.translate(
                             offset: const Offset(0, 5),

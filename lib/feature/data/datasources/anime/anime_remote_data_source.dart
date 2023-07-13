@@ -1,19 +1,29 @@
+import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
 import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
 
+///
 abstract class AnimeRemoteDataSource {
   ///Get anime list with page
   ///
   ///Throws [ServerException] for all code errors
-  Future<List<Anime>> getAnimes(int page,
-      {String? order = "ranked", int? limit = 50, int? score});
+  Future<List<Anime>> getAnimes(
+    int page, {
+    String? order = 'ranked',
+    int? limit = 50,
+    int? score,
+  });
 
   ///Get animes by name
   ///
   ///Throws [ServerException] for all code errors
-  Future<List<Anime>> getAnimesByName(String phrase,
-      {String? order = "ranked", int? limit = 50, int? score});
+  Future<List<Anime>> getAnimesByName(
+    String phrase, {
+    String? order = 'ranked',
+    int? limit = 50,
+    int? score,
+  });
 
   ///Get anime details with id
   ///

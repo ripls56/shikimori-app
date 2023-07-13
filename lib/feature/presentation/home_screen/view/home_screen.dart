@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shikimoriapp/constants.dart';
 import 'package:shikimoriapp/core/widgets/search_delegate_impl.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anime_screen_builder.dart';
@@ -126,14 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     selectedRadioTile = 0;
-    _getScrollPosition();
     _pageController = PageController(initialPage: 0);
     super.initState();
-  }
-
-  void _getScrollPosition() async {
-    var prefs = await SharedPreferences.getInstance();
-    _position = prefs.getDouble(SCROLL_POSITION_KEY_NAME);
   }
 
   @override

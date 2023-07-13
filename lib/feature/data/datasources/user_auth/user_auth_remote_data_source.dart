@@ -1,6 +1,8 @@
+import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
 
-abstract class UserAuthRemoteDataSource {
+///User auth data source
+abstract interface class UserAuthRemoteDataSource {
   ///Get access token after user authorization
   ///
   ///Throws [ServerException] for all code errors

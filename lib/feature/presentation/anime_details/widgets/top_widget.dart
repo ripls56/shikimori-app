@@ -27,7 +27,7 @@ class TopWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FutureBuilder(
-          future: generator('$SHIKIMORI_URL${animeDetails.image?.original}'),
+          future: generator('${Env.host}${animeDetails.image?.original}'),
           builder: (context, snapshot) {
             return Container(
               color: snapshot.data?.darkMutedColor?.color ??
@@ -43,7 +43,7 @@ class TopWidget extends StatelessWidget {
                       child: Image.asset(AppImages.missing),
                     );
                   },
-                  imageUrl: '$SHIKIMORI_URL${animeDetails.image?.original}',
+                  imageUrl: '${Env.host}${animeDetails.image?.original}',
                 ),
               ),
             );
@@ -69,7 +69,7 @@ class TopWidget extends StatelessWidget {
                               );
                             },
                             imageUrl:
-                                '$SHIKIMORI_URL${animeDetails.studios.first?.image}'),
+                                '${Env.host}${animeDetails.studios.first?.image}'),
                       ),
                     ],
                   ),
@@ -81,7 +81,7 @@ class TopWidget extends StatelessWidget {
                   children: [
                     FutureBuilder(
                       future: generator(
-                          '$SHIKIMORI_URL${animeDetails.image?.original}'),
+                          '${Env.host}${animeDetails.image?.original}'),
                       builder: (context, snapshot) => RatingBarIndicator(
                         unratedColor: snapshot.data?.lightMutedColor?.color ??
                             Theme.of(context).colorScheme.background,
@@ -110,93 +110,93 @@ class TopWidget extends StatelessWidget {
                   height: 8,
                 ),
                 FutureBuilder(
-                    future: generator(
-                        '$SHIKIMORI_URL${animeDetails.image?.original}'),
-                    builder: (context, snapshot) {
-                      return AspectRatio(
-                        aspectRatio: 1.18,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: BarChart(
-                            BarChartData(
-                              gridData: const FlGridData(show: false),
-                              borderData: FlBorderData(show: false),
-                              barTouchData: BarTouchData(
-                                touchTooltipData: BarTouchTooltipData(
-                                  tooltipPadding: const EdgeInsets.all(8),
-                                  tooltipBgColor: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
-                                  getTooltipItem:
-                                      (group, groupIndex, rod, rodIndex) =>
-                                          BarTooltipItem(
-                                    rod.toY.round().toString(),
-                                    Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background),
+                  future:
+                      generator('${Env.host}${animeDetails.image?.original}'),
+                  builder: (context, snapshot) {
+                    return AspectRatio(
+                      aspectRatio: 1.18,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: BarChart(
+                          BarChartData(
+                            gridData: const FlGridData(show: false),
+                            borderData: FlBorderData(show: false),
+                            barTouchData: BarTouchData(
+                              touchTooltipData: BarTouchTooltipData(
+                                tooltipPadding: const EdgeInsets.all(8),
+                                tooltipBgColor:
+                                    Theme.of(context).colorScheme.onBackground,
+                                getTooltipItem:
+                                    (group, groupIndex, rod, rodIndex) =>
+                                        BarTooltipItem(
+                                  rod.toY.round().toString(),
+                                  Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background),
+                                ),
+                              ),
+                            ),
+                            titlesData: FlTitlesData(
+                              show: true,
+                              topTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              leftTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              rightTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                                  showTitles: true,
+                                  getTitlesWidget: (value, meta) => Text(
+                                    value.round().toString(),
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
                                   ),
                                 ),
                               ),
-                              titlesData: FlTitlesData(
-                                show: true,
-                                topTitles: const AxisTitles(
-                                  sideTitles: SideTitles(showTitles: false),
-                                ),
-                                leftTitles: const AxisTitles(
-                                  sideTitles: SideTitles(showTitles: false),
-                                ),
-                                rightTitles: const AxisTitles(
-                                  sideTitles: SideTitles(showTitles: false),
-                                ),
-                                bottomTitles: AxisTitles(
-                                  sideTitles: SideTitles(
-                                    showTitles: true,
-                                    getTitlesWidget: (value, meta) => Text(
-                                      value.round().toString(),
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              barGroups: animeDetails.ratesScoresStats
-                                  .map(
-                                    (e) => BarChartGroupData(
-                                      x: e?.name ?? -1,
-                                      barRods: [
-                                        BarChartRodData(
-                                          backDrawRodData:
-                                              BackgroundBarChartRodData(
-                                            show: true,
-                                            toY: findBigestScore(),
-                                            color: snapshot.data
-                                                    ?.lightMutedColor?.color ??
-                                                Theme.of(context)
-                                                    .colorScheme
-                                                    .background,
-                                          ),
-                                          toY: e?.value.toDouble() ?? 0,
-                                          color: snapshot.data?.darkMutedColor
+                            ),
+                            barGroups: animeDetails.ratesScoresStats
+                                .map(
+                                  (e) => BarChartGroupData(
+                                    x: e?.name ?? -1,
+                                    barRods: [
+                                      BarChartRodData(
+                                        backDrawRodData:
+                                            BackgroundBarChartRodData(
+                                          show: true,
+                                          toY: findBigestScore(),
+                                          color: snapshot.data?.lightMutedColor
                                                   ?.color ??
                                               Theme.of(context)
                                                   .colorScheme
-                                                  .onBackground,
-                                          width: 11,
-                                          borderRadius: BorderRadius.zero,
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
+                                                  .background,
+                                        ),
+                                        toY: e?.value.toDouble() ?? 0,
+                                        color: snapshot
+                                                .data?.darkMutedColor?.color ??
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                        width: 11,
+                                        borderRadius: BorderRadius.zero,
+                                      )
+                                    ],
+                                  ),
+                                )
+                                .toList(),
                           ),
                         ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

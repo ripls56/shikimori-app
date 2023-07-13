@@ -3,14 +3,17 @@ import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime/anime.dart';
 import 'package:shikimoriapp/feature/domain/entities/anime_details/anime_details.dart';
 
+///Anime repository
 abstract class AnimeRepository {
   ///Get anime list with page
   Future<Either<Failure, List<Anime>>> getAnimes(int page,
-      {String? order = "ranked", int? limit = 50, int? score});
+      {String? order = 'ranked', int? limit = 50, int? score});
 
   ///Search anime by name
-  Future<Either<Failure, List<Anime>>> getAnimesByName(String phrase,
-      {int? limit = 50});
+  Future<Either<Failure, List<Anime>>> getAnimesByName(
+    String phrase, {
+    int? limit = 50,
+  });
 
   ///Get anime details with id
   Future<Either<Failure, AnimeDetails>> getAnimeById(int id);

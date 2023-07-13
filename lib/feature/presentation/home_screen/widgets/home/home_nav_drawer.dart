@@ -131,7 +131,6 @@ class _HomeNavDrawerState extends State<HomeNavDrawer> {
               ),
             ),
             onTap: () {
-              sl<FlutterSecureStorage>().deleteAll();
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                     builder: (context) => const LoginScreen(),

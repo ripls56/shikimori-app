@@ -1,4 +1,7 @@
-abstract class TokenLocalDataSource {
+import 'package:shikimoriapp/core/error/exception.dart';
+
+///Token local data source
+abstract interface class TokenLocalDataSource {
   ///Save access token in storage
   ///
   ///Throws [SaveException] for all code errors
@@ -8,4 +11,9 @@ abstract class TokenLocalDataSource {
   ///
   ///Throws [SaveException] for all code errors
   Future<void> saveRefreshToken(String token);
+
+  ///Delete tokens from storage
+  ///
+  ///Throws [DeleteException] for all code errors
+  Future<void> deleteTokens();
 }

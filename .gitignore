@@ -28,3 +28,13 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+#Enviroment files
+*.env
+*.env.g.dart
+
+#Generated files
+*.g.dart
+
+#Firebase
+firebase_options.dart

@@ -41,7 +41,7 @@ class _AnimeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('$SHIKIMORI_URL${anime.image?.preview}');
+    debugPrint('${Env.host}${anime.image?.preview}');
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
@@ -53,7 +53,7 @@ class _AnimeCard extends StatelessWidget {
         children: [
           CachedNetworkImage(
             height: 226,
-            imageUrl: '$SHIKIMORI_URL${anime.image?.original}',
+            imageUrl: '${Env.host}${anime.image?.original}',
             errorWidget: (context, url, error) {
               return Center(
                 child: Image.asset(AppImages.missing),
@@ -96,7 +96,7 @@ class _MangaCard extends StatelessWidget {
         children: [
           CachedNetworkImage(
             height: 226,
-            imageUrl: '$SHIKIMORI_URL${manga.image?.original}',
+            imageUrl: '${Env.host}${manga.image?.original}',
             errorWidget: (context, url, error) {
               return Center(
                 child: Image.asset(AppImages.missing),

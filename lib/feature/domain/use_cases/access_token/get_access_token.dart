@@ -3,10 +3,10 @@ import 'package:equatable/equatable.dart';
 import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:shikimoriapp/core/usecase/usecase.dart';
 import 'package:shikimoriapp/feature/domain/entities/user_auth/user_auth.dart';
-import 'package:shikimoriapp/feature/domain/repositories/access_token_repository.dart';
+import 'package:shikimoriapp/feature/domain/repositories/user_auth_repository.dart';
 
 class GetAccessToken extends UseCase<UserAuth, GetAccessTokenParams> {
-  final GetAccessTokenRepository userGetAccessTokenRepository;
+  final UserAuthRepository userGetAccessTokenRepository;
 
   GetAccessToken(this.userGetAccessTokenRepository);
 

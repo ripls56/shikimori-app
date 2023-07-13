@@ -3,7 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/view/anime_details.dart';
 
 class AnimeCardWidget extends StatelessWidget {
@@ -50,7 +50,7 @@ class AnimeCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CachedNetworkImage(
-                  imageUrl: '$SHIKIMORI_URL$imageUrl',
+                  imageUrl: '${Env.shikimoriUrl}$imageUrl',
                 ),
                 Expanded(
                   child: Padding(

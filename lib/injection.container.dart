@@ -17,18 +17,18 @@ import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote
 import 'package:shikimoriapp/feature/data/repository/anime_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/character_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/creditional_repository_impl.dart';
-import 'package:shikimoriapp/feature/data/repository/refresh_access_token_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/refresh_token_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/related_repository_impl.dart';
-import 'package:shikimoriapp/feature/data/repository/save_access_token_repository_impl.dart';
+import 'package:shikimoriapp/feature/data/repository/tokens_local_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/user_auth_repository_impl.dart';
-import 'package:shikimoriapp/feature/domain/repositories/access_token_repository.dart';
+import 'package:shikimoriapp/feature/data/repository/user_auth_repository_impl.dart';
 import 'package:shikimoriapp/feature/domain/repositories/anime_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/character_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/creditional_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/refresh_access_token_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/related_repository.dart';
-import 'package:shikimoriapp/feature/domain/repositories/save_tokens_repository.dart';
+import 'package:shikimoriapp/feature/domain/repositories/tokens_repository.dart';
+import 'package:shikimoriapp/feature/domain/repositories/user_auth_repository.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/access_token/get_access_token.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/access_token/refresh_access_token.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_anime_by_id.dart';
@@ -110,16 +110,16 @@ Future<void> init() async {
   sl.registerLazySingleton<AnimeRepository>(() => AnimeRepositoryImpl(sl()));
   sl.registerLazySingleton<CreditionalRepository>(
       () => CreditionalRepositoryImpl(sl()));
-  sl.registerLazySingleton<GetAccessTokenRepository>(
+  sl.registerLazySingleton<UserAuthRepository>(
       () => GetAccessTokenRepositoryImpl(sl()));
   sl.registerLazySingleton<RefreshAccessTokenRepository>(
-      () => RefreshAccessTokenRepositoryImpl(sl()));
+      () => UserAuthRepositoryImpl(sl()));
   sl.registerLazySingleton<RelatedRepository>(
       () => RelatedRepositoryImpl(sl()));
   sl.registerLazySingleton<CharacterRepository>(
       () => CharacterRepositoryImpl(sl()));
   sl.registerLazySingleton<SaveAccessTokenRepository>(
-      () => SaveAccessTokenRepositoryImpl(sl()));
+      () => TokensLocalRepositoryImpl(sl()));
   sl.registerLazySingleton<SaveRefreshTokenRepository>(
       () => SaveRefreshTokenRepositoryImpl(sl()));
 

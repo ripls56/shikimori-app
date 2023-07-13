@@ -1,19 +1,22 @@
 import 'package:dio/dio.dart';
-import 'package:shikimoriapp/constants.dart';
+import 'package:shikimoriapp/core/endpoints/api_endpoints.dart';
 import 'package:shikimoriapp/core/error/exception.dart';
+import 'package:shikimoriapp/feature/data/datasources/character/character_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/models/character/character.dart';
 import 'package:shikimoriapp/feature/domain/entities/character/character.dart';
-import 'character_remote_data_source.dart';
 
+///Character repository implementation
 class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
-  final Dio dio;
-  CharacterRemoteDataSourceImpl(this.dio);
+  ///Need dio client to work
+  CharacterRemoteDataSourceImpl(this._dio);
+
+  final Dio _dio;
 
   @override
   Future<Character> getCharacterById(int id) async {
-    var response = await dio.get('$HOST/characters/$id');
+    final response = await _dio.get(ApiEndpoints.characterById(id));
     if (response.statusCode == 200) {
-      return CharacterModel.fromJson(response.data);
+      return CharacterModel.fromJson(response.data as Map<String, dynamic>);
     } else {
       throw ServerException();
     }
