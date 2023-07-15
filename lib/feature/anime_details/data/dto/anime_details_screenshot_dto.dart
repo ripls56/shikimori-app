@@ -12,7 +12,7 @@ class AnimeDetailsScreenshotDTO {
   });
 
   factory AnimeDetailsScreenshotDTO.fromJson(Map<String, dynamic> json) =>
-      _$ScreenshotDTOFromJson(json);
+      _$AnimeDetailsScreenshotDTOFromJson(json);
 
   ///Screenshot original
   final String original;

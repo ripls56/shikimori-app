@@ -52,6 +52,20 @@ class SaveException implements Exception {
   final String? stackTrace;
 }
 
+///Get token exception
+///
+///Use to all local storage errors
+class GetTokenException implements Exception {
+  ///Can add a stack trace or a message, or both
+  GetTokenException({this.message, this.stackTrace});
+
+  ///Exception reason
+  final String? message;
+
+  ///Stack trace
+  final String? stackTrace;
+}
+
 ///Delete exception
 ///
 ///Use to all local storage errors

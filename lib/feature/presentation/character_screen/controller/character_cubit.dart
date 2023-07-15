@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shikimoriapp/feature/domain/entities/character/character.dart';
-import 'package:shikimoriapp/feature/domain/use_cases/character/get_character_by_id.dart';
+import 'package:shikimoriapp/feature/character/domain/models/character.dart';
+import 'package:shikimoriapp/feature/character/domain/use_cases/get_character_by_id.dart';
 
 part 'character_state.dart';
 

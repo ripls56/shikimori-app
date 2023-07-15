@@ -1,6 +1,6 @@
 import 'package:shikimoriapp/feature/anime/data/dto/anime_dto.dart';
-import 'package:shikimoriapp/feature/anime/data/mappers/anime_image_mapper.dart';
 import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
+import 'package:shikimoriapp/feature/image/data/mapper/image_mapper.dart';
 
 ///Mapper for [AnimeDTO]
 extension AnimeMapper on AnimeDTO {

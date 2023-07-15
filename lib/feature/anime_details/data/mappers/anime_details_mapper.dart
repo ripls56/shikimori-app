@@ -1,12 +1,12 @@
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_genre_mapper.dart';
-import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_image_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_rates_score_stat_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_rates_statuses_stat_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_screenshot_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_studio_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_video_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
+import 'package:shikimoriapp/feature/image/data/mapper/image_mapper.dart';
 
 extension AnimeDetailsMapper on AnimeDetailsDTO {
   ///Convert from model to entity

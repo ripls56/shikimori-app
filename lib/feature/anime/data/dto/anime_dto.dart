@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shikimoriapp/feature/anime/data/dto/anime_image_dto.dart';
 import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
+import 'package:shikimoriapp/feature/image/data/dto/image_dto.dart';
 
 part 'anime_dto.g.dart';
 
@@ -37,7 +37,7 @@ class AnimeDTO {
   final String? russian;
 
   ///Anime image
-  final AnimeImageDTO? image;
+  final ImageDTO? image;
 
   ///Anime url
   final String? url;

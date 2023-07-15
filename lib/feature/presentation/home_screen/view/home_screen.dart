@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/core/widgets/search_delegate_impl.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/widgets/anime/anime_screen_builder.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/widgets/home/home_nav_drawer.dart';
+import 'package:shikimoriapp/feature/profile/presentation/profile_nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -73,47 +73,53 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: Text(drawerItems[_page]['name']),
       ),
-      drawer: HomeNavDrawer(
-          drawerItems: drawerItems, page: _page, controller: _pageController,),
+      drawer: ProfileNavDrawer(
+        drawerItems: drawerItems,
+        page: _page,
+        controller: _pageController,
+      ),
     );
   }
 
   void filterModalBotomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => StatefulBuilder(builder: (context, state) {
-        return ListView(
-          padding: const EdgeInsets.all(12),
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                'Сортировка:',
-                style: Theme.of(context).textTheme.headlineSmall,
+      builder: (context) => StatefulBuilder(
+        builder: (context, state) {
+          return ListView(
+            padding: const EdgeInsets.all(12),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  'Сортировка:',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
-            ),
-            Column(
-              children: orderVariants
-                  .map(
-                    (order) => RadioListTile(
-                      value: orderVariants
-                          .indexWhere((element) => element == order),
-                      groupValue: selectedRadioTile,
-                      title: Text(order),
-                      onChanged: (index) {
-                        BlocProvider.of<AnimePageCubit>(context)
-                            .getAnimeList(1, order: orderVariants[index ?? 0]);
-                        state(() {
-                          selectedRadioTile = index ?? 0;
-                        });
-                      },
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
-        );
-      },),
+              Column(
+                children: orderVariants
+                    .map(
+                      (order) => RadioListTile(
+                        value: orderVariants
+                            .indexWhere((element) => element == order),
+                        groupValue: selectedRadioTile,
+                        title: Text(order),
+                        onChanged: (index) {
+                          BlocProvider.of<AnimePageCubit>(context).getAnimeList(
+                              1,
+                              order: orderVariants[index ?? 0]);
+                          state(() {
+                            selectedRadioTile = index ?? 0;
+                          });
+                        },
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:shikimoriapp/feature/anime/domain/models/anime_image.dart';
+import 'package:shikimoriapp/feature/image/domain/model/image.dart';
 
 class Anime extends Equatable {
   ///
@@ -21,7 +21,7 @@ class Anime extends Equatable {
   final int id;
   final String name;
   final String? russian;
-  final AnimeImage? image;
+  final Image? image;
   final String? url;
   final String? kind;
   final String? score;

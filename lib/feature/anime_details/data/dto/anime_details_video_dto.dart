@@ -17,7 +17,7 @@ class AnimeDetailsVideoDTO {
   });
 
   factory AnimeDetailsVideoDTO.fromJson(Map<String, dynamic> json) =>
-      _$VideoDTOFromJson(json);
+      _$AnimeDetailsVideoDTOFromJson(json);
 
   ///Video id
   final int id;

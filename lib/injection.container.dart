@@ -6,24 +6,21 @@ import 'package:shikimoriapp/feature/anime/data/anime_remote_data_source.dart';
 import 'package:shikimoriapp/feature/anime/data/datasources/anime_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/anime/data/datasources/repositories/anime_repository.dart';
 import 'package:shikimoriapp/feature/anime/data/repositories/anime_repository_impl.dart';
-import 'package:shikimoriapp/feature/data/datasources/character/character_remote_data_source.dart';
+import 'package:shikimoriapp/feature/character/data/datasources/character_remote_data_source.dart';
+import 'package:shikimoriapp/feature/character/data/repositories/character_repository_impl.dart';
+import 'package:shikimoriapp/feature/character/domain/repositories/character_repository.dart';
+import 'package:shikimoriapp/feature/character/domain/use_cases/get_character_by_id.dart';
 import 'package:shikimoriapp/feature/data/datasources/character/character_remote_data_source_impl.dart';
-import 'package:shikimoriapp/feature/data/datasources/creditional/creditional_remote_data_source.dart';
-import 'package:shikimoriapp/feature/data/datasources/creditional/creditional_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/data/datasources/related/related_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/datasources/related/related_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/data/datasources/token/token_local_data_source.dart';
 import 'package:shikimoriapp/feature/data/datasources/token/token_local_data_source_impl.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source.dart';
 import 'package:shikimoriapp/feature/data/datasources/user_auth/user_auth_remote_data_source_impl.dart';
-import 'package:shikimoriapp/feature/data/repository/character_repository_impl.dart';
-import 'package:shikimoriapp/feature/data/repository/creditional_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/refresh_token_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/related_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/tokens_local_repository_impl.dart';
 import 'package:shikimoriapp/feature/data/repository/user_auth_repository_impl.dart';
-import 'package:shikimoriapp/feature/domain/repositories/character_repository.dart';
-import 'package:shikimoriapp/feature/domain/repositories/creditional_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/refresh_access_token_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/related_repository.dart';
 import 'package:shikimoriapp/feature/domain/repositories/user_auth_repository.dart';
@@ -35,8 +32,6 @@ import 'package:shikimoriapp/feature/domain/use_cases/anime/get_animes.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_related.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_screenshots.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/anime/get_videos.dart';
-import 'package:shikimoriapp/feature/domain/use_cases/character/get_character_by_id.dart';
-import 'package:shikimoriapp/feature/domain/use_cases/creditional/get_creditional.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/save_tokens/save_access_token.dart';
 import 'package:shikimoriapp/feature/domain/use_cases/save_tokens/save_refresh_token.dart';
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/details/anime_detail_cubit.dart';
@@ -44,9 +39,14 @@ import 'package:shikimoriapp/feature/presentation/anime_details/controller/scree
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/character_screen/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
+import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source.dart';
+import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source_impl.dart';
+import 'package:shikimoriapp/feature/profile/data/repositories/creditional_repository_impl.dart';
+import 'package:shikimoriapp/feature/profile/domain/repositories/creditional_repository.dart';
+import 'package:shikimoriapp/feature/profile/domain/use_cases/get_creditional.dart';
+import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -107,33 +107,46 @@ Future<void> init() async {
   //Repositories
   sl.registerLazySingleton<AnimeRepository>(() => AnimeRepositoryImpl(sl()));
   sl.registerLazySingleton<CreditionalRepository>(
-      () => CreditionalRepositoryImpl(sl()),);
+    () => CreditionalRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<UserAuthRepository>(
-      () => GetAccessTokenRepositoryImpl(sl()),);
+    () => GetAccessTokenRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<RefreshAccessTokenRepository>(
-      () => UserAuthRepositoryImpl(sl()),);
+    () => UserAuthRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<RelatedRepository>(
-      () => RelatedRepositoryImpl(sl()),);
+    () => RelatedRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<CharacterRepository>(
-      () => CharacterRepositoryImpl(sl()),);
+    () => CharacterRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<SaveAccessTokenRepository>(
-      () => TokensLocalRepositoryImpl(sl()),);
+    () => TokensLocalRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<SaveRefreshTokenRepository>(
-      () => SaveRefreshTokenRepositoryImpl(sl()),);
+    () => SaveRefreshTokenRepositoryImpl(sl()),
+  );
 
   //RemoteDataSource
   sl.registerLazySingleton<AnimeRemoteDataSource>(
-      () => AnimeRemoteDataSourceImpl(sl()),);
+    () => AnimeRemoteDataSourceImpl(sl()),
+  );
   sl.registerLazySingleton<CreditionalRemoteDataSource>(
-      () => CreditionalRemoteDataSourceImpl(sl()),);
+    () => CreditionalRemoteDataSourceImpl(sl()),
+  );
   sl.registerLazySingleton<UserAuthRemoteDataSource>(
-      () => UserAuthRemoteDataSourceImpl(sl()),);
+    () => UserAuthRemoteDataSourceImpl(sl()),
+  );
   sl.registerLazySingleton<RelatedRemoteDataSource>(
-      () => RelatedRemoteDataSourceImpl(sl()),);
+    () => RelatedRemoteDataSourceImpl(sl()),
+  );
   sl.registerLazySingleton<CharacterRemoteDataSource>(
-      () => CharacterRemoteDataSourceImpl(sl()),);
+    () => CharacterRemoteDataSourceImpl(sl()),
+  );
 
   //LocalDataSource
   sl.registerLazySingleton<TokenLocalDataSource>(
-      () => TokenLocalDataSourceImpl(sl()),);
+    () => TokenLocalDataSourceImpl(sl()),
+  );
 }

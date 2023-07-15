@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_genre.dart';
-import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_image.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_rates_score_stat.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_rates_statuses_stat.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_screenshot.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_studio.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_video.dart';
+import 'package:shikimoriapp/feature/image/domain/model/image.dart';
 
 ///Anime details model
 class AnimeDetails extends Equatable {
@@ -63,7 +63,7 @@ class AnimeDetails extends Equatable {
   final String? russian;
 
   ///Anime image
-  final AnimeDetailsImage? image;
+  final Image? image;
 
   ///Anime url
   final String? url;

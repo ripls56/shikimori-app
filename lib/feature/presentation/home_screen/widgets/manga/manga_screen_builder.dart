@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:shikimoriapp/feature/domain/entities/manga/manga.dart';
+// import 'package:shikimoriapp/feature/domain/entities/manga/character_manga.dart';
 // import 'package:shikimoriapp/feature/presentation/home_screen/controller/manga/manga_cubit.dart';
 
 // class MangaScreenBuilder extends StatefulWidget {

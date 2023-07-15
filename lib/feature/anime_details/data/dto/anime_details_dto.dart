@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_genre_dto.dart';
-import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_image_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_rates_score_stat_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_rates_statuses_stat_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_screenshot_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_studio_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_video_dto.dart';
+import 'package:shikimoriapp/feature/image/data/dto/image_dto.dart';
 
 part 'anime_details_dto.g.dart';
 
@@ -69,7 +69,7 @@ class AnimeDetailsDTO {
   final String? russian;
 
   ///Anime image
-  final AnimeDetailsImageDTO? image;
+  final ImageDTO? image;
 
   ///Anime url
   final String? url;

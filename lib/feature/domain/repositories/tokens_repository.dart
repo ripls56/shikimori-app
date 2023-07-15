@@ -9,6 +9,12 @@ abstract interface class TokenLocalRepository {
   /// Add refresh token to flutter_secure_storage
   Future<Either<Failure, void>> saveRefreshToken(String token);
 
+  ///Get access token from flutter_secure_storage
+  Future<Either<Failure, String>> getAccessToken();
+
+  ///Get refresh token from flutter_secure_storage
+  Future<Either<Failure, String>> getRefreshToken();
+
   ///Remove tokens from flutter_secure_storage
   Future<Either<Failure, void>> deleteTokens();
 }

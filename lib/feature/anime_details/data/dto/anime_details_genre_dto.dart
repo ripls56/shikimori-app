@@ -14,7 +14,7 @@ class AnimeDetailsGenreDTO {
   });
 
   factory AnimeDetailsGenreDTO.fromJson(Map<String, dynamic> json) =>
-      _$GenreDTOFromJson(json);
+      _$AnimeDetailsGenreDTOFromJson(json);
 
   ///Genre id
   final int? id;

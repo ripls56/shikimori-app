@@ -13,7 +13,7 @@ class AnimeDetailsRatesStatusesStatDTO {
 
   factory AnimeDetailsRatesStatusesStatDTO.fromJson(
           Map<String, dynamic> json) =>
-      _$RatesStatusesStatDTOFromJson(json);
+      _$AnimeDetailsRatesStatusesStatDTOFromJson(json);
 
   ///Rates statuses stat name
   final String name;

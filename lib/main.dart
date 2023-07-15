@@ -12,10 +12,10 @@ import 'package:shikimoriapp/feature/presentation/anime_details/controller/scree
 import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/character_screen/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/controller/home/profile_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
 import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
+import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/firebase_options.dart';
 import 'package:shikimoriapp/injection.container.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -35,7 +35,8 @@ Future<void> main() async {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     await init();
     await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,);
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     runApp(const MyApp());
   }, (error, stack) {
     sl<Talker>().handle(error, stack);
@@ -84,26 +85,28 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: {
               TargetPlatform.android: CupertinoPageTransitionsBuilder()
-            },),
-            useMaterial3: true,
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.blue,
-            ),
-            textTheme: TextTheme(
-              labelLarge: Theme.of(context)
-                  .textTheme
-                  .labelLarge
-                  ?.copyWith(fontSize: 20),
-            ),
+            },
           ),
-          home: Provider(
-              create: (context) => sl<Talker>(),
-              child: const SafeArea(child: LoginScreen()),),),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.blue,
+          ),
+          textTheme: TextTheme(
+            labelLarge:
+                Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 20),
+          ),
+        ),
+        home: Provider(
+          create: (context) => sl<Talker>(),
+          child: const SafeArea(child: LoginScreen()),
+        ),
+      ),
     );
   }
 }

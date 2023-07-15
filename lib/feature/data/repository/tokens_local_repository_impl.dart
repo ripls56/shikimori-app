@@ -15,7 +15,8 @@ class TokensLocalRepositoryImpl implements TokenLocalRepository {
   }
 
   Future<Either<Failure, void>> _saveAccessToken(
-      Future<void> Function() token,) async {
+    Future<void> Function() token,
+  ) async {
     try {
       final model = await token();
       return Right(model);
@@ -27,11 +28,13 @@ class TokensLocalRepositoryImpl implements TokenLocalRepository {
   @override
   Future<Either<Failure, void>> saveRefreshToken(String token) async {
     return _saveRefreshToken(
-        () => _tokenLocalDataSource.saveRefreshToken(token),);
+      () => _tokenLocalDataSource.saveRefreshToken(token),
+    );
   }
 
   Future<Either<Failure, void>> _saveRefreshToken(
-      Future<void> Function() token,) async {
+    Future<void> Function() token,
+  ) async {
     try {
       final model = await token();
       return Right(model);
@@ -42,12 +45,44 @@ class TokensLocalRepositoryImpl implements TokenLocalRepository {
 
   @override
   Future<Either<Failure, void>> deleteTokens() {
-    // TODO: implement deleteTokens
-    throw UnimplementedError();
+    return _deleteTokens(_tokenLocalDataSource.deleteTokens);
   }
 
   Future<Either<Failure, void>> _deleteTokens(
-      Future<void> Function() token,) async {
+    Future<void> Function() token,
+  ) async {
+    try {
+      final model = await token();
+      return Right(model);
+    } catch (_) {
+      return const Left(LocalFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> getAccessToken() {
+    return _getAccessToken(_tokenLocalDataSource.getAccessToken);
+  }
+
+  Future<Either<Failure, String>> _getAccessToken(
+    Future<String> Function() token,
+  ) async {
+    try {
+      final model = await token();
+      return Right(model);
+    } catch (_) {
+      return const Left(LocalFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> getRefreshToken() {
+    return _getRefreshToken(_tokenLocalDataSource.getRefreshToken);
+  }
+
+  Future<Either<Failure, String>> _getRefreshToken(
+    Future<String> Function() token,
+  ) async {
     try {
       final model = await token();
       return Right(model);

@@ -15,7 +15,7 @@ class AnimeDetailsStudioDTO {
   });
 
   factory AnimeDetailsStudioDTO.fromJson(Map<String, dynamic> json) =>
-      _$StudioDTOFromJson(json);
+      _$AnimeDetailsStudioDTOFromJson(json);
 
   ///Studio id
   final int? id;
