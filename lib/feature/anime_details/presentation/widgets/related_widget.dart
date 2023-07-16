@@ -20,13 +20,9 @@ class RelatedWidget extends StatelessWidget {
             shrinkWrap: true,
             itemCount: relateds.length,
             itemBuilder: (context, index) {
-              return relateds[index].anime != null
-                  ? _AnimeCard(
-                      anime: relateds[index].anime!,
-                    )
-                  : _MangaCard(
-                      manga: relateds[index].manga!,
-                    );
+              return _AnimeCard(
+                anime: relateds[index].anime!,
+              );
             },
           ),
         ),
@@ -82,41 +78,41 @@ class _AnimeCard extends StatelessWidget {
   }
 }
 
-class _MangaCard extends StatelessWidget {
-  const _MangaCard({required this.manga});
-  final Manga manga;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: HapticFeedback.lightImpact,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CachedNetworkImage(
-            height: 226,
-            imageUrl: '${Env.host}${manga.image?.original}',
-            errorWidget: (context, url, error) {
-              return Center(
-                child: Image.asset(AppImages.missing),
-              );
-            },
-            fit: BoxFit.fitHeight,
-          ),
-          const SizedBox(
-            height: 6,
-          ),
-          Flexible(
-            child: Text(
-              manga.name ?? '',
-              style: Theme.of(context).textTheme.titleSmall,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
+// class _MangaCard extends StatelessWidget {
+//   const _MangaCard({required this.manga});
+//   final Manga manga;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: HapticFeedback.lightImpact,
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           CachedNetworkImage(
+//             height: 226,
+//             imageUrl: '${Env.host}${manga.image?.original}',
+//             errorWidget: (context, url, error) {
+//               return Center(
+//                 child: Image.asset(AppImages.missing),
+//               );
+//             },
+//             fit: BoxFit.fitHeight,
+//           ),
+//           const SizedBox(
+//             height: 6,
+//           ),
+//           Flexible(
+//             child: Text(
+//               manga.name ?? '',
+//               style: Theme.of(context).textTheme.titleSmall,
+//               textAlign: TextAlign.center,
+//               overflow: TextOverflow.ellipsis,
+//               maxLines: 1,
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }

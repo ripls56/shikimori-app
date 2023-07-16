@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:shikimoriapp/feature/presentation/anime_details/view/anime_details.dart';
-import 'package:shikimoriapp/feature/presentation/character_screen/view/character_screen.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/view/anime_details.dart';
+import 'package:shikimoriapp/feature/character/presentation/view/character_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 ///Parse html decryption and show it like basic widgets

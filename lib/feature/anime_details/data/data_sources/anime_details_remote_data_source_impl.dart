@@ -11,7 +11,7 @@ import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_vi
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_screenshot.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_video.dart';
-import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
+import 'package:shikimoriapp/feature/related/domain/models/related.dart';
 
 ///Anime details data source implementation
 class AnimeDetailsDataSourceImpl implements AnimeDetailsRemoteDataSource {

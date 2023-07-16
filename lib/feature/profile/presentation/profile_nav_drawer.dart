@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/view/login_screen.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/injection.container.dart';
 
@@ -29,7 +29,9 @@ class ProfileNavDrawer extends StatefulWidget {
 class _ProfileNavDrawerState extends State<ProfileNavDrawer> {
   @override
   void initState() {
-    context.read<ProfileCubit>().getAccessTokenFromStorage();
+    context.read<ProfileCubit>().getAccessTokenFromStorage().then(
+          (token) => context.read<ProfileCubit>().getCreditionals(token),
+        );
     super.initState();
   }
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:shikimoriapp/core/usecase/no_params.dart';
-import 'package:shikimoriapp/feature/domain/use_cases/tokens/get_access_token.dart';
-import 'package:shikimoriapp/feature/domain/use_cases/tokens/get_refresh_token.dart';
+import 'package:shikimoriapp/feature/authorization/domain/use_cases/get_access_token_from_storage.dart';
+import 'package:shikimoriapp/feature/authorization/domain/use_cases/get_refresh_token_from_storage.dart';
 import 'package:shikimoriapp/feature/profile/domain/models/creditional.dart';
 import 'package:shikimoriapp/feature/profile/domain/use_cases/get_creditional.dart';
 

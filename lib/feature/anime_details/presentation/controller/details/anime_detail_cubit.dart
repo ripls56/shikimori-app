@@ -3,7 +3,7 @@ import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_anime_by_id.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_related.dart';
-import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
+import 'package:shikimoriapp/feature/related/domain/models/related.dart';
 
 part 'anime_detail_state.dart';
 

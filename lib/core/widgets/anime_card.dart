@@ -4,11 +4,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shikimoriapp/env/env.dart';
-import 'package:shikimoriapp/feature/presentation/anime_details/view/anime_details.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/view/anime_details.dart';
 
 class AnimeCardWidget extends StatelessWidget {
   const AnimeCardWidget({
-    required this.imageUrl, required this.title, required this.score, required this.episodes, required this.animeId, super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.score,
+    required this.episodes,
+    required this.animeId,
+    super.key,
   });
 
   final String imageUrl;
@@ -60,7 +65,9 @@ class AnimeCardWidget extends StatelessWidget {
                                 .textTheme
                                 .headlineLarge
                                 ?.copyWith(
-                                    fontSize: 16, fontWeight: FontWeight.w700,),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
                             maxLines: 3,
@@ -106,8 +113,11 @@ class AnimeCardWidget extends StatelessWidget {
                 Radius.circular(10),
               ),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AnimeDetailScreen(id: animeId),),);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AnimeDetailScreen(id: animeId),
+                  ),
+                );
               },
             ),
           )

@@ -11,15 +11,13 @@ import 'package:shikimoriapp/core/widgets/headline_button.dart';
 import 'package:shikimoriapp/core/widgets/headline_widget.dart';
 import 'package:shikimoriapp/core/widgets/html_description_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
+import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_genre.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/details/anime_detail_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/view/screenshots_page.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/view/videos_page.dart';
-import 'package:shikimoriapp/feature/domain/entities/manga/manga.dart';
-import 'package:shikimoriapp/feature/domain/entities/related/related.dart';
-
-import '../../../anime/domain/models/anime.dart';
+import 'package:shikimoriapp/feature/related/domain/models/related.dart';
 
 part '../widgets/anime_information_widget.dart';
 part '../widgets/description.dart';
@@ -29,9 +27,9 @@ part '../widgets/top_widget.dart';
 part '../widgets/videos_widget.dart';
 
 class AnimeDetailScreen extends StatefulWidget {
-  const AnimeDetailScreen({required this.id, super.key});
+  const AnimeDetailScreen({required int id, super.key}) : _id = id;
 
-  final int id;
+  final int _id;
 
   @override
   State<AnimeDetailScreen> createState() => _AnimeDetailScreenState();
@@ -40,7 +38,7 @@ class AnimeDetailScreen extends StatefulWidget {
 class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
   @override
   void initState() {
-    context.read<AnimeDetailCubit>().getAnimeDetails(widget.id);
+    context.read<AnimeDetailCubit>().getAnimeDetails(widget._id);
     super.initState();
   }
 
@@ -51,7 +49,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
         if (state is AnimeDetailError) {
           Future.delayed(
             const Duration(seconds: 5),
-            () => context.read<AnimeDetailCubit>().getAnimeDetails(widget.id),
+            () => context.read<AnimeDetailCubit>().getAnimeDetails(widget._id),
           );
         }
       },
@@ -73,7 +71,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
             ),
             body: RefreshIndicator(
               onRefresh: () =>
-                  context.read<AnimeDetailCubit>().getAnimeDetails(widget.id),
+                  context.read<AnimeDetailCubit>().getAnimeDetails(widget._id),
               child: ListView(
                 children: [
                   TopWidget(animeDetails: animeDetails),

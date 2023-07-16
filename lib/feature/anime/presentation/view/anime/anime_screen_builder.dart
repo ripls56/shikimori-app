@@ -5,11 +5,14 @@ import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_state.dart';
 import 'package:shikimoriapp/feature/anime/presentation/view/anime/anime_loaded_widget.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/widgets/empty_widget.dart';
+import 'package:shikimoriapp/feature/home/presentation/widgets/empty_widget.dart';
 
 class AnimeScreenBuilder extends StatefulWidget {
-  const AnimeScreenBuilder(
-      {required this.position, required this.order, super.key,});
+  const AnimeScreenBuilder({
+    required this.position,
+    required this.order,
+    super.key,
+  });
 
   final double? position;
   final String order;
@@ -62,9 +65,7 @@ class _AnimeScreenBuilderState extends State<AnimeScreenBuilder> {
           BlocConsumer<AnimePageCubit, AnimePageState>(
             listener: (context, state) {
               if (state is AnimePageLoading) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  loadingSnackBar('Загружается', context),
-                );
+                SnackBarService.loadingSnackBar('Загрузка');
               } else if (state is AnimePageEmpty) {
                 animes.clear();
               } else {
@@ -74,9 +75,10 @@ class _AnimeScreenBuilderState extends State<AnimeScreenBuilder> {
             builder: (context, state) {
               if (state is AnimePageError) {
                 return RefreshIndicator(
-                    onRefresh: () async =>
-                        context.read<AnimePageCubit>().getAnimeList(1),
-                    child: Center(child: Text(state.errorMessage)),);
+                  onRefresh: () async =>
+                      context.read<AnimePageCubit>().getAnimeList(1),
+                  child: Center(child: Text(state.errorMessage)),
+                );
               }
               if (state is AnimePageLoaded || state is AnimePageLoading) {
                 if (state is AnimePageLoaded) {

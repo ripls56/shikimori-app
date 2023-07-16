@@ -7,15 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
-import 'package:shikimoriapp/feature/presentation/anime_details/controller/details/anime_detail_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/anime_details/controller/screenshots/screenshots_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/anime_details/controller/videos/videos_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/character_screen/controller/character_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/home_screen/controller/anime/anime_page_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/login_screen/controller/login_screen_cubit.dart';
-import 'package:shikimoriapp/feature/presentation/login_screen/view/login_screen.dart';
-import 'package:shikimoriapp/feature/presentation/search/bloc/search_bloc.dart';
+import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_cubit.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/controller/details/anime_detail_cubit.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/controller/screenshots/screenshots_cubit.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/controller/videos/videos_cubit.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/login_screen_cubit.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/view/login_screen.dart';
+import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
+import 'package:shikimoriapp/feature/search/presentation/bloc/search_bloc.dart';
 import 'package:shikimoriapp/firebase_options.dart';
 import 'package:shikimoriapp/injection.container.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -33,17 +33,18 @@ Future<void> main() async {
   await runZonedGuarded(() async {
     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-    await init();
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    await init();
     runApp(const MyApp());
   }, (error, stack) {
     sl<Talker>().handle(error, stack);
   });
 }
 
-Future<void> frameRate() async {
+///Set frame rate to 120Hz if device support it
+Future<void> _frameRate() async {
   try {
     await FlutterDisplayMode.setHighRefreshRate();
   } catch (_) {
@@ -51,12 +52,13 @@ Future<void> frameRate() async {
   }
 }
 
+///Main app widget
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    frameRate();
+    _frameRate();
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginScreenCubit>(
