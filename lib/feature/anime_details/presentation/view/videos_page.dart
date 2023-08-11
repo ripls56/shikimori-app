@@ -68,7 +68,7 @@ class _VideosPageState extends State<VideosPage> {
               },
             );
           }
-          return const CustomLoadingBar();
+          return const CustomLoadingIndicator();
         },
       ),
     );

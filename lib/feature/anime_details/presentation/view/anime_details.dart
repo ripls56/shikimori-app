@@ -62,7 +62,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
               actions: [
                 PopupMenuButton(
                   itemBuilder: (context) => [
-                    const PopupMenuItem(
+                    const PopupMenuItem<Text>(
                       child: Text('Add to list'),
                     ),
                   ],
@@ -95,7 +95,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
           );
         }
         return const Scaffold(
-          body: Center(child: CustomLoadingBar()),
+          body: Center(child: CustomLoadingIndicator()),
         );
       },
     );

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shikimoriapp/core/helpers/crashlitycs.dart';
+import 'package:shikimoriapp/core/theme/theme_provider.dart';
 import 'package:shikimoriapp/feature/anime/data/data_sources/anime_remote_data_source.dart';
 import 'package:shikimoriapp/feature/anime/data/data_sources/anime_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/anime/data/repositories/anime_repository_impl.dart';
@@ -9,6 +10,10 @@ import 'package:shikimoriapp/feature/anime/domain/repositories/anime_repository.
 import 'package:shikimoriapp/feature/anime/domain/use_cases/get_anime_by_name.dart';
 import 'package:shikimoriapp/feature/anime/domain/use_cases/get_animes.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_cubit.dart';
+import 'package:shikimoriapp/feature/anime_details/data/data_sources/anime_details_remote_data_source.dart';
+import 'package:shikimoriapp/feature/anime_details/data/data_sources/anime_details_remote_data_source_impl.dart';
+import 'package:shikimoriapp/feature/anime_details/data/repositories/anime_details_repository_impl.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/repositories/anime_details_repository.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_anime_by_id.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_related.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_screenshots.dart';
@@ -37,6 +42,7 @@ import 'package:shikimoriapp/feature/character/data/repositories/character_repos
 import 'package:shikimoriapp/feature/character/domain/repositories/character_repository.dart';
 import 'package:shikimoriapp/feature/character/domain/use_cases/get_character_by_id.dart';
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
+import 'package:shikimoriapp/feature/home/presentation/controller/home/home_store.dart';
 import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source.dart';
 import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/profile/data/repositories/creditional_repository_impl.dart';
@@ -59,16 +65,18 @@ final sl = GetIt.asNewInstance();
 Future<void> init() async {
   //Talker
   sl.registerLazySingleton(CrashlyticsTalkerObserver.new);
+
   final talker = TalkerFlutter.init(
     observer: sl<CrashlyticsTalkerObserver>(),
   );
+
   sl.registerLazySingleton(() => talker);
 
   //Dio
   final dio = Dio();
   dio.interceptors.add(
     TalkerDioLogger(
-      talker: talker,
+      talker: sl<Talker>(),
     ),
   );
   dio.options.headers = {
@@ -83,6 +91,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => dio);
 
   sl.registerLazySingleton(() => storage);
+
+  //Theme
+  sl.registerLazySingleton(() => ThemeProvider());
+
+  //Stores
+  sl.registerFactory(() => HomeStore(sl()));
 
   //Cubit
   sl.registerFactory(() => AnimePageCubit(sl()));
@@ -116,6 +130,9 @@ Future<void> init() async {
   sl.registerLazySingleton<CreditionalRepository>(
     () => CreditionalRepositoryImpl(sl()),
   );
+  sl.registerLazySingleton<AnimeDetailsRepository>(
+    () => AnimeDetailsRepositoryImpl(sl()),
+  );
   sl.registerLazySingleton<UserAuthRepository>(
     () => UserAuthRepositoryImpl(sl()),
   );
@@ -132,6 +149,9 @@ Future<void> init() async {
   //RemoteDataSource
   sl.registerLazySingleton<AnimeRemoteDataSource>(
     () => AnimeRemoteDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<AnimeDetailsRemoteDataSource>(
+    () => AnimeDetailsRemoteDataSourceImpl(sl()),
   );
   sl.registerLazySingleton<CreditionalRemoteDataSource>(
     () => CreditionalRemoteDataSourceImpl(sl()),

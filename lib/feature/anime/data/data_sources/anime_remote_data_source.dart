@@ -11,6 +11,8 @@ abstract class AnimeRemoteDataSource {
     String? order = 'ranked',
     int? limit = 50,
     int? score,
+    String? season,
+    String? status,
   });
 
   ///Get animes by name

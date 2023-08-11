@@ -19,6 +19,8 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
     String? order = 'ranked',
     int? limit = 50,
     int? score,
+    String? season,
+    String? status,
   }) async {
     final response = await _dio.get(
       ApiEndpoints.getAnimes,
@@ -26,6 +28,8 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
         'order': order,
         'page': page,
         'limit': limit,
+        'season': season,
+        'status': status,
       },
     );
     if (response.statusCode == 200) {

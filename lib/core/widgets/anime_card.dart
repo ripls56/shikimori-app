@@ -48,8 +48,10 @@ class AnimeCardWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                CachedNetworkImage(
-                  imageUrl: '${Env.shikimoriUrl}$imageUrl',
+                Flexible(
+                  child: CachedNetworkImage(
+                    imageUrl: '${Env.shikimoriUrl}$imageUrl',
+                  ),
                 ),
                 Expanded(
                   child: Padding(
@@ -114,7 +116,7 @@ class AnimeCardWidget extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(
+                  MaterialPageRoute<AnimeDetailScreen>(
                     builder: (context) => AnimeDetailScreen(id: animeId),
                   ),
                 );

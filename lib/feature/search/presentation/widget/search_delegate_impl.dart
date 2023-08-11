@@ -112,7 +112,7 @@ class _SearchBuilder extends StatelessWidget {
           );
         }
         return const Center(
-          child: CustomLoadingBar(),
+          child: CustomLoadingIndicator(),
         );
       },
     );

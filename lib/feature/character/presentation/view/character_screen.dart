@@ -163,7 +163,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
           );
         }
         return const Scaffold(
-          body: Center(child: CustomLoadingBar()),
+          body: Center(child: CustomLoadingIndicator()),
         );
       },
     );

@@ -10,6 +10,8 @@ abstract class AnimeRepository {
     String? order = 'ranked',
     int? limit = 50,
     int? score,
+    String? season,
+    String? status,
   });
 
   ///Search anime by name

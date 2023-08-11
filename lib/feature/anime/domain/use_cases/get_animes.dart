@@ -17,7 +17,10 @@ class GetAnimes extends UseCase<List<Anime>, GetAnimesParams> {
     return _animeRepository.getAnimes(
       params.page,
       order: params.order,
-    ); //order: params.order, limit: params.limit, score: params.score
+      limit: params.limit,
+      score: params.score,
+      season: params.season,
+    );
   }
 }
 
@@ -29,6 +32,8 @@ class GetAnimesParams extends Equatable {
     this.order,
     this.limit,
     this.score,
+    this.season,
+    this.status,
   });
 
   /// The [page] is the page number of the list of [Anime].
@@ -42,6 +47,12 @@ class GetAnimesParams extends Equatable {
 
   /// The [score] is the score of the list of [Anime].
   final int? score;
+
+  /// The [season] is the season of the list of [Anime].
+  final String? season;
+
+  /// The [status] is the status of the list of [Anime].
+  final String? status;
 
   @override
   List<Object?> get props => [page, order, limit, score];

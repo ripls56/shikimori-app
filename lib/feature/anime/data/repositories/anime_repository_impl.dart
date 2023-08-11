@@ -16,6 +16,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
     String? order = 'ranked',
     int? limit = 50,
     int? score,
+    String? season,
   }) async {
     return _getAnimesByName(
       () => _animeRemoteDataSource.getAnimesByName(
@@ -44,6 +45,8 @@ class AnimeRepositoryImpl implements AnimeRepository {
     String? order = 'ranked',
     int? limit = 50,
     int? score,
+    String? season,
+    String? status,
   }) async {
     return _getAnimes(
       () => _animeRemoteDataSource.getAnimes(
@@ -51,6 +54,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
         order: order,
         limit: limit,
         score: score,
+        season: season,
       ),
     );
   }

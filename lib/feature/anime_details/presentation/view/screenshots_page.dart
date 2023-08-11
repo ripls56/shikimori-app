@@ -96,7 +96,7 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
               },
             );
           }
-          return const CustomLoadingBar();
+          return const CustomLoadingIndicator();
         },
       ),
     );

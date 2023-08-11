@@ -31,8 +31,9 @@ class HtmlDescriptionWidget extends StatelessWidget {
 
           if (data['type'] == 'character') {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => CharacterScreen(id: data['id'] as int),
+              MaterialPageRoute<CharacterScreen>(
+                builder: (renderContext) =>
+                    CharacterScreen(id: data['id'] as int),
               ),
             );
           }

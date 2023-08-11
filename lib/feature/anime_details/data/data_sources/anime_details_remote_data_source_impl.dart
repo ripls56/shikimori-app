@@ -14,9 +14,9 @@ import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_v
 import 'package:shikimoriapp/feature/related/domain/models/related.dart';
 
 ///Anime details data source implementation
-class AnimeDetailsDataSourceImpl implements AnimeDetailsRemoteDataSource {
+class AnimeDetailsRemoteDataSourceImpl implements AnimeDetailsRemoteDataSource {
   ///Constructor
-  AnimeDetailsDataSourceImpl(this._dio);
+  AnimeDetailsRemoteDataSourceImpl(this._dio);
 
   final Dio _dio;
 

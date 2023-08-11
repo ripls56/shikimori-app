@@ -9,7 +9,14 @@ class AnimePageCubit extends Cubit<AnimePageState> {
   final GetAnimes _getAnimes;
 
   ///Get anime list
-  Future<void> getAnimeList(int page, {String? order = 'ranked'}) async {
+  Future<void> getAnimeList(
+    int page, {
+    String? order = 'ranked',
+    int? score,
+    int? limit,
+    String? season,
+    String? status,
+  }) async {
     try {
       if (page == 1) {
         emit(AnimePageEmpty());
@@ -17,8 +24,16 @@ class AnimePageCubit extends Cubit<AnimePageState> {
         emit(AnimePageLoading());
       }
       // await Future.delayed(const Duration(milliseconds: 1000));
-      final loadedOrFailure =
-          await _getAnimes.call(GetAnimesParams(page: page, order: order));
+      final loadedOrFailure = await _getAnimes.call(
+        GetAnimesParams(
+          page: page,
+          order: order,
+          limit: limit,
+          score: score,
+          season: season,
+          status: status,
+        ),
+      );
       loadedOrFailure.fold(
         (error) => {emit(AnimePageError(errorMessage: error.toString()))},
         (loaded) => {emit(AnimePageLoaded(animeList: loaded))},

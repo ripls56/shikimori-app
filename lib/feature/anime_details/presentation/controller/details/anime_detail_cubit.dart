@@ -17,7 +17,7 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
   Future<void> getAnimeDetails(int id) async {
     try {
       emit(AnimeDetailEmpty());
-      final related = await _getRelatedAnimes(id);
+      //final related = await _getRelatedAnimes(id);
       final loadedOrFailure =
           await getAnimeById.call(GetAnimeByIdParams(id: id));
       loadedOrFailure.fold(
@@ -26,7 +26,7 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
         },
         (loaded) => {
           emit(
-            AnimeDetailLoaded(animeDetails: loaded, related: related),
+            AnimeDetailLoaded(animeDetails: loaded, related: []),
           ),
         },
       );
