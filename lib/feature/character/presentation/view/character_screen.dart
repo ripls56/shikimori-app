@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
-import 'package:shikimoriapp/core/widgets/headline_widget.dart';
-import 'package:shikimoriapp/core/widgets/html_description_widget.dart';
+import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/common/widgets/headline_widget.dart';
+import 'package:shikimoriapp/common/widgets/html_description_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
 

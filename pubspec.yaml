@@ -72,6 +72,7 @@ dependencies:
   #  crashlytics
   firebase_core:
   talker_flutter:
+  talker_bloc_logger:
   firebase_crashlytics:
   envied:
 

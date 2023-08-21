@@ -1157,6 +1157,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  talker_bloc_logger:
+    dependency: "direct main"
+    description:
+      name: talker_bloc_logger
+      sha256: "8d5f7d332fbae5f2f4e72a4a9617cc2ed1f9f8121254907ab68841584291a11b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   talker_dio_logger:
     dependency: "direct main"
     description:

@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
+import 'package:shikimoriapp/common/widgets/custom_text_button.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
-import 'package:shikimoriapp/core/widgets/custom_text_button.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/widgets/login_button.dart';
 

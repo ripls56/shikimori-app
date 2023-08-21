@@ -52,7 +52,7 @@ class HeadlineButton extends StatelessWidget {
                     width: 10,
                   ),
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.centerRight,
                   child: Icon(
                     Icons.arrow_right,
@@ -63,7 +63,7 @@ class HeadlineButton extends StatelessWidget {
           ),
         ),
         ColoredBox(
-          color: theme.colorScheme.inverseSurface,
+          color: theme.colorScheme.secondary,
           child: child,
         )
       ],

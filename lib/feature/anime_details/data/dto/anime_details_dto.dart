@@ -156,10 +156,10 @@ class AnimeDetailsDTO {
   final dynamic nextEpisodeAt;
 
   ///Anime fan subbers
-  final List<String?> fanSubbers;
+  final List<String>? fanSubbers;
 
   ///Anime fan dubbers
-  final List<String?> fanDubbers;
+  final List<String>? fanDubbers;
 
   ///Anime licensors
   final List<dynamic> licensors;

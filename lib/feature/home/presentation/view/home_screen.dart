@@ -3,17 +3,16 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:shikimoriapp/common/widgets/custom_app_bar.dart';
+import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/common/widgets/headline_button.dart';
 import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/home_card_type.dart';
-import 'package:shikimoriapp/core/helpers/screen_routes.dart';
-import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
-import 'package:shikimoriapp/core/widgets/headline_button.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home/home_store.dart';
+import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/home_screen_drawer.dart';
 import 'package:shikimoriapp/feature/home/presentation/widgets/home_card.dart';
-import 'package:shikimoriapp/feature/home/presentation/widgets/home_screen_drawer.dart';
-
-import '../../../../core/widgets/custom_app_bar.dart';
+import 'package:shikimoriapp/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,13 +28,21 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<HomeStore>().fetch();
   }
 
+  Uri animeUrl(int id) => Uri(
+        path: '/${ScreenRoutes.animeDetails}', //${ScreenRoutes.anime}
+        queryParameters: {
+          'id': '${id}',
+        },
+      );
+
   @override
   Widget build(BuildContext context) {
     final height = context.screenHeight;
     final width = context.screenWidth;
     final theme = context.theme;
+
     return Scaffold(
-      drawer: const HomeScreenDrawer(),
+      drawer: HomeScreenDrawer(),
       appBar: const CustomAppBar(
         title: 'Главная',
       ),
@@ -78,13 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 cardType: HomeCardType.anime,
                                 title: anime.russian ?? anime.name,
                                 onTap: () => context.go(
-                                  Uri(
-                                    path:
-                                        '/${ScreenRoutes.anime}/${ScreenRoutes.animeDetails}',
-                                    queryParameters: {
-                                      'id': '${anime.id}',
-                                    },
-                                  ).toString(),
+                                  animeUrl(anime.id).toString(),
                                 ),
                               );
                             },

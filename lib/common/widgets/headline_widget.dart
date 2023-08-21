@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shikimoriapp/core/extension/context_extension.dart';
 
 class HeadlineWidget extends StatelessWidget {
   HeadlineWidget({required this.title, super.key, this.height = 30});
@@ -8,25 +9,24 @@ class HeadlineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+
     return Container(
       height: height,
-      color: Theme.of(context).colorScheme.onBackground,
+      color: theme.colorScheme.primaryContainer.withOpacity(.5),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Text(
             title,
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .labelLarge
-                ?.copyWith(color: Theme.of(context).colorScheme.surface),
+            style: theme.textTheme.labelLarge,
           ),
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
               height: height,
-              color: Theme.of(context).colorScheme.surface.withOpacity(.5),
+              color: theme.colorScheme.primary,
               width: 10,
             ),
           ),

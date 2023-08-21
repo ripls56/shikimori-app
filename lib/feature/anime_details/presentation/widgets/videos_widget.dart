@@ -36,14 +36,9 @@ class VideosButton extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: AspectRatio(
                       aspectRatio: 16 / 9,
-                      child: CachedNetworkImage(
+                      child: ImageWidget(
+                        url: animeDetails.videos[index]?.imageUrl ?? '',
                         fit: BoxFit.fitWidth,
-                        errorWidget: (context, url, error) {
-                          return Center(
-                            child: Image.asset(AppImages.missing),
-                          );
-                        },
-                        imageUrl: animeDetails.videos[index]?.imageUrl ?? '',
                       ),
                     ),
                   );
@@ -52,15 +47,7 @@ class VideosButton extends StatelessWidget {
             ),
             Material(
               color: Colors.transparent,
-              child: GestureDetector(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => VideosPage(
-                      id: animeDetails.id ?? 1,
-                    ),
-                  ),
-                ),
-              ),
+              child: GestureDetector(onTap: () {}),
             )
           ],
         ),

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shikimoriapp/common/theme/theme_provider.dart';
 import 'package:shikimoriapp/core/helpers/crashlitycs.dart';
-import 'package:shikimoriapp/core/theme/theme_provider.dart';
 import 'package:shikimoriapp/feature/anime/data/data_sources/anime_remote_data_source.dart';
 import 'package:shikimoriapp/feature/anime/data/data_sources/anime_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/anime/data/repositories/anime_repository_impl.dart';
@@ -43,6 +43,7 @@ import 'package:shikimoriapp/feature/character/domain/repositories/character_rep
 import 'package:shikimoriapp/feature/character/domain/use_cases/get_character_by_id.dart';
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home/home_store.dart';
+import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/controller/home_drawer_store.dart';
 import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source.dart';
 import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/profile/data/repositories/creditional_repository_impl.dart';
@@ -97,6 +98,7 @@ Future<void> init() async {
 
   //Stores
   sl.registerFactory(() => HomeStore(sl()));
+  sl.registerFactory(() => HomeDrawerStore(sl(), sl(), sl()));
 
   //Cubit
   sl.registerFactory(() => AnimePageCubit(sl()));

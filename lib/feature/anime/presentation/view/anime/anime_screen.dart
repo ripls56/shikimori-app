@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shikimoriapp/core/widgets/custom_snack_bar.dart';
+import 'package:shikimoriapp/common/widgets/custom_snack_bar.dart';
 import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_state.dart';
