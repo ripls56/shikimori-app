@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
+import 'package:shikimoriapp/common/widgets/custom_text_button.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
-import 'package:shikimoriapp/core/widgets/custom_text_button.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/widgets/login_button.dart';
-import 'package:shikimoriapp/feature/home/presentation/view/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -46,13 +46,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<LoginScreenCubit, LoginScreenState>(
       listener: (context, state) {
         if (state is LoginScreenLoaded) {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) {
-                return const HomeScreen();
-              },
-            ),
-            (Route<dynamic> route) => false,
+          context.replace(
+            Uri(
+              path: '/',
+            ).toString(),
           );
         }
       },

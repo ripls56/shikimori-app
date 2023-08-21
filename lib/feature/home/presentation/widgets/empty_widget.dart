@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:shikimoriapp/core/widgets/loading_card.dart';
+import 'package:shikimoriapp/common/widgets/loading_card.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({super.key});
@@ -16,7 +16,9 @@ class EmptyWidget extends StatelessWidget {
         return AnimationConfiguration.staggeredList(
           position: index,
           child: const FadeInAnimation(
-              duration: Duration(milliseconds: 500), child: LoadingCard(),),
+            duration: Duration(milliseconds: 500),
+            child: LoadingCard(),
+          ),
         );
       },
     );

@@ -8,6 +8,9 @@ class ScreenshotsWidget extends StatelessWidget {
 
   final AnimeDetails animeDetails;
 
+  String _screenshotUrl(int index) =>
+      '${Env.shikimoriUrl}${animeDetails.screenshots[index]!.original}';
+
   @override
   Widget build(BuildContext context) {
     return HeadlineButton(
@@ -36,15 +39,8 @@ class ScreenshotsWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: AspectRatio(
                       aspectRatio: 16 / 9,
-                      child: CachedNetworkImage(
-                        fit: BoxFit.fitWidth,
-                        errorWidget: (context, url, error) {
-                          return Center(
-                            child: Image.asset(AppImages.missing),
-                          );
-                        },
-                        imageUrl:
-                            '${Env.host}${animeDetails.screenshots[index]!.original}',
+                      child: ImageWidget(
+                        url: _screenshotUrl(index),
                       ),
                     ),
                   );
@@ -53,15 +49,19 @@ class ScreenshotsWidget extends StatelessWidget {
             ),
             Material(
               color: Colors.transparent,
-              child: GestureDetector(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ScreenshotsPage(
-                      id: animeDetails.id ?? 1,
+              child: GestureDetector(onTap: () {
+                if (animeDetails.id == null) {
+                  return;
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ScreenshotsPage(
+                        id: animeDetails.id!,
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                  );
+                }
+              }),
             )
           ],
         ),

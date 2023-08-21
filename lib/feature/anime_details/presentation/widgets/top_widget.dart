@@ -4,53 +4,51 @@ class TopWidget extends StatelessWidget {
   const TopWidget({required this.animeDetails, super.key});
   final AnimeDetails animeDetails;
 
-  @override
-  Widget build(BuildContext context) {
-    Future<PaletteGenerator> generator(String imgUrl) {
-      return PaletteGenerator.fromImageProvider(Image.network(imgUrl).image);
-    }
+  @Deprecated('Maybe remove later')
+  Future<PaletteGenerator> _generator(String imgUrl) {
+    return PaletteGenerator.fromImageProvider(Image.network(imgUrl).image);
+  }
 
-    double findBigestScore() {
-      var bigestScore = 0;
-      for (var i = 0; i < animeDetails.ratesScoresStats.length; i++) {
-        if (animeDetails.ratesScoresStats[i]?.value != null) {
-          if (animeDetails.ratesScoresStats[i]!.value > bigestScore) {
-            bigestScore = animeDetails.ratesScoresStats[i]!.value;
-          }
+  double _findBigestScore() {
+    var bigestScore = 0;
+    for (var i = 0; i < animeDetails.ratesScoresStats.length; i++) {
+      if (animeDetails.ratesScoresStats[i]?.value != null) {
+        if (animeDetails.ratesScoresStats[i]!.value > bigestScore) {
+          bigestScore = animeDetails.ratesScoresStats[i]!.value;
         }
       }
-      return bigestScore.toDouble();
     }
+    return bigestScore.toDouble();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final posterImageUrl = '${Env.shikimoriUrl}${animeDetails.image?.original}';
+
+    final studioImageUrl =
+        '${Env.shikimoriUrl}${animeDetails.studios.first?.image}';
+
+    final theme = context.theme;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FutureBuilder(
-          future: generator('${Env.host}${animeDetails.image?.original}'),
-          builder: (context, snapshot) {
-            return ColoredBox(
-              color: snapshot.data?.darkMutedColor?.color ??
-                  Theme.of(context).colorScheme.background,
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  height: 300,
-                  width: MediaQuery.of(context).size.width / 2,
-                  errorWidget: (context, url, error) {
-                    return Center(
-                      child: Image.asset(AppImages.missing),
-                    );
-                  },
-                  imageUrl: '${Env.host}${animeDetails.image?.original}',
-                ),
-              ),
-            );
-          },
+        ColoredBox(
+          color: theme.brightness != Brightness.dark
+              ? Colors.black.withOpacity(.1)
+              : Colors.white.withOpacity(.1),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: ImageWidget(
+              url: posterImageUrl,
+              height: 300,
+              width: MediaQuery.of(context).size.width / 2,
+            ),
+          ),
         ),
         Expanded(
           child: ColoredBox(
-            color: Theme.of(context).colorScheme.background,
+            color: theme.colorScheme.background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -67,8 +65,7 @@ class TopWidget extends StatelessWidget {
                               child: Image.asset(AppImages.missing),
                             );
                           },
-                          imageUrl:
-                              '${Env.host}${animeDetails.studios.first?.image}',
+                          imageUrl: studioImageUrl,
                         ),
                       ),
                     ],
@@ -76,24 +73,20 @@ class TopWidget extends StatelessWidget {
                 HeadlineWidget(
                   title: 'Рейтинг',
                 ),
+                const SizedBox(
+                  height: 6,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    FutureBuilder(
-                      future: generator(
-                        '${Env.host}${animeDetails.image?.original}',
+                    RatingBarIndicator(
+                      unratedColor: theme.colorScheme.primary.withOpacity(.2),
+                      rating: double.parse(animeDetails.score ?? '5') / 2,
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: theme.colorScheme.primary,
                       ),
-                      builder: (context, snapshot) => RatingBarIndicator(
-                        unratedColor: snapshot.data?.lightMutedColor?.color ??
-                            Theme.of(context).colorScheme.background,
-                        rating: double.parse(animeDetails.score ?? '5') / 2,
-                        itemBuilder: (context, index) => Icon(
-                          Icons.star,
-                          color: snapshot.data?.darkMutedColor?.color ??
-                              Theme.of(context).colorScheme.onBackground,
-                        ),
-                        itemSize: 24,
-                      ),
+                      itemSize: 24,
                     ),
                     const SizedBox(
                       width: 5,
@@ -101,94 +94,71 @@ class TopWidget extends StatelessWidget {
                     Text(
                       animeDetails.score ?? '',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: theme.textTheme.bodyLarge,
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 8,
                 ),
-                FutureBuilder(
-                  future:
-                      generator('${Env.host}${animeDetails.image?.original}'),
-                  builder: (context, snapshot) {
-                    return AspectRatio(
-                      aspectRatio: 1.18,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: BarChart(
-                          BarChartData(
-                            gridData: const FlGridData(show: false),
-                            borderData: FlBorderData(show: false),
-                            barTouchData: BarTouchData(
-                              touchTooltipData: BarTouchTooltipData(
-                                tooltipPadding: const EdgeInsets.all(8),
-                                tooltipBgColor:
-                                    Theme.of(context).colorScheme.onBackground,
-                                getTooltipItem:
-                                    (group, groupIndex, rod, rodIndex) =>
-                                        BarTooltipItem(
-                                  rod.toY.round().toString(),
-                                  Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background,
-                                      ),
-                                ),
-                              ),
+                AspectRatio(
+                  aspectRatio: 1.18,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: BarChart(
+                      BarChartData(
+                        gridData: const FlGridData(show: false),
+                        borderData: FlBorderData(show: false),
+                        barTouchData: BarTouchData(
+                          touchTooltipData: BarTouchTooltipData(
+                            tooltipBorder: const BorderSide(),
+                            tooltipPadding: const EdgeInsets.all(8),
+                            tooltipBgColor: theme.colorScheme.background,
+                            getTooltipItem:
+                                (group, groupIndex, rod, rodIndex) =>
+                                    BarTooltipItem(
+                              rod.toY.round().toString(),
+                              theme.textTheme.bodyMedium!,
                             ),
-                            titlesData: FlTitlesData(
-                              topTitles: const AxisTitles(),
-                              leftTitles: const AxisTitles(),
-                              rightTitles: const AxisTitles(),
-                              bottomTitles: AxisTitles(
-                                sideTitles: SideTitles(
-                                  showTitles: true,
-                                  getTitlesWidget: (value, meta) => Text(
-                                    value.round().toString(),
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            barGroups: animeDetails.ratesScoresStats
-                                .map(
-                                  (e) => BarChartGroupData(
-                                    x: e?.name ?? -1,
-                                    barRods: [
-                                      BarChartRodData(
-                                        backDrawRodData:
-                                            BackgroundBarChartRodData(
-                                          show: true,
-                                          toY: findBigestScore(),
-                                          color: snapshot.data?.lightMutedColor
-                                                  ?.color ??
-                                              Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
-                                        ),
-                                        toY: e?.value.toDouble() ?? 0,
-                                        color: snapshot
-                                                .data?.darkMutedColor?.color ??
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .onBackground,
-                                        width: 11,
-                                        borderRadius: BorderRadius.zero,
-                                      )
-                                    ],
-                                  ),
-                                )
-                                .toList(),
                           ),
                         ),
+                        titlesData: FlTitlesData(
+                          topTitles: const AxisTitles(),
+                          leftTitles: const AxisTitles(),
+                          rightTitles: const AxisTitles(),
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              getTitlesWidget: (value, meta) => Text(
+                                value.round().toString(),
+                                style: theme.textTheme.bodySmall,
+                              ),
+                            ),
+                          ),
+                        ),
+                        barGroups: animeDetails.ratesScoresStats
+                            .map(
+                              (e) => BarChartGroupData(
+                                x: e?.name ?? -1,
+                                barRods: [
+                                  BarChartRodData(
+                                    backDrawRodData: BackgroundBarChartRodData(
+                                      show: true,
+                                      toY: _findBigestScore(),
+                                      color: theme.colorScheme.background,
+                                    ),
+                                    toY: e?.value.toDouble() ?? 0,
+                                    color: theme.colorScheme.primary,
+                                    width: 11,
+                                    borderRadius: BorderRadius.zero,
+                                  )
+                                ],
+                              ),
+                            )
+                            .toList(),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ],
             ),

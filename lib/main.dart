@@ -1,23 +1,27 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:shikimoriapp/common/behaviours/scroll_without_splash.dart';
+import 'package:shikimoriapp/common/theme/theme_provider.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/details/anime_detail_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/screenshots/screenshots_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/videos/videos_cubit.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/login_screen_cubit.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/view/login_screen.dart';
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/feature/search/presentation/bloc/search_bloc.dart';
 import 'package:shikimoriapp/firebase_options.dart';
 import 'package:shikimoriapp/injection.container.dart';
+import 'package:shikimoriapp/routes.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger_observer.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 Future<void> main() async {
@@ -33,10 +37,12 @@ Future<void> main() async {
   await runZonedGuarded(() async {
     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    Animate.restartOnHotReload = true;
+    await init();
+    Bloc.observer = TalkerBlocObserver(talker: sl<Talker>());
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    await init();
     runApp(const MyApp());
   }, (error, stack) {
     sl<Talker>().handle(error, stack);
@@ -61,6 +67,9 @@ class MyApp extends StatelessWidget {
     _frameRate();
     return MultiBlocProvider(
       providers: [
+        Provider(
+          create: (context) => sl<Talker>(),
+        ),
         BlocProvider<LoginScreenCubit>(
           create: (context) => sl<LoginScreenCubit>(),
         ),
@@ -86,27 +95,16 @@ class MyApp extends StatelessWidget {
           create: (context) => sl<CharacterCubit>(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          pageTransitionsTheme: const PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: CupertinoPageTransitionsBuilder()
-            },
+      child: ChangeNotifierProvider<ThemeProvider>(
+        create: (_) => sl<ThemeProvider>(),
+        child: Consumer<ThemeProvider>(
+          builder: (context, value, child) => MaterialApp.router(
+            routerConfig: router,
+            scrollBehavior: ScrollWithoutSplash(),
+            debugShowCheckedModeBanner: false,
+            title: 'shikimori app',
+            theme: context.read<ThemeProvider>().appTheme,
           ),
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
-          ),
-          textTheme: TextTheme(
-            labelLarge:
-                Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 20),
-          ),
-        ),
-        home: Provider(
-          create: (context) => sl<Talker>(),
-          child: const SafeArea(child: LoginScreen()),
         ),
       ),
     );

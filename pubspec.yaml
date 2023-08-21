@@ -46,8 +46,6 @@ dependencies:
   provider:
   oauth2:
   uni_links:
-  fluttertoast:
-  webview_flutter:
   talker_dio_logger:
   cached_network_image:
   rxdart:
@@ -58,7 +56,6 @@ dependencies:
   lottie:
   rive: ^0.11.4
   fl_chart:
-  chewie:
   flutter_rating_bar:
   palette_generator:
   flutter_cache_manager:
@@ -68,11 +65,20 @@ dependencies:
   flutter_secure_storage:
   flutter_native_splash:
   json_serializable:
+  flutter_animate:
+  chewie:
+  flutter_colorpicker:
+  go_router:
   #  crashlytics
   firebase_core:
   talker_flutter:
+  talker_bloc_logger:
   firebase_crashlytics:
-  envied: ^0.3.0+3
+  envied:
+
+  #mobx
+  mobx:
+  flutter_mobx:
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +91,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints:
   envied_generator:
+  mobx_codegen:
   build_runner:
   very_good_analysis:
 

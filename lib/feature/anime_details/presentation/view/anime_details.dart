@@ -5,11 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/common/widgets/headline_button.dart';
+import 'package:shikimoriapp/common/widgets/headline_widget.dart';
+import 'package:shikimoriapp/common/widgets/html_description_widget.dart';
+import 'package:shikimoriapp/common/widgets/image_widget.dart';
+import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
-import 'package:shikimoriapp/core/widgets/custom_loading_bar.dart';
-import 'package:shikimoriapp/core/widgets/headline_button.dart';
-import 'package:shikimoriapp/core/widgets/headline_widget.dart';
-import 'package:shikimoriapp/core/widgets/html_description_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
@@ -62,7 +64,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
               actions: [
                 PopupMenuButton(
                   itemBuilder: (context) => [
-                    const PopupMenuItem(
+                    const PopupMenuItem<Text>(
                       child: Text('Add to list'),
                     ),
                   ],
@@ -76,15 +78,13 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                 children: [
                   TopWidget(animeDetails: animeDetails),
                   InformationWidget(animeDetails: animeDetails),
-                  DescriptionWidget(animeDetails: animeDetails),
+                  if (animeDetails.description != null &&
+                      animeDetails.descriptionHtml != null)
+                    DescriptionWidget(animeDetails: animeDetails),
                   if (animeDetails.screenshots.isNotEmpty)
-                    ScreenshotsWidget(animeDetails: animeDetails)
-                  else
-                    Container(),
+                    ScreenshotsWidget(animeDetails: animeDetails),
                   if (animeDetails.videos.isNotEmpty)
-                    VideosButton(animeDetails: animeDetails)
-                  else
-                    Container(),
+                    VideosButton(animeDetails: animeDetails),
                   if (state.related.isNotEmpty)
                     RelatedWidget(relateds: state.related)
                   else
@@ -95,7 +95,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
           );
         }
         return const Scaffold(
-          body: Center(child: CustomLoadingBar()),
+          body: Center(child: CustomLoadingIndicator()),
         );
       },
     );

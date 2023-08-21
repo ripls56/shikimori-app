@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:shikimoriapp/core/widgets/anime_card.dart';
+import 'package:shikimoriapp/common/widgets/anime_card.dart';
 import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
 
 ///Anime loaded widget
