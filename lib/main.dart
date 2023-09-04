@@ -34,6 +34,7 @@ Future<void> main() async {
     return true;
   };
 
+
   await runZonedGuarded(() async {
     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
