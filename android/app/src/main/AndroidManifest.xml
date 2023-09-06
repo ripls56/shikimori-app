@@ -2,6 +2,10 @@
     package="com.example.shikimoriapp">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <!-- read permissions for external storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- installation package permissions -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
    <application
         android:usesCleartextTraffic="true"
         android:label="shikimori_app"

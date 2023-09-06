@@ -62,7 +62,7 @@ class TopWidget extends StatelessWidget {
                           height: 60,
                           errorWidget: (context, url, error) {
                             return Center(
-                              child: Image.asset(AppImages.missing),
+                              child: Image.asset(AppAssets.missing),
                             );
                           },
                           imageUrl: studioImageUrl,

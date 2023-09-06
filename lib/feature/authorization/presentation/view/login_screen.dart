@@ -7,7 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
 import 'package:shikimoriapp/common/widgets/custom_text_button.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/controller/login_screen_cubit.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/login/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/widgets/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -46,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<LoginScreenCubit, LoginScreenState>(
       listener: (context, state) {
         if (state is LoginScreenLoaded) {
+          context.read<CreditionalStore>().fetchCreditional();
           context.replace(
             Uri(
               path: '/',
@@ -64,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.black.withOpacity(.55),
                 ),
                 child: RiveAnimation.asset(
-                  AppImages.animeCollageAnimation,
+                  AppAssets.animeCollageAnimation,
                   fit: BoxFit.fill,
                   animations: animations,
                 ),
@@ -84,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Spacer(),
                 Image.asset(
-                  AppImages.loagingPageBg,
+                  AppAssets.loginPageBg,
                   color: Colors.white,
                   width: 280,
                 ),

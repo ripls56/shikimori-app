@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shikimoriapp/common/widgets/custom_app_bar.dart';
 import 'package:shikimoriapp/core/extension/context_extension.dart';
+import 'package:shikimoriapp/feature/settings/presentation/widgets/color_picker_dialog.dart';
 import 'package:shikimoriapp/feature/settings/presentation/widgets/settings_block_widget.dart';
+import 'package:shikimoriapp/feature/settings/presentation/widgets/settings_header_widget.dart';
 
 ///Settings screen
 class SettingsScreen extends StatelessWidget {
@@ -13,12 +14,10 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
 
+    final double spaceBetweenBlocks = 12;
+
     return Scaffold(
       appBar: CustomAppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(Icons.arrow_back),
-        ),
         title: 'Настройки',
       ),
       body: ListView(
@@ -32,23 +31,27 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                    ),
-                    child: Text(
-                      'Оформление',
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
+                  const SettingsHeaderWidget(text: 'Оформление asdasdas'),
+                  SettingsBlockWidget(
+                    text: 'Основной цвет',
+                    leading: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: GestureDetector(
+                        onTap: () => showDialog(
+                          builder: (context) => const ColorPickerDialog(),
+                          context: context,
+                        ),
+                        child: ColoredBox(
+                          color: theme.colorScheme.primary,
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 6,
+                  SizedBox(
+                    height: spaceBetweenBlocks,
                   ),
-                  const SettingsBlockWidget(
-                    text: 'Основной цвет',
-                  ),
+                  const SettingsHeaderWidget(text: 'Обновление'),
                 ],
               ),
             ),

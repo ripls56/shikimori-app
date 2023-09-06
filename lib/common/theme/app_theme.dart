@@ -25,6 +25,7 @@ ThemeData _userTheme({
   Brightness? brightness,
 }) =>
     ThemeData.from(
+      useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         seedColor: color ?? Colors.lightBlueAccent,
         brightness: brightness ?? Brightness.light,

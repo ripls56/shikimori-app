@@ -13,6 +13,9 @@ abstract class Env {
   @EnviedField(varName: 'HOSTV2')
   static const String hostV2 = _Env.hostV2;
 
+  @EnviedField(varName: 'UPDATE_HOST')
+  static const String updateHost = _Env.updateHost;
+
   @EnviedField(varName: 'GRANT_TYPE')
   static const String grantType = _Env.grantType;
 
