@@ -10,11 +10,12 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shikimoriapp/common/behaviours/scroll_without_splash.dart';
 import 'package:shikimoriapp/common/theme/theme_provider.dart';
+import 'package:shikimoriapp/core/helpers/snack_bar_service.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/details/anime_detail_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/screenshots/screenshots_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/videos/videos_cubit.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/controller/login_screen_cubit.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/feature/search/presentation/bloc/search_bloc.dart';
@@ -71,8 +72,8 @@ class MyApp extends StatelessWidget {
         Provider(
           create: (context) => sl<Talker>(),
         ),
-        BlocProvider<LoginScreenCubit>(
-          create: (context) => sl<LoginScreenCubit>(),
+        Provider(
+          create: (context) => sl<CreditionalStore>(),
         ),
         BlocProvider<AnimePageCubit>(
           create: (context) => sl<AnimePageCubit>(),
@@ -102,6 +103,7 @@ class MyApp extends StatelessWidget {
           builder: (context, value, child) => MaterialApp.router(
             routerConfig: router,
             scrollBehavior: ScrollWithoutSplash(),
+            scaffoldMessengerKey: SnackBarService.scaffoldKey,
             debugShowCheckedModeBanner: false,
             title: 'shikimori app',
             theme: context.read<ThemeProvider>().appTheme,

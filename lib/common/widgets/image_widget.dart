@@ -32,6 +32,8 @@ class ImageWidget extends StatelessWidget {
       imageUrl: url,
       width: width,
       height: height,
+      fadeInDuration: Duration.zero,
+      fadeOutDuration: Duration.zero,
       placeholder: (context, url) => const Center(
         child: CircularProgressIndicator.adaptive(
           strokeWidth: 2,
@@ -40,7 +42,7 @@ class ImageWidget extends StatelessWidget {
       placeholderFadeInDuration: Duration.zero,
       errorWidget: (context, url, error) => Center(
         child: Image.asset(
-          AppImages.missing,
+          AppAssets.missing,
         ),
       ),
     );

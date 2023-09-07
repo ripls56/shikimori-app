@@ -48,7 +48,7 @@ class LoginButton extends StatelessWidget {
                 const SizedBox(
                   width: 6,
                 ),
-                SvgPicture.asset(AppImages.shikimoriLogo),
+                SvgPicture.asset(AppAssets.shikimoriLogo),
               ],
             ),
           ),

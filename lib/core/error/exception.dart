@@ -14,10 +14,22 @@ class ServerException implements Exception {
 
 ///Client exception
 ///
-///Use to all server error related with data source
+///Use to all client error related with data source
 class ClientException implements Exception {
   ///Can add a stack trace or a message, or both
   ClientException({this.message, this.stackTrace});
+
+  ///Exception reason
+  final String? message;
+
+  ///Stack trace
+  final String? stackTrace;
+}
+
+///Update exception
+class UpdateException implements Exception {
+  ///Can add a stack trace or a message, or both
+  UpdateException({this.message, this.stackTrace});
 
   ///Exception reason
   final String? message;

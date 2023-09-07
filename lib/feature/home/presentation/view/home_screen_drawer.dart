@@ -5,9 +5,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shikimoriapp/core/extension/context_extension.dart';
-import 'package:shikimoriapp/core/helpers/images.dart';
-import 'package:shikimoriapp/feature/home/presentation/widgets/change_theme_widget.dart';
-import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/controller/home_drawer_store.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
+import 'package:shikimoriapp/feature/home/presentation/controller/home_drawer/home_drawer_store.dart';
+import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/change_theme_widget.dart';
+import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/credential_widget.dart';
+import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/exit_button.dart';
+import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/no_creditional_widget.dart';
 import 'package:shikimoriapp/routes.dart';
 
 ///Home screen drawer
@@ -19,7 +22,8 @@ class HomeScreenDrawer extends StatefulWidget {
   State<HomeScreenDrawer> createState() => _HomeScreenDrawerState();
 }
 
-class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
+class _HomeScreenDrawerState extends State<HomeScreenDrawer>
+    with SingleTickerProviderStateMixin {
   final Uri _settingsPath = Uri(path: '/${ScreenRoutes.settings}');
 
   final Uri _loginPath = Uri(path: '/${ScreenRoutes.login}');
@@ -27,7 +31,6 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeDrawerStore>().fetchCreditional();
   }
 
   @override
@@ -51,55 +54,16 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
                   children: [
                     Observer(
                       builder: (context) {
-                        final homeDrawerStore = context.read<HomeDrawerStore>();
-                        final userCreditional = homeDrawerStore.userCreditional;
-                        switch (homeDrawerStore.creditionalFuture.status) {
-                          case FutureStatus.pending:
-                            return const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            );
-                          case FutureStatus.fulfilled:
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).viewPadding.top,
-                                ),
-                                CircleAvatar(
-                                  radius: 30,
-                                  foregroundImage: userCreditional != null
-                                      ? Image.network(userCreditional.avatar)
-                                          .image
-                                      : Image.asset(AppImages.missing).image,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'Username',
-                                  style: theme.textTheme.titleMedium,
-                                ),
-                              ],
-                            );
-                          case FutureStatus.rejected:
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).viewPadding.top,
-                                ),
-                                CircleAvatar(
-                                  radius: 30,
-                                  foregroundImage:
-                                      Image.asset(AppImages.missing).image,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'Username',
-                                  style: theme.textTheme.titleMedium,
-                                ),
-                              ],
-                            );
+                        final userCredential =
+                            context.read<CreditionalStore>().userCreditional;
+                        if (userCredential == null) {
+                          return const NoCreditionalWidget();
+                        } else {
+                          return CredentialWidget(
+                            profileImgUrl: userCredential.image.x160,
+                            nickname: userCredential.nickname,
+                            userProfileUrl: userCredential.url,
+                          );
                         }
                       },
                     ),
@@ -151,15 +115,7 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
                           ),
                         );
                       case FutureStatus.fulfilled:
-                        return ElevatedButton.icon(
-                          onPressed: () {
-                            context.read<HomeDrawerStore>().deleteTokens();
-                          },
-                          icon: const Icon(
-                            Icons.exit_to_app,
-                          ),
-                          label: const Text('Выйти'),
-                        );
+                        return const ExitButton();
                       case FutureStatus.rejected:
                         return const Icon(
                           Icons.close,

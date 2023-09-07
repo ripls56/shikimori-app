@@ -17,7 +17,7 @@ class CustomLoadingIndicator extends StatelessWidget {
     return Center(
       child: theme.brightness == Brightness.dark
           ? SvgPicture.asset(
-              AppImages.shikimoriLogo,
+              AppAssets.shikimoriLogo,
               colorFilter: const ColorFilter.mode(
                 Colors.white,
                 BlendMode.srcIn,
@@ -46,7 +46,7 @@ class CustomLoadingIndicator extends StatelessWidget {
                 color: Colors.white,
               )
           : Lottie.asset(
-              AppImages.loadingAnimationLight,
+              AppAssets.loadingAnimationLight,
               width: size.width / 2,
               height: size.width / 2,
             ),

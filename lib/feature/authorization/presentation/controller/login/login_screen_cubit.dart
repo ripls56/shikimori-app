@@ -10,7 +10,7 @@ import 'package:shikimoriapp/feature/authorization/domain/models/user_auth.dart'
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/get_access_token.dart';
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/save_access_token.dart';
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/save_refresh_token.dart';
-import 'package:shikimoriapp/injection.container.dart' as di;
+import 'package:shikimoriapp/injection.container.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -64,10 +64,10 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
               loadedOrFailure.fold(
                 (error) => emit(LoginScreenEmpty()),
                 (loaded) {
-                  if (di.sl.isRegistered<UserAuth>()) {
-                    di.sl.unregister<UserAuth>();
+                  if (sl.isRegistered<UserAuth>()) {
+                    sl.unregister<UserAuth>();
                   }
-                  di.sl.registerSingleton<UserAuth>(loaded);
+                  sl.registerSingleton<UserAuth>(loaded);
                   saveAccessToken.call(
                     SaveAccessTokenParams(accessToken: loaded.accessToken!),
                   );
@@ -87,23 +87,6 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
           },
         );
       } else {
-        // TODO(ripls56): fix
-        // final accessToken =
-        //     await di.sl<FlutterSecureStorage>().read(key: 'access_token');
-        // final refreshToken =
-        //     await di.sl<FlutterSecureStorage>().read(key: 'refresh_token');
-        // final model = UserAuthModel(
-        //   accessToken: accessToken,
-        //   refreshToken: refreshToken,
-        //   tokenType: 'Bearer',
-        //   scope: null,
-        //   createdAt: null,
-        //   expireIn: null,
-        // );
-        // if (di.sl.isRegistered<UserAuth>()) {
-        //   di.sl.unregister<UserAuth>();
-        // }
-        // di.sl.registerSingleton<UserAuth>(model);
         emit(
           LoginScreenLoaded(),
         );
@@ -116,12 +99,12 @@ class LoginScreenCubit extends Cubit<LoginScreenState> {
     }
   }
 
+  ///Check tokens in storage
   Future<bool> checkTokensExist() async {
-    if (await di.sl<FlutterSecureStorage>().read(key: 'access_token') == null) {
+    if (await sl<FlutterSecureStorage>().read(key: 'access_token') == null) {
       return false;
     }
-    if (await di.sl<FlutterSecureStorage>().read(key: 'refresh_token') ==
-        null) {
+    if (await sl<FlutterSecureStorage>().read(key: 'refresh_token') == null) {
       return false;
     }
     return true;

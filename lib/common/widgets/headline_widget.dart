@@ -5,7 +5,7 @@ class HeadlineWidget extends StatelessWidget {
   HeadlineWidget({required this.title, super.key, this.height = 30});
 
   final String title;
-  double? height;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {

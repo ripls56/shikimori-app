@@ -6,6 +6,7 @@ import 'package:shikimoriapp/common/widgets/image_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_screenshot.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/screenshots/screenshots_cubit.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/widgets/screenshots/screenshot_viewer_widget.dart';
 
 class ScreenshotsPage extends StatefulWidget {
   const ScreenshotsPage({required this.id, super.key});
@@ -47,15 +48,16 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
               ),
               itemCount: state.screenshots.length,
               itemBuilder: (context, index) {
+                final screenshotUrl = _screenshotUrl(index, state.screenshots);
                 return Padding(
                   padding: const EdgeInsets.all(8),
                   child: Stack(
                     children: [
                       Positioned.fill(
                         child: Hero(
-                          tag: index,
+                          tag: screenshotUrl,
                           child: ImageWidget(
-                            url: _screenshotUrl(index, state.screenshots),
+                            url: screenshotUrl,
                           ),
                         ),
                       ),
@@ -64,23 +66,9 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
                         child: InkWell(
                           onTap: () => Navigator.of(context).push(
                             HeroDialogRoute(
-                              builder: (context) => Dialog(
-                                backgroundColor: Colors.transparent,
-                                elevation: 0,
-                                child: SizedBox(
-                                  height: MediaQuery.of(context).size.width / 2,
-                                  child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: Hero(
-                                      tag: index,
-                                      child: ImageWidget(
-                                        url: _screenshotUrl(
-                                          index,
-                                          state.screenshots,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                              builder: (context) => RepaintBoundary(
+                                child: ScreenshotViewerWidget(
+                                  screenshotUrl: screenshotUrl,
                                 ),
                               ),
                             ),

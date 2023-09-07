@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
 
@@ -33,6 +34,36 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     const logoSize = 26.0;
 
     final theme = context.theme;
+
+    Widget calculateLeading() {
+      if (leading != null) {
+        return leading!;
+      }
+      if (ModalRoute.of(context)?.settings.name == 'home') {
+        debugPrint(ModalRoute.of(context)?.settings.name);
+        return IconButton(
+          icon: SvgPicture.asset(
+            AppAssets.shikimoriLogo,
+            height: logoSize,
+            width: logoSize,
+            colorFilter: ColorFilter.mode(
+              theme.brightness != Brightness.dark ? Colors.black : Colors.white,
+              BlendMode.srcIn,
+            ),
+          ),
+          onPressed: () => Scaffold.of(context).openDrawer(),
+        );
+      }
+      return IconButton(
+        onPressed: () {
+          if (context.canPop()) {
+            context.pop();
+          }
+        },
+        icon: const Icon(Icons.arrow_back),
+      );
+    }
+
     return AppBar(
       iconTheme: theme.iconTheme.copyWith(
         color:
@@ -41,21 +72,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle,
       backgroundColor: theme.colorScheme.primaryContainer,
       actions: actions ?? [],
-      leading: leading ??
-          IconButton(
-            icon: SvgPicture.asset(
-              AppImages.shikimoriLogo,
-              height: logoSize,
-              width: logoSize,
-              colorFilter: ColorFilter.mode(
-                theme.brightness != Brightness.dark
-                    ? Colors.black
-                    : Colors.white,
-                BlendMode.srcIn,
-              ),
-            ),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
+      leading: calculateLeading(),
       title: Text(
         title ?? '',
         style: theme.textTheme.titleMedium,

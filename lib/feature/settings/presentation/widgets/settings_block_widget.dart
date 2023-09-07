@@ -9,7 +9,7 @@ class SettingsBlockWidget extends StatelessWidget {
     required this.text,
     super.key,
     this.color,
-    this.title,
+    this.title, this.leading,
   });
 
   final Color? color;
@@ -17,6 +17,8 @@ class SettingsBlockWidget extends StatelessWidget {
   final String text;
 
   final String? title;
+
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +56,7 @@ class SettingsBlockWidget extends StatelessWidget {
                       ),
                   ],
                 ),
-                SizedBox(
-                  height: 30,
-                  width: 30,
-                  child: GestureDetector(
-                    onTap: () => showDialog(
-                      builder: (context) => const ColorPickerDialog(),
-                      context: context,
-                    ),
-                    child: ColoredBox(
-                      color: theme.colorScheme.primary,
-                    ),
-                  ),
-                )
+                leading ?? Container(),
               ],
             ),
           ),

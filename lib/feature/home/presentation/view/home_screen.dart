@@ -10,7 +10,7 @@ import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/home_card_type.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home/home_store.dart';
-import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/home_screen_drawer.dart';
+import 'package:shikimoriapp/feature/home/presentation/view/home_screen_drawer.dart';
 import 'package:shikimoriapp/feature/home/presentation/widgets/home_card.dart';
 import 'package:shikimoriapp/routes.dart';
 
@@ -31,9 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Uri animeUrl(int id) => Uri(
         path: '/${ScreenRoutes.animeDetails}', //${ScreenRoutes.anime}
         queryParameters: {
-          'id': '${id}',
+          'id': '$id',
         },
       );
+
+  final updatePath = Uri(path: '/${ScreenRoutes.update}');
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       drawer: HomeScreenDrawer(),
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Главная',
+        actions: [
+          IconButton(
+            onPressed: () => context.go(updatePath.toString()),
+            icon: const Badge(
+              smallSize: 8,
+              largeSize: 8,
+              child: Icon(Icons.system_update_alt),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: RefreshIndicator(
@@ -107,8 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         ElevatedButton.icon(
                             onPressed: () => context.read<HomeStore>().fetch(),
-                            label: Text('Попробовать еще раз'),
-                            icon: Icon(Icons.update))
+                            label: const Text('Попробовать еще раз'),
+                            icon: const Icon(Icons.update))
                       ],
                     ),
                   );

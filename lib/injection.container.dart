@@ -35,15 +35,17 @@ import 'package:shikimoriapp/feature/authorization/domain/use_cases/get_refresh_
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/refresh_access_token.dart';
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/save_access_token.dart';
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/save_refresh_token.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/controller/login_screen_cubit.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/login/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/character/data/datasources/character_remote_data_source.dart';
 import 'package:shikimoriapp/feature/character/data/datasources/character_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/character/data/repositories/character_repository_impl.dart';
 import 'package:shikimoriapp/feature/character/domain/repositories/character_repository.dart';
 import 'package:shikimoriapp/feature/character/domain/use_cases/get_character_by_id.dart';
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
+import 'package:shikimoriapp/feature/download/service/download_service.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home/home_store.dart';
-import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/controller/home_drawer_store.dart';
+import 'package:shikimoriapp/feature/home/presentation/controller/home_drawer/home_drawer_store.dart';
 import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source.dart';
 import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/profile/data/repositories/creditional_repository_impl.dart';
@@ -56,6 +58,15 @@ import 'package:shikimoriapp/feature/related/data/datasources/related_remote_dat
 import 'package:shikimoriapp/feature/related/data/repositories/related_repository_impl.dart';
 import 'package:shikimoriapp/feature/related/domain/repositories/related_repository.dart';
 import 'package:shikimoriapp/feature/search/presentation/bloc/search_bloc.dart';
+import 'package:shikimoriapp/feature/update_app/data/datasources/local/update_local_data_source.dart';
+import 'package:shikimoriapp/feature/update_app/data/datasources/local/update_local_data_source_impl.dart';
+import 'package:shikimoriapp/feature/update_app/data/datasources/remote/update_remote_data_source.dart';
+import 'package:shikimoriapp/feature/update_app/data/datasources/remote/update_remote_data_source_impl.dart';
+import 'package:shikimoriapp/feature/update_app/data/repositories/update_repository_impl.dart';
+import 'package:shikimoriapp/feature/update_app/domain/repositories/update_repository.dart';
+import 'package:shikimoriapp/feature/update_app/domain/use_cases/get_update.dart';
+import 'package:shikimoriapp/feature/update_app/domain/use_cases/update.dart';
+import 'package:shikimoriapp/feature/update_app/presentation/controller/update_store.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -93,12 +104,17 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => storage);
 
+  //Services
+  sl.registerLazySingleton(() => DownloadService());
+
   //Theme
   sl.registerLazySingleton(() => ThemeProvider());
 
   //Stores
   sl.registerFactory(() => HomeStore(sl()));
-  sl.registerFactory(() => HomeDrawerStore(sl(), sl(), sl()));
+  sl.registerFactory(() => HomeDrawerStore(sl()));
+  sl.registerFactory(() => CreditionalStore(sl(), sl()));
+  sl.registerFactory(() => UpdateStore(sl(), sl(), sl()));
 
   //Cubit
   sl.registerFactory(() => AnimePageCubit(sl()));
@@ -126,6 +142,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAccessToken(sl()));
   sl.registerLazySingleton(() => RefreshAccessToken(sl()));
   sl.registerLazySingleton(() => GetScreenshots(sl()));
+  sl.registerLazySingleton(() => GetUpdate(sl()));
+  sl.registerLazySingleton(() => UpdateApp(sl()));
 
   //Repositories
   sl.registerLazySingleton<AnimeRepository>(() => AnimeRepositoryImpl(sl()));
@@ -147,6 +165,9 @@ Future<void> init() async {
   sl.registerLazySingleton<TokenLocalRepository>(
     () => TokensLocalRepositoryImpl(sl()),
   );
+  sl.registerLazySingleton<UpdateRepository>(
+    () => UpdateRepositoryImpl(sl(), sl()),
+  );
 
   //RemoteDataSource
   sl.registerLazySingleton<AnimeRemoteDataSource>(
@@ -167,9 +188,15 @@ Future<void> init() async {
   sl.registerLazySingleton<CharacterRemoteDataSource>(
     () => CharacterRemoteDataSourceImpl(sl()),
   );
+  sl.registerLazySingleton<UpdateRemoteDataSource>(
+    () => UpdateRemoteDataSourceImpl(sl(), sl()),
+  );
 
   //LocalDataSource
   sl.registerLazySingleton<TokenLocalDataSource>(
     () => TokenLocalDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<UpdateLocalDataSource>(
+    () => UpdateLocalDataSourceImpl(),
   );
 }

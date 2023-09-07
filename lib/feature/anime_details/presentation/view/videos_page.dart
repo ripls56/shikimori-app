@@ -51,7 +51,7 @@ class _VideosPageState extends State<VideosPage> {
                         child: CachedNetworkImage(
                           errorWidget: (context, url, error) {
                             return Center(
-                              child: Image.asset(AppImages.missing),
+                              child: Image.asset(AppAssets.missing),
                             );
                           },
                           imageUrl: state.videos[index].imageUrl,

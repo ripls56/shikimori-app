@@ -54,7 +54,7 @@ dependencies:
   flutter_staggered_animations:
   shimmer:
   lottie:
-  rive: ^0.11.4
+  rive:
   fl_chart:
   flutter_rating_bar:
   palette_generator:
@@ -69,7 +69,12 @@ dependencies:
   chewie:
   flutter_colorpicker:
   go_router:
-  #  crashlytics
+# for update
+  path_provider:
+  package_info_plus:
+  permission_handler:
+  install_plugin:
+#  crashlytics
   firebase_core:
   talker_flutter:
   talker_bloc_logger:
@@ -113,6 +118,7 @@ flutter:
     - assets/animation/
     - assets/animation/lottie/
     - assets/animation/rive/
+    - shorebird.yaml
 
 
 

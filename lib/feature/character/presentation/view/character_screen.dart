@@ -10,9 +10,9 @@ import 'package:shikimoriapp/feature/character/presentation/controller/character
 part '../widgets/character_name_widget.dart';
 
 class CharacterScreen extends StatefulWidget {
-  const CharacterScreen({required this.id, super.key});
+  const CharacterScreen({required int id, super.key}) : _id = id;
 
-  final int id;
+  final int _id;
 
   @override
   State<CharacterScreen> createState() => _CharacterScreenState();
@@ -21,7 +21,7 @@ class CharacterScreen extends StatefulWidget {
 class _CharacterScreenState extends State<CharacterScreen> {
   @override
   void initState() {
-    context.read<CharacterCubit>().getCharacter(widget.id);
+    context.read<CharacterCubit>().getCharacter(widget._id);
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
         if (state is CharacterError) {
           Future.delayed(
             const Duration(seconds: 5),
-            () => context.read<CharacterCubit>().getCharacter(widget.id),
+            () => context.read<CharacterCubit>().getCharacter(widget._id),
           );
         }
       },
@@ -51,7 +51,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
                     CachedNetworkImage(
                       width: 154,
                       height: 240,
-                      imageUrl: '${Env.host}${character.image?.preview}',
+                      imageUrl:
+                          '${Env.shikimoriUrl}${character.image?.preview}',
                     ),
                     Expanded(
                       child: Column(
@@ -98,7 +99,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      final seyu = character.seyu?[index];
+                      final seyu = character.seyu[index];
                       return Padding(
                         padding: const EdgeInsets.all(8),
                         child: Container(
@@ -110,7 +111,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                               Flexible(
                                 child: CachedNetworkImage(
                                   imageUrl:
-                                      '${Env.host}${seyu?.image.original}',
+                                      '${Env.shikimoriUrl}${seyu?.image.original}',
                                   height: 150,
                                   fit: BoxFit.fitHeight,
                                 ),

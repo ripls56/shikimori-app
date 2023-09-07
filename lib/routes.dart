@@ -1,20 +1,24 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shikimoriapp/feature/anime/presentation/view/anime/anime_screen.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/view/anime_details.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/login/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/view/login_screen.dart';
 import 'package:shikimoriapp/feature/character/presentation/view/character_screen.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home/home_store.dart';
+import 'package:shikimoriapp/feature/home/presentation/controller/home_drawer/home_drawer_store.dart';
 import 'package:shikimoriapp/feature/home/presentation/view/home_screen.dart';
-import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/controller/home_drawer_store.dart';
 import 'package:shikimoriapp/feature/settings/presentation/settings_screen.dart';
+import 'package:shikimoriapp/feature/update_app/presentation/controller/update_store.dart';
+import 'package:shikimoriapp/feature/update_app/presentation/update_screen.dart';
 import 'package:shikimoriapp/injection.container.dart';
-import 'package:talker_flutter/talker_flutter.dart';
 
 abstract class ScreenRoutes {
   static String get login => 'login';
   static String get home => 'home';
   static String get settings => 'settings';
+  static String get update => 'update';
   static String get anime => 'animes';
   static String get animeDetails => 'anime_details';
   static String get characterDetails => 'character_details';
@@ -27,8 +31,8 @@ final router = GoRouter(
     GoRoute(
       name: ScreenRoutes.login,
       path: '/login',
-      builder: (context, state) => Provider(
-        create: (context) => sl<Talker>(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => sl<LoginScreenCubit>(),
         child: const LoginScreen(),
       ),
     ),
@@ -51,6 +55,13 @@ final router = GoRouter(
           name: ScreenRoutes.settings,
           path: ScreenRoutes.settings,
           builder: (context, state) => const SettingsScreen(),
+        ),
+        GoRoute(
+          path: ScreenRoutes.update,
+          builder: (context, state) => Provider(
+            create: (context) => sl<UpdateStore>(),
+            child: const UpdateScreen(),
+          ),
         ),
         GoRoute(
           path: ScreenRoutes.anime,

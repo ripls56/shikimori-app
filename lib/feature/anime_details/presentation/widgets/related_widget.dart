@@ -55,7 +55,7 @@ class _AnimeCard extends StatelessWidget {
             imageUrl: '${Env.host}${anime.image?.original}',
             errorWidget: (context, url, error) {
               return Center(
-                child: Image.asset(AppImages.missing),
+                child: Image.asset(AppAssets.missing),
               );
             },
             fit: BoxFit.fitHeight,
