@@ -15,17 +15,24 @@ class UpdateRemoteDataSourceImpl implements UpdateRemoteDataSource {
   final DownloadService _downloadService;
 
   @override
-  Future<void> getUpdate(String version, String path) async {
+  Future<(StreamSubscription<DownloadData>, CancelToken)> getUpdate(
+    String version,
+    String path,
+  ) async {
+    final (stream, cancelToken) =
+        _downloadService.createStreamWithCancelToken();
     unawaited(
       _dio.download(
         ApiEndpoints.getUpdate(version),
         path,
+        cancelToken: cancelToken,
         onReceiveProgress: (count, total) {
           if (count != -1) {
-            _downloadService.addDownloadData(DownloadData(count, total));
+            stream.sink.add(DownloadData(count, total));
           }
         },
       ),
     );
+    return (stream.stream.listen((event) {}), cancelToken);
   }
 }

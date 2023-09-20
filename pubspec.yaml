@@ -51,7 +51,6 @@ dependencies:
   rxdart:
   json_annotation:
   shared_preferences:
-  flutter_staggered_animations:
   shimmer:
   lottie:
   rive:
@@ -65,16 +64,21 @@ dependencies:
   flutter_secure_storage:
   flutter_native_splash:
   json_serializable:
-  flutter_animate:
   chewie:
   flutter_colorpicker:
   go_router:
+  intl:
+  google_fonts:
+# animations
+  animations:
+  flutter_staggered_animations:
+  flutter_animate:
 # for update
   path_provider:
   package_info_plus:
   permission_handler:
   install_plugin:
-#  crashlytics
+# crashlytics
   firebase_core:
   talker_flutter:
   talker_bloc_logger:
@@ -94,7 +98,6 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints:
   envied_generator:
   mobx_codegen:
   build_runner:
@@ -118,7 +121,7 @@ flutter:
     - assets/animation/
     - assets/animation/lottie/
     - assets/animation/rive/
-    - shorebird.yaml
+    - assets/google_fonts/
 
 
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/common/hero_dialog_route.dart';
 import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
+import 'package:shikimoriapp/common/widgets/image_viewer_widget.dart';
 import 'package:shikimoriapp/common/widgets/image_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_screenshot.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/screenshots/screenshots_cubit.dart';
-import 'package:shikimoriapp/feature/anime_details/presentation/widgets/screenshots/screenshot_viewer_widget.dart';
 
 class ScreenshotsPage extends StatefulWidget {
   const ScreenshotsPage({required this.id, super.key});
@@ -67,8 +67,8 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
                           onTap: () => Navigator.of(context).push(
                             HeroDialogRoute(
                               builder: (context) => RepaintBoundary(
-                                child: ScreenshotViewerWidget(
-                                  screenshotUrl: screenshotUrl,
+                                child: ImageViewerWidget(
+                                  imageUrl: screenshotUrl,
                                 ),
                               ),
                             ),

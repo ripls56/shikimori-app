@@ -1,12 +1,11 @@
 import 'dart:async';
 
-class DownloadService {
-  final _stream = StreamController<DownloadData>();
-  Stream<DownloadData> get downloadStream => _stream.stream;
+import 'package:dio/dio.dart';
 
-  ///Add [DownloadData] to existing stream
-  void addDownloadData(DownloadData data) {
-    _stream.sink.add(data);
+class DownloadService {
+  ///Create stream and token to manage download for  for [DownloadData]
+  (StreamController<DownloadData>, CancelToken) createStreamWithCancelToken() {
+    return (StreamController<DownloadData>(), CancelToken());
   }
 }
 

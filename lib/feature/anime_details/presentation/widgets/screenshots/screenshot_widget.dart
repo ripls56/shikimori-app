@@ -1,4 +1,4 @@
-part of '../view/anime_details.dart';
+part of '../../view/anime_details.dart';
 
 class ScreenshotsWidget extends StatelessWidget {
   const ScreenshotsWidget({
@@ -8,60 +8,63 @@ class ScreenshotsWidget extends StatelessWidget {
 
   final AnimeDetails animeDetails;
 
+  void _navigate(BuildContext context) {
+    if (animeDetails.id == null) {
+      return;
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ScreenshotsPage(
+            id: animeDetails.id!,
+          ),
+        ),
+      );
+    }
+  }
+
   String _screenshotUrl(int index) =>
       '${Env.shikimoriUrl}${animeDetails.screenshots[index]!.original}';
 
   @override
   Widget build(BuildContext context) {
     return HeadlineButton(
-      onPress: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ScreenshotsPage(
-            id: animeDetails.id ?? 1,
-          ),
-        ),
-      ),
+      onPress: () => _navigate(context),
       title: 'Кадры',
-      height: 30,
       child: SizedBox(
-        height: 110,
+        height: 130,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            Align(
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: animeDetails.videos.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: AspectRatio(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              child: Align(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: animeDetails.screenshots.length,
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 8,
+                  ),
+                  itemBuilder: (context, index) {
+                    return AspectRatio(
                       aspectRatio: 16 / 9,
                       child: ImageWidget(
-                        url: _screenshotUrl(index),
+                        url: '${Env.shikimoriUrl}'
+                                '${animeDetails.screenshots[index]?.original}' ??
+                            '',
+                        fit: BoxFit.fitWidth,
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             Material(
               color: Colors.transparent,
-              child: GestureDetector(onTap: () {
-                if (animeDetails.id == null) {
-                  return;
-                } else {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ScreenshotsPage(
-                        id: animeDetails.id!,
-                      ),
-                    ),
-                  );
-                }
-              }),
+              child: GestureDetector(
+                onTap: () => _navigate(context),
+              ),
             )
           ],
         ),

@@ -1,53 +1,65 @@
 part of '../view/anime_details.dart';
 
-class VideosButton extends StatelessWidget {
-  const VideosButton({
+class VideosWidget extends StatelessWidget {
+  const VideosWidget({
     required this.animeDetails,
     super.key,
   });
 
   final AnimeDetails animeDetails;
 
+  void _navigate(BuildContext context) {
+    if (animeDetails.id == null) {
+      return;
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => VideosPage(
+            id: animeDetails.id!,
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return HeadlineButton(
-      onPress: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => VideosPage(
-            id: animeDetails.id ?? 1,
-          ),
-        ),
-      ),
+      onPress: () => _navigate(context),
       title: 'Видео',
-      height: 30,
       child: SizedBox(
-        height: 110,
+        height: 130,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            Align(
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: animeDetails.videos.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: AspectRatio(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              child: Align(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: animeDetails.videos.length,
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 8,
+                  ),
+                  itemBuilder: (context, index) {
+                    return AspectRatio(
                       aspectRatio: 16 / 9,
                       child: ImageWidget(
                         url: animeDetails.videos[index]?.imageUrl ?? '',
                         fit: BoxFit.fitWidth,
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             Material(
               color: Colors.transparent,
-              child: GestureDetector(onTap: () {}),
+              child: GestureDetector(
+                onTap: () => _navigate(context),
+              ),
             )
           ],
         ),

@@ -7,6 +7,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shikimoriapp/common/behaviours/scroll_without_splash.dart';
 import 'package:shikimoriapp/common/theme/theme_provider.dart';
@@ -19,6 +22,7 @@ import 'package:shikimoriapp/feature/authorization/presentation/controller/credi
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/feature/search/presentation/bloc/search_bloc.dart';
+import 'package:shikimoriapp/feature/update_app/presentation/controller/update_store.dart';
 import 'package:shikimoriapp/firebase_options.dart';
 import 'package:shikimoriapp/injection.container.dart';
 import 'package:shikimoriapp/routes.dart';
@@ -37,6 +41,9 @@ Future<void> main() async {
 
 
   await runZonedGuarded(() async {
+    Intl.defaultLocale = 'ru';
+    await initializeDateFormatting('ru');
+    GoogleFonts.config.allowRuntimeFetching = false;
     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     Animate.restartOnHotReload = true;
@@ -74,6 +81,9 @@ class MyApp extends StatelessWidget {
         ),
         Provider(
           create: (context) => sl<CreditionalStore>(),
+        ),
+        Provider(
+          create: (context) => sl<UpdateStore>(),
         ),
         BlocProvider<AnimePageCubit>(
           create: (context) => sl<AnimePageCubit>(),

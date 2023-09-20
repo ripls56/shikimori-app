@@ -84,7 +84,10 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer>
                 _settingsPath.toString(),
               ),
               leading: const Icon(Icons.settings),
-              title: const Text('Настройки'),
+              title: Text(
+                'Настройки',
+                style: theme.textTheme.bodyMedium,
+              ),
             ),
             const Spacer(),
             Padding(

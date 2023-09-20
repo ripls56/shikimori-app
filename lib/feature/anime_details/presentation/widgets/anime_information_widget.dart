@@ -6,23 +6,23 @@ class InformationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+
     String buildGenresString(List<AnimeDetailsGenre?> genres) {
       var genresString = '';
       for (var i = 0; i < genres.length; i++) {
         i != 0
-            ? genresString += ', ${genres[i]?.russian ?? ''}'
+            ? genresString += ', ${genres[i]?.russian?.toLowerCase() ?? ''}'
             : genresString += genres[i]?.russian ?? '';
       }
       return genresString;
     }
 
+    final titleTextStyle = theme.textTheme.bodyMedium?.copyWith(
+      color: theme.textTheme.bodyMedium?.color?.withOpacity(.6),
+    );
+
     final genresString = buildGenresString(animeDetails.genres);
-
-    final titleTextStyle = Theme.of(context).textTheme.bodyLarge?.copyWith(
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
-        );
-
-    final mainTextStyle = Theme.of(context).textTheme.bodyLarge;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class InformationWidget extends StatelessWidget {
           title: 'Информация',
         ),
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(14),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,8 +43,7 @@ class InformationWidget extends StatelessWidget {
                   ),
                   Flexible(
                     child: Text(
-                      animeDetails.kind ?? '',
-                      style: mainTextStyle,
+                      animeDetails.kind?.capitalize ?? '',
                     ),
                   ),
                 ],
@@ -58,7 +57,6 @@ class InformationWidget extends StatelessWidget {
                   Flexible(
                     child: Text(
                       animeDetails.episodes.toString(),
-                      style: mainTextStyle,
                     ),
                   ),
                 ],
@@ -72,7 +70,6 @@ class InformationWidget extends StatelessWidget {
                   Flexible(
                     child: Text(
                       animeDetails.duration.toString(),
-                      style: mainTextStyle,
                     ),
                   ),
                 ],
@@ -85,8 +82,7 @@ class InformationWidget extends StatelessWidget {
                   ),
                   Flexible(
                     child: Text(
-                      animeDetails.status.toString(),
-                      style: mainTextStyle,
+                      animeDetails.status.toString().capitalize,
                     ),
                   ),
                 ],
@@ -101,7 +97,6 @@ class InformationWidget extends StatelessWidget {
                     child: Text(
                       genresString,
                       textAlign: TextAlign.center,
-                      style: mainTextStyle,
                     ),
                   ),
                 ],

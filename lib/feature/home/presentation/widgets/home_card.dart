@@ -32,58 +32,49 @@ class HomeCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Stack(
           children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimension.borderRadius),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.03),
-                    spreadRadius: 3,
-                    blurRadius: 3,
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(Dimension.borderRadius),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: ImageWidget(
-                        url: url,
-                        fit: BoxFit.cover,
-                        width: 200,
-                      ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(Dimension.borderRadius),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ImageWidget(
+                      url: url,
+                      fadeInDuration: const Duration(milliseconds: 100),
+                      fit: BoxFit.cover,
+                      width: 200,
                     ),
-                    Expanded(
-                      flex: 0,
-                      child: AspectRatio(
-                        aspectRatio: 16 / 4,
-                        child: ColoredBox(
-                          color: theme.colorScheme.primaryContainer,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: context.theme.textTheme.bodySmall
-                                    ?.copyWith(),
-                              ),
+                  ),
+                  Expanded(
+                    flex: 0,
+                    child: AspectRatio(
+                      aspectRatio: 16 / 4,
+                      child: ColoredBox(
+                        color: theme.colorScheme.primaryContainer,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  context.theme.textTheme.bodySmall?.copyWith(),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Material(
+              borderRadius: BorderRadius.circular(Dimension.borderRadius),
               color: Colors.transparent,
               child: InkWell(
+                borderRadius: BorderRadius.circular(Dimension.borderRadius),
                 onTap: onTap,
               ),
             )
