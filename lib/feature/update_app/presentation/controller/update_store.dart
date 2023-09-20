@@ -1,25 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shikimoriapp/feature/download/service/download_service.dart';
 import 'package:shikimoriapp/feature/update_app/domain/use_cases/get_update.dart';
 import 'package:shikimoriapp/feature/update_app/domain/use_cases/update.dart';
 
 part 'update_store.g.dart';
 
-class UpdateStore = UpdateStoreBase with _$UpdateStore;
+class UpdateStore = _UpdateStoreBase with _$UpdateStore;
 
-abstract class UpdateStoreBase with Store {
-  UpdateStoreBase(
+abstract class _UpdateStoreBase with Store {
+  _UpdateStoreBase(
     this._getUpdateUseCase,
     this._updateAppUseCase,
-    this._downloadService,
   );
 
   final GetUpdate _getUpdateUseCase;
 
   final UpdateApp _updateAppUseCase;
-
-  final DownloadService _downloadService;
 
   @observable
   ObservableFuture<void> fetchUpdateFuture = ObservableFuture.value({});
@@ -40,21 +37,28 @@ abstract class UpdateStoreBase with Store {
   @observable
   double currentSize = 0;
 
+  CancelToken? cancelToken;
+
   Future<void> _getUpdate(String version, String path) async {
+    debugPrint(path);
     final response = await _getUpdateUseCase
         .call(GetUpdateParams(version: version, path: path));
     response.fold(
       (error) =>
           throw MobXException(error.message ?? 'Get apk for update failed'),
-      (_) => _downloadService.downloadStream.listen(
-        (event) {
-          if (apkSize != event.total) {
-            apkSize = event.total / 1024 / 1024;
+      (data) {
+        final subscription = data.$1;
+        cancelToken = data.$2;
+        subscription.onData((data) {
+          if (apkSize == data.current) {
+            subscription.cancel();
           }
-          currentSize = event.current / 1024 / 1024;
-          debugPrint(event.current.toString());
-        },
-      ),
+          if (apkSize != data.total) {
+            apkSize = data.total / 1024 / 1024;
+          }
+          currentSize = data.current / 1024 / 1024;
+        });
+      },
     );
   }
 }

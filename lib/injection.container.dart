@@ -71,7 +71,7 @@ import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 ///Service locator
-final sl = GetIt.asNewInstance();
+final sl = GetIt.instance;
 
 ///Init service locator
 Future<void> init() async {
@@ -114,7 +114,7 @@ Future<void> init() async {
   sl.registerFactory(() => HomeStore(sl()));
   sl.registerFactory(() => HomeDrawerStore(sl()));
   sl.registerFactory(() => CreditionalStore(sl(), sl()));
-  sl.registerFactory(() => UpdateStore(sl(), sl(), sl()));
+  sl.registerFactory(() => UpdateStore(sl(), sl()));
 
   //Cubit
   sl.registerFactory(() => AnimePageCubit(sl()));

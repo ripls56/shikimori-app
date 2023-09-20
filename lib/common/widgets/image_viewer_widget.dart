@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shikimoriapp/common/widgets/image_widget.dart';
 
-class ScreenshotViewerWidget extends StatefulWidget {
-  final String screenshotUrl;
+class ImageViewerWidget extends StatefulWidget {
+  final String imageUrl;
 
-  const ScreenshotViewerWidget({super.key, required this.screenshotUrl});
+  const ImageViewerWidget({super.key, required this.imageUrl});
 
   @override
-  State<ScreenshotViewerWidget> createState() => _ScreenshotViewerWidgetState();
+  State<ImageViewerWidget> createState() => _ImageViewerWidgetState();
 }
 
-class _ScreenshotViewerWidgetState extends State<ScreenshotViewerWidget>
+class _ImageViewerWidgetState extends State<ImageViewerWidget>
     with SingleTickerProviderStateMixin {
   late TransformationController _transformationController;
   late AnimationController _animationController;
@@ -37,6 +37,18 @@ class _ScreenshotViewerWidgetState extends State<ScreenshotViewerWidget>
 
   @override
   Widget build(BuildContext context) {
+    /*
+      страница обернута в гестур детектор, откуда я беру позицию при драге,
+      дальше стек,
+      в стеке картинка и ui
+      картинка в гестурдетекторе, который дает мне узнать
+      когда юзер тащит картинку
+      анимирую позицию картинки в стеке, по глоьальной позиции первого детектора
+      если позиция картинки при окончании драга меньше или болешь
+      чем 1\3 высоты экрана вызываю pop
+      также надо опасити заанимировать
+     */
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onDoubleTap: () {
         _animation = Matrix4Tween(
@@ -57,9 +69,9 @@ class _ScreenshotViewerWidgetState extends State<ScreenshotViewerWidget>
             child: AspectRatio(
               aspectRatio: 16 / 9,
               child: Hero(
-                tag: widget.screenshotUrl,
+                tag: widget.imageUrl,
                 child: ImageWidget(
-                  url: widget.screenshotUrl,
+                  url: widget.imageUrl,
                 ),
               ),
             ),

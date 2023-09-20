@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Badge(
               smallSize: 8,
               largeSize: 8,
-              child: Icon(Icons.system_update_alt),
+              child: Icon(CupertinoIcons.arrow_down_doc_fill),
             ),
           ),
         ],

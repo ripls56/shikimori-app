@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shikimoriapp/core/extension/context_extension.dart';
 
 class HeadlineWidget extends StatelessWidget {
-  HeadlineWidget({required this.title, super.key, this.height = 30});
+  HeadlineWidget({required this.title, super.key, this.height});
 
   final String title;
   final double? height;
@@ -12,15 +12,15 @@ class HeadlineWidget extends StatelessWidget {
     final theme = context.theme;
 
     return Container(
-      height: height,
-      color: theme.colorScheme.primaryContainer.withOpacity(.5),
+      height: height ?? 34,
+      color: theme.colorScheme.primaryContainer.withOpacity(.7),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Text(
             title,
             textAlign: TextAlign.center,
-            style: theme.textTheme.labelLarge,
+            style: theme.textTheme.bodyLarge,
           ),
           Align(
             alignment: Alignment.centerLeft,

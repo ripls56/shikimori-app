@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
-import 'package:shikimoriapp/core/helpers/images.dart';
+import 'package:shikimoriapp/common/widgets/image_widget.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/videos/videos_cubit.dart';
 
 class VideosPage extends StatefulWidget {
@@ -48,13 +47,8 @@ class _VideosPageState extends State<VideosPage> {
                   child: Stack(
                     children: [
                       Positioned.fill(
-                        child: CachedNetworkImage(
-                          errorWidget: (context, url, error) {
-                            return Center(
-                              child: Image.asset(AppAssets.missing),
-                            );
-                          },
-                          imageUrl: state.videos[index].imageUrl,
+                        child: ImageWidget(
+                          url: state.videos[index].imageUrl,
                           fit: BoxFit.fitWidth,
                         ),
                       ),

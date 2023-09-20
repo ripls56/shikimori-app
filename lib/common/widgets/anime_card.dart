@@ -32,13 +32,13 @@ class AnimeCardWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onPrimary,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(.2),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.black.withOpacity(.2),
+              //     blurRadius: 8,
+              //     offset: const Offset(0, 2),
+              //   ),
+              // ],
               borderRadius: const BorderRadius.all(
                 Radius.circular(10),
               ),

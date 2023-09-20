@@ -10,7 +10,6 @@ import 'package:shikimoriapp/feature/home/presentation/controller/home/home_stor
 import 'package:shikimoriapp/feature/home/presentation/controller/home_drawer/home_drawer_store.dart';
 import 'package:shikimoriapp/feature/home/presentation/view/home_screen.dart';
 import 'package:shikimoriapp/feature/settings/presentation/settings_screen.dart';
-import 'package:shikimoriapp/feature/update_app/presentation/controller/update_store.dart';
 import 'package:shikimoriapp/feature/update_app/presentation/update_screen.dart';
 import 'package:shikimoriapp/injection.container.dart';
 
@@ -58,10 +57,7 @@ final router = GoRouter(
         ),
         GoRoute(
           path: ScreenRoutes.update,
-          builder: (context, state) => Provider(
-            create: (context) => sl<UpdateStore>(),
-            child: const UpdateScreen(),
-          ),
+          builder: (context, state) => const UpdateScreen(),
         ),
         GoRoute(
           path: ScreenRoutes.anime,

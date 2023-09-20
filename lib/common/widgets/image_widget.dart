@@ -11,6 +11,8 @@ class ImageWidget extends StatelessWidget {
     this.fit,
     this.width,
     this.height,
+    this.fadeInDuration,
+    this.fadeOutDuration,
   });
 
   ///Url of the image
@@ -25,6 +27,12 @@ class ImageWidget extends StatelessWidget {
   ///Height of the image
   final double? height;
 
+  ///The duration of the fade-in animation for the [url]
+  final Duration? fadeInDuration;
+
+  ///The duration of the fade-out animation for the [url]
+  final Duration? fadeOutDuration;
+
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
@@ -32,13 +40,17 @@ class ImageWidget extends StatelessWidget {
       imageUrl: url,
       width: width,
       height: height,
-      fadeInDuration: Duration.zero,
-      fadeOutDuration: Duration.zero,
-      placeholder: (context, url) => const Center(
-        child: CircularProgressIndicator.adaptive(
-          strokeWidth: 2,
+      fadeInDuration: fadeInDuration ?? const Duration(milliseconds: 200),
+      fadeOutDuration: fadeOutDuration,
+      progressIndicatorBuilder: (context, url, progress) => const Center(
+        child: SizedBox.square(
+          dimension: 26,
+          child: CircularProgressIndicator.adaptive(),
         ),
       ),
+      httpHeaders: const {
+        'User-Agent': 'mpt coursework',
+      },
       placeholderFadeInDuration: Duration.zero,
       errorWidget: (context, url, error) => Center(
         child: Image.asset(

@@ -33,7 +33,7 @@ class HeadlineButton extends StatelessWidget {
     return Column(
       children: [
         Material(
-          color: theme.colorScheme.primaryContainer.withOpacity(.5),
+          color: theme.colorScheme.primaryContainer.withOpacity(.7),
           child: InkWell(
             onTap: onPress,
             child: Stack(
@@ -41,13 +41,13 @@ class HeadlineButton extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: theme.textTheme.bodyLarge,
                   textAlign: TextAlign.center,
+                  style: theme.textTheme.bodyLarge,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                    height: height ?? 38,
+                    height: height ?? 34,
                     color: theme.colorScheme.primary,
                     width: 10,
                   ),
@@ -63,7 +63,7 @@ class HeadlineButton extends StatelessWidget {
           ),
         ),
         ColoredBox(
-          color: theme.colorScheme.secondary,
+          color: theme.colorScheme.background,
           child: child,
         )
       ],
