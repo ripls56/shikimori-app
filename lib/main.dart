@@ -39,6 +39,7 @@ Future<void> main() async {
     return true;
   };
 
+
   await runZonedGuarded(() async {
     Intl.defaultLocale = 'ru';
     await initializeDateFormatting('ru');
