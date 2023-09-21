@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:interactiveviewer_gallery/interactiveviewer_gallery.dart';
 import 'package:shikimoriapp/common/hero_dialog_route.dart';
 import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
-import 'package:shikimoriapp/common/widgets/image_viewer_widget.dart';
 import 'package:shikimoriapp/common/widgets/image_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_screenshot.dart';
@@ -64,15 +64,39 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
                       Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          onTap: () => Navigator.of(context).push(
-                            HeroDialogRoute(
-                              builder: (context) => RepaintBoundary(
-                                child: ImageViewerWidget(
-                                  imageUrl: screenshotUrl,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              HeroDialogRoute(
+                                builder: (context) => RepaintBoundary(
+                                  child: InteractiveviewerGallery(
+                                    maxScale: 5,
+                                    sources: state.screenshots,
+                                    initIndex: index,
+                                    itemBuilder: (
+                                      BuildContext context,
+                                      int imageIndex,
+                                      bool isFocus,
+                                    ) {
+                                      return Center(
+                                        child: Hero(
+                                          tag: _screenshotUrl(
+                                            imageIndex,
+                                            state.screenshots,
+                                          ),
+                                          child: ImageWidget(
+                                            url: _screenshotUrl(
+                                              imageIndex,
+                                              state.screenshots,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ),
                     ],

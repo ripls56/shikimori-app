@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:shikimoriapp/core/endpoints/api_endpoints.dart';
+import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/download/service/download_service.dart';
 import 'package:shikimoriapp/feature/update_app/data/datasources/remote/update_remote_data_source.dart';
 
@@ -23,7 +24,7 @@ class UpdateRemoteDataSourceImpl implements UpdateRemoteDataSource {
         _downloadService.createStreamWithCancelToken();
     unawaited(
       _dio.download(
-        ApiEndpoints.getUpdate(version),
+        ApiEndpoints.update(version),
         path,
         cancelToken: cancelToken,
         onReceiveProgress: (count, total) {
@@ -34,5 +35,18 @@ class UpdateRemoteDataSourceImpl implements UpdateRemoteDataSource {
       ),
     );
     return (stream.stream.listen((event) {}), cancelToken);
+  }
+
+  @override
+  Future<String> getUpdateInformation() async {
+    final response = await _dio.get(ApiEndpoints.updateInformation);
+    if (response.statusCode == 200) {
+      return (response.data as Map<String, dynamic>)['message'] as String;
+    } else {
+      throw ServerException(
+        message: 'Exception in [UpdateRemoteDataSource], '
+            'method: getUpdateInformation',
+      );
+    }
   }
 }

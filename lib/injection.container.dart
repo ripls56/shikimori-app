@@ -65,6 +65,7 @@ import 'package:shikimoriapp/feature/update_app/data/datasources/remote/update_r
 import 'package:shikimoriapp/feature/update_app/data/repositories/update_repository_impl.dart';
 import 'package:shikimoriapp/feature/update_app/domain/repositories/update_repository.dart';
 import 'package:shikimoriapp/feature/update_app/domain/use_cases/get_update.dart';
+import 'package:shikimoriapp/feature/update_app/domain/use_cases/get_update_information.dart';
 import 'package:shikimoriapp/feature/update_app/domain/use_cases/update.dart';
 import 'package:shikimoriapp/feature/update_app/presentation/controller/update_store.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
@@ -114,7 +115,7 @@ Future<void> init() async {
   sl.registerFactory(() => HomeStore(sl()));
   sl.registerFactory(() => HomeDrawerStore(sl()));
   sl.registerFactory(() => CreditionalStore(sl(), sl()));
-  sl.registerFactory(() => UpdateStore(sl(), sl()));
+  sl.registerFactory(() => UpdateStore(sl(), sl(), sl()));
 
   //Cubit
   sl.registerFactory(() => AnimePageCubit(sl()));
@@ -143,6 +144,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => RefreshAccessToken(sl()));
   sl.registerLazySingleton(() => GetScreenshots(sl()));
   sl.registerLazySingleton(() => GetUpdate(sl()));
+  sl.registerLazySingleton(() => GetUpdateInformation(sl()));
   sl.registerLazySingleton(() => UpdateApp(sl()));
 
   //Repositories

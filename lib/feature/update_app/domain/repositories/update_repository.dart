@@ -14,6 +14,9 @@ abstract interface class UpdateRepository {
     String path,
   );
 
+  ///Get update information
+  Future<Either<Failure, String>> getUpdateInformation();
+
   ///Update application with apk file
   Future<Either<Failure, void>> updateApp(String path);
 }

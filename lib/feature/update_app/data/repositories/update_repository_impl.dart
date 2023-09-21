@@ -57,4 +57,19 @@ class UpdateRepositoryImpl implements UpdateRepository {
       return const Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, String>> getUpdateInformation() =>
+      _updateInfo(_updateRemoteDataSource.getUpdateInformation);
+
+  Future<Either<Failure, String>> _updateInfo(
+    Future<String> Function() value,
+  ) async {
+    try {
+      final model = await value();
+      return Right(model);
+    } catch (_) {
+      return const Left(ServerFailure());
+    }
+  }
 }

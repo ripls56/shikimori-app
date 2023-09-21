@@ -13,4 +13,9 @@ abstract class UpdateRemoteDataSource {
     String version,
     String path,
   );
+
+  ///Get update information from api
+  ///
+  /// Throws [ServerException] for all code errors
+  Future<String> getUpdateInformation();
 }

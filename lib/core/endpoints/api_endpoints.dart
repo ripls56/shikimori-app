@@ -41,5 +41,8 @@ abstract class ApiEndpoints {
 
   ///Endpoint on _updateHost/update
   // TODO(ripls56): add version
-  static String getUpdate(String version) => '$_updateHost/update';
+  static String update(String version) => '$_updateHost/update';
+
+  ///Endpoint on _updateHost/update/info
+  static String get updateInformation => '$_updateHost/update/info';
 }

@@ -69,6 +69,8 @@ dependencies:
   go_router:
   intl:
   google_fonts:
+  flutter_markdown:
+  interactiveviewer_gallery:
 # animations
   animations:
   flutter_staggered_animations:
