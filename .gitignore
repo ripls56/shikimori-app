@@ -92,3 +92,4 @@ google-services.json
 
 #Firebase
 firebase_options.dart
+firebase_app_id_file.json
