@@ -18,10 +18,7 @@ class CustomLoadingIndicator extends StatelessWidget {
       child: theme.brightness == Brightness.dark
           ? SvgPicture.asset(
               AppAssets.shikimoriLogo,
-              colorFilter: const ColorFilter.mode(
-                Colors.white,
-                BlendMode.srcIn,
-              ),
+        color: theme.brightness != Brightness.dark ? Colors.black : Colors.white,
               width: 56,
               height: 56,
             )

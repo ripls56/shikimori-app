@@ -40,95 +40,108 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer>
     return FractionallySizedBox(
       widthFactor: 0.6,
       child: ColoredBox(
-        color: theme.colorScheme.background,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ColoredBox(
-              color: theme.colorScheme.primary.withOpacity(.1),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).viewPadding.top,
+        color: Color.lerp(
+              theme.colorScheme.background,
+              theme.colorScheme.primary,
+              0.1,
+            ) ??
+            theme.colorScheme.background,
+        child: SafeArea(
+          bottom: false,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Stack(
+                  children: [
+                    Observer(
+                      builder: (context) {
+                        final userCredential =
+                            context.read<CredentialStore>().userCredential;
+                        if (userCredential == null) {
+                          return const NoCreditionalWidget();
+                        } else {
+                          return CredentialWidget(
+                            profileImgUrl: userCredential.image.x160,
+                            nickname: userCredential.nickname,
+                            userProfileUrl: userCredential.url,
+                          );
+                        }
+                      },
+                    ),
+                    const Align(
+                      alignment: Alignment.topRight,
+                      child: ChangeThemeWidget(),
+                    ),
+                  ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Stack(
-                    children: [
-                      Observer(
-                        builder: (context) {
-                          final userCredential =
-                              context.read<CredentialStore>().userCredential;
-                          if (userCredential == null) {
-                            return const NoCreditionalWidget();
-                          } else {
-                            return CredentialWidget(
-                              profileImgUrl: userCredential.image.x160,
-                              nickname: userCredential.nickname,
-                              userProfileUrl: userCredential.url,
-                            );
-                          }
-                        },
-                      ),
-                      const Align(
-                        alignment: Alignment.topRight,
-                        child: ChangeThemeWidget(),
-                      ),
-                    ],
+              ),
+              Expanded(
+                child: ColoredBox(
+                  color: theme.colorScheme.background,
+                  child: SafeArea(
+                    top: false,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          onTap: () => context.go(
+                            _settingsPath.toString(),
+                          ),
+                          leading: const Icon(Icons.settings),
+                          title: Text(
+                            'Настройки',
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                        ),
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: ReactionBuilder(
+                            builder: (context) => reaction(
+                              (_) => context.read<HomeDrawerStore>().isDeleted,
+                              (value) {
+                                if (value) {
+                                  context.go(_loginPath.toString());
+                                }
+                              },
+                            ),
+                            child: Observer(
+                              builder: (context) {
+                                final status = context
+                                    .read<HomeDrawerStore>()
+                                    .deleteTokensFuture
+                                    .status;
+                                switch (status) {
+                                  case FutureStatus.pending:
+                                    return ElevatedButton(
+                                      onPressed: () {},
+                                      child: const SizedBox(
+                                        height: 16,
+                                        width: 16,
+                                        child: CircularProgressIndicator
+                                            .adaptive(),
+                                      ),
+                                    );
+                                  case FutureStatus.fulfilled:
+                                    return const ExitButton();
+                                  case FutureStatus.rejected:
+                                    return const Icon(
+                                      Icons.close,
+                                    );
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            ListTile(
-              onTap: () => context.go(
-                _settingsPath.toString(),
-              ),
-              leading: const Icon(Icons.settings),
-              title: Text(
-                'Настройки',
-                style: theme.textTheme.bodyMedium,
-              ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: ReactionBuilder(
-                builder: (context) => reaction(
-                  (_) => context.read<HomeDrawerStore>().isDeleted,
-                  (value) {
-                    if (value) {
-                      context.go(_loginPath.toString());
-                    }
-                  },
-                ),
-                child: Observer(
-                  builder: (context) {
-                    final status = context
-                        .read<HomeDrawerStore>()
-                        .deleteTokensFuture
-                        .status;
-                    switch (status) {
-                      case FutureStatus.pending:
-                        return ElevatedButton(
-                          onPressed: () {},
-                          child: const SizedBox(
-                            height: 16,
-                            width: 16,
-                            child: CircularProgressIndicator.adaptive(),
-                          ),
-                        );
-                      case FutureStatus.fulfilled:
-                        return const ExitButton();
-                      case FutureStatus.rejected:
-                        return const Icon(
-                          Icons.close,
-                        );
-                    }
-                  },
-                ),
-              ),
-            ),
-          ],
-        ).animate().fadeIn(duration: 200.ms),
+            ],
+          ).animate().fadeIn(duration: 200.ms),
+        ),
       ),
     );
   }

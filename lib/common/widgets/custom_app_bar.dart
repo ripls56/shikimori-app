@@ -52,10 +52,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             AppAssets.shikimoriLogo,
             height: logoSize,
             width: logoSize,
-            colorFilter: ColorFilter.mode(
-              theme.brightness != Brightness.dark ? Colors.black : Colors.white,
-              BlendMode.srcIn,
-            ),
+            color: theme.brightness != Brightness.dark ? Colors.black : Colors.white,
           ),
           onPressed: () => Scaffold.of(context).openDrawer(),
         );

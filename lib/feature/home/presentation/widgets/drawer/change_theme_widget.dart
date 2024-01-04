@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -15,23 +17,39 @@ class ChangeThemeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     return RepaintBoundary(
-      child: IconButton(
-        icon: theme.brightness != Brightness.dark
-            ? const Icon(Icons.nightlight_outlined)
-            : const Icon(Icons.light_mode_outlined),
-        onPressed: () => context.read<ThemeProvider>().changeTheme(),
-      ).animate(
-        onPlay: (controller) {
-          controller.repeat(
-            reverse: true,
-          );
-        },
-      ).rotate(
-        curve: Curves.easeInOut,
-        begin: theme.brightness == Brightness.dark ? 0 : pi / 0.86,
-        end: theme.brightness == Brightness.dark ? pi / 8 : pi / 0.88,
-        duration: theme.brightness == Brightness.dark ? 7000.ms : 2000.ms,
-      ),
+      child: Platform.isIOS
+          ? Animate(
+              onPlay: (controller) {
+                controller.repeat(
+                  reverse: true,
+                );
+              },
+              effects: [
+                RotateEffect(
+                  curve: Curves.easeInOut,
+                  begin: theme.brightness == Brightness.dark ? 0 : pi / 0.86,
+                  end: theme.brightness == Brightness.dark ? pi / 8 : pi / 0.88,
+                  duration:
+                      theme.brightness == Brightness.dark ? 7000.ms : 2000.ms,
+                ),
+              ],
+              child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                borderRadius: BorderRadius.circular(30),
+                child: theme.brightness != Brightness.dark
+                    ? const Icon(Icons.nightlight_outlined)
+                    : const Icon(Icons.light_mode_outlined),
+                onPressed: () => context.read<ThemeProvider>().changeTheme(),
+              ),
+            )
+          : CupertinoButton(
+              padding: EdgeInsets.zero,
+              borderRadius: BorderRadius.circular(30),
+              child: theme.brightness != Brightness.dark
+                  ? const Icon(Icons.nightlight_outlined)
+                  : const Icon(Icons.light_mode_outlined),
+              onPressed: () => context.read<ThemeProvider>().changeTheme(),
+            ),
     );
   }
 }

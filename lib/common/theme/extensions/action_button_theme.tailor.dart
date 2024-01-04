@@ -10,7 +10,6 @@ part of 'action_button_theme.dart';
 
 mixin _$ActionButtonThemeTailorMixin on ThemeExtension<ActionButtonTheme> {
   TextStyle get labelTextStyle;
-
   Color get iconColor;
 
   @override

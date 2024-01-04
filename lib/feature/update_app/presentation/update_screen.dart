@@ -77,10 +77,11 @@ class _UpdateScreenState extends State<UpdateScreen> {
                         padding: const EdgeInsets.all(8),
                         child: SvgPicture.asset(
                           AppAssets.shikimoriLogo,
-                          colorFilter: ColorFilter.mode(
-                            AppColors.purple.shade50,
-                            BlendMode.srcIn,
-                          ),
+
+                          // colorFilter: ColorFilter.mode(
+                          //   AppColors.purple.shade50,
+                          //   BlendMode.srcIn,
+                          // ),
                         ),
                       ),
                       Row(

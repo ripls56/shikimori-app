@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/credential/credential_store.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/login/login_screen_cubit.dart';
+import 'package:shikimoriapp/routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -100,11 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        width: 66,
-                      ),
+                      if (Platform.isAndroid)
+                        const SizedBox(
+                          width: 66,
+                        ),
                       OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () => context.replace(
+                          ScreenRoutes.home.path,
+                        ),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.purple.shade50,
                           shape: RoundedRectangleBorder(
@@ -131,21 +136,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         width: 14,
                       ),
-                      IconButton(
-                        style: IconButton.styleFrom(
-                          backgroundColor: AppColors.purple.shade50,
-                        ),
-                        onPressed: () =>
-                            context.read<LoginScreenCubit>().login(),
-                        icon: Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: SvgPicture.asset(
-                            AppAssets.shikimoriLogo,
-                            height: 26,
-                            width: 26,
+                      if (Platform.isAndroid)
+                        IconButton(
+                          style: IconButton.styleFrom(
+                            backgroundColor: AppColors.purple.shade50,
+                          ),
+                          onPressed: () =>
+                              context.read<LoginScreenCubit>().login(),
+                          icon: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: SvgPicture.asset(
+                              AppAssets.shikimoriLogo,
+                              height: 26,
+                              width: 26,
+                            ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                   const SizedBox(
