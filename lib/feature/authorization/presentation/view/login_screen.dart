@@ -3,13 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
-import 'package:shikimoriapp/common/widgets/custom_text_button.dart';
+import 'package:shikimoriapp/common/theme/app_colors.dart';
+import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/images.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/credential/credential_store.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/login/login_screen_cubit.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/widgets/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,10 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
     return BlocListener<LoginScreenCubit, LoginScreenState>(
       listener: (context, state) {
         if (state is LoginScreenLoaded) {
-          context.read<CreditionalStore>().fetchCreditional();
+          context.read<CredentialStore>().fetchCreditional();
           context.replace(
             Uri(
               path: '/',
@@ -63,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: DecoratedBox(
                 position: DecorationPosition.foreground,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(.55),
+                  color: Colors.black.withOpacity(.80),
                 ),
                 child: RiveAnimation.asset(
                   AppAssets.animeCollageAnimation,
@@ -81,33 +83,76 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: const SizedBox.shrink(),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                Image.asset(
-                  AppAssets.loginPageBg,
-                  color: Colors.white,
-                  width: 280,
-                ),
-                const Spacer(),
-                LoginButton(
-                  onTap: () {
-                    context.read<LoginScreenCubit>().login();
-                  },
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                CustomTextButton(
-                  text: 'Гость',
-                  onTap: () {},
-                  color: Colors.black.withOpacity(.75),
-                ),
-                const SizedBox(
-                  height: 96,
-                ),
-              ],
+            Positioned.fill(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Spacer(),
+                  Image.asset(
+                    AppAssets.loginPageBg,
+                    color: AppColors.purple.shade50,
+                    width: 280,
+                  ),
+                  const SizedBox(
+                    height: 48,
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 66,
+                      ),
+                      OutlinedButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: AppColors.purple.shade50,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(
+                              color: AppColors.purple.shade50,
+                            ),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 14,
+                          ),
+                          child: Text(
+                            'Гость',
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.purple.shade50,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      IconButton(
+                        style: IconButton.styleFrom(
+                          backgroundColor: AppColors.purple.shade50,
+                        ),
+                        onPressed: () =>
+                            context.read<LoginScreenCubit>().login(),
+                        icon: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: SvgPicture.asset(
+                            AppAssets.shikimoriLogo,
+                            height: 26,
+                            width: 26,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 112,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

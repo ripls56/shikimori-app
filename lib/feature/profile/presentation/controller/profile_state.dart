@@ -4,9 +4,9 @@ part of 'profile_cubit.dart';
 abstract class ProfileState {}
 
 class ProfileInitial extends ProfileState {
+  ProfileInitial(this.credential);
 
-  ProfileInitial(this.creditional);
-  final Creditional creditional;
+  final Credential credential;
 }
 
 class ProfileEmpty extends ProfileState {}

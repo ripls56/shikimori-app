@@ -18,7 +18,7 @@ import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_p
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/details/anime_detail_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/screenshots/screenshots_cubit.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/videos/videos_cubit.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/credential/credential_store.dart';
 import 'package:shikimoriapp/feature/character/presentation/controller/character_cubit.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/feature/search/presentation/bloc/search_bloc.dart';
@@ -38,7 +38,6 @@ Future<void> main() async {
     sl<Talker>().handle(error, stack);
     return true;
   };
-
 
   await runZonedGuarded(() async {
     Intl.defaultLocale = 'ru';
@@ -80,7 +79,7 @@ class MyApp extends StatelessWidget {
           create: (context) => sl<Talker>(),
         ),
         Provider(
-          create: (context) => sl<CreditionalStore>(),
+          create: (context) => sl<CredentialStore>(),
         ),
         Provider(
           create: (context) => sl<UpdateStore>(),

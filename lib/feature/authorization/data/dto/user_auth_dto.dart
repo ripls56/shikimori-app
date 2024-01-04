@@ -18,6 +18,8 @@ class UserAuthDTO {
   factory UserAuthDTO.fromJson(Map<String, dynamic> json) =>
       _$UserAuthDTOFromJson(json);
 
+  Map<String, dynamic> toJson() => _$UserAuthDTOToJson(this);
+
   ///Access token
   final String? accessToken;
 

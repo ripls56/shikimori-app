@@ -33,7 +33,15 @@ class RelatedWidget extends StatelessWidget {
 
 class _AnimeCard extends StatelessWidget {
   const _AnimeCard({required this.anime});
+
   final Anime anime;
+
+  Uri _animeDetailPath(int id) => Uri(
+        path: ScreenRoutes.animeDetails.path,
+        queryParameters: {
+          'id': '$id',
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +49,7 @@ class _AnimeCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         HapticFeedback.lightImpact();
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => AnimeDetailScreen(id: anime.id),
-          ),
-        );
+        context.pushReplacement(_animeDetailPath(anime.id).toString());
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

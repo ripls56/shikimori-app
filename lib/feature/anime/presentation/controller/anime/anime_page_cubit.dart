@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shikimoriapp/feature/anime/domain/use_cases/get_animes.dart';
 import 'package:shikimoriapp/feature/anime/presentation/controller/anime/anime_page_state.dart';
+import 'package:shikimoriapp/feature/anime/presentation/view/anime/anime_screen.dart';
 
-///Cubit for [AnimePage]
+///Cubit for [AnimeScreen]
 class AnimePageCubit extends Cubit<AnimePageState> {
   ///
   AnimePageCubit(this._getAnimes) : super(AnimePageEmpty());

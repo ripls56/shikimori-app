@@ -13,6 +13,9 @@ class ImageWidget extends StatelessWidget {
     this.height,
     this.fadeInDuration,
     this.fadeOutDuration,
+    this.alignment,
+    this.color,
+    this.colorBlendMode,
   });
 
   ///Url of the image
@@ -33,6 +36,15 @@ class ImageWidget extends StatelessWidget {
   ///The duration of the fade-out animation for the [url]
   final Duration? fadeOutDuration;
 
+  ///Image alignment
+  final Alignment? alignment;
+
+  ///Color over image
+  final Color? color;
+
+  ///Color blend mode
+  final BlendMode? colorBlendMode;
+
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
@@ -40,6 +52,7 @@ class ImageWidget extends StatelessWidget {
       imageUrl: url,
       width: width,
       height: height,
+      alignment: alignment ?? Alignment.center,
       fadeInDuration: fadeInDuration ?? const Duration(milliseconds: 200),
       fadeOutDuration: fadeOutDuration,
       progressIndicatorBuilder: (context, url, progress) => const Center(
@@ -48,6 +61,8 @@ class ImageWidget extends StatelessWidget {
           child: CircularProgressIndicator.adaptive(),
         ),
       ),
+      color: color,
+      colorBlendMode: colorBlendMode,
       httpHeaders: const {
         'User-Agent': 'mpt coursework',
       },

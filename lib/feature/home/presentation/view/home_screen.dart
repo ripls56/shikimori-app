@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:shikimoriapp/common/widgets/custom_app_bar.dart';
 import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
-import 'package:shikimoriapp/common/widgets/headline_button.dart';
+import 'package:shikimoriapp/common/widgets/headline_header_delegate.dart';
+import 'package:shikimoriapp/common/widgets/list_animation_configuration.dart';
 import 'package:shikimoriapp/core/extension/context_extension.dart';
 import 'package:shikimoriapp/core/helpers/home_card_type.dart';
 import 'package:shikimoriapp/env/env.dart';
@@ -29,14 +31,16 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<HomeStore>().fetch();
   }
 
-  Uri animeUrl(int id) => Uri(
-        path: '/${ScreenRoutes.animeDetails}', //${ScreenRoutes.anime}
+  String animeUrl(int id) => Uri(
+        path: '${ScreenRoutes.home.path}${ScreenRoutes.animeDetails.path}',
         queryParameters: {
           'id': '$id',
         },
-      );
+      ).toString();
 
-  final updatePath = Uri(path: '/${ScreenRoutes.update}');
+  final updatePath =
+      Uri(path: '${ScreenRoutes.home.path}${ScreenRoutes.update.path}')
+          .toString();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: 'Главная',
         actions: [
           IconButton(
-            onPressed: () => context.go(updatePath.toString()),
+            onPressed: () => context.go(updatePath),
             icon: const Badge(
               smallSize: 8,
               largeSize: 8,
@@ -76,39 +80,59 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 case FutureStatus.fulfilled:
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        HeadlineButton(
-                          title: 'Сейчас на экранах',
-                          onPress: () {},
-                        ),
-                        SizedBox(
-                          height: height * 0.35,
-                          width: width,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: animes.length,
-                            itemBuilder: (context, index) {
-                              final anime = animes[index];
-                              final url =
-                                  '${Env.shikimoriUrl}${anime.image?.original}';
-                              return HomeCard(
-                                url: url,
-                                cardType: HomeCardType.anime,
-                                title: anime.russian ?? anime.name,
-                                onTap: () => context.go(
-                                  animeUrl(anime.id).toString(),
-                                ),
-                              );
-                            },
+                  return CustomScrollView(
+                    slivers: [
+                      SliverMainAxisGroup(
+                        slivers: [
+                          SliverPersistentHeader(
+                            pinned: true,
+                            delegate: HeadlineHeaderDelegate(
+                              title: 'Сейчас на экранах',
+                              onTap: () {},
+                            ),
                           ),
+                          SliverToBoxAdapter(
+                            child: SizedBox(
+                              height: height * 0.35,
+                              width: width,
+                              child: AnimationLimiter(
+                                child: ListView.separated(
+                                  padding: const EdgeInsets.all(10),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: animes.length,
+                                  itemBuilder: (context, index) {
+                                    final anime = animes[index];
+                                    final url = '${Env.shikimoriUrl}'
+                                        '${anime.image?.original}';
+                                    return ListAnimationConfiguration
+                                        .horizontal(
+                                      index: index,
+                                      child: HomeCard(
+                                        url: url,
+                                        cardType: HomeCardType.anime,
+                                        title: anime.russian ?? anime.name,
+                                        onTap: () => context.go(
+                                          animeUrl(anime.id),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(
+                                    width: 10,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SliverToBoxAdapter(
+                        child: SizedBox(
+                          height: 1000,
                         ),
-                        const SizedBox(
-                          height: 1600,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   );
                 case FutureStatus.rejected:
                   return Center(
@@ -119,9 +143,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: theme.textTheme.bodyLarge,
                         ),
                         ElevatedButton.icon(
-                            onPressed: () => context.read<HomeStore>().fetch(),
-                            label: const Text('Попробовать еще раз'),
-                            icon: const Icon(Icons.update))
+                          onPressed: () => context.read<HomeStore>().fetch(),
+                          label: const Text('Попробовать еще раз'),
+                          icon: const Icon(Icons.update),
+                        ),
                       ],
                     ),
                   );

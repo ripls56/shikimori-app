@@ -1,4 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:palette_generator/palette_generator.dart';
+import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_anime_by_id.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_related.dart';
@@ -16,17 +20,37 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
   Future<void> getAnimeDetails(int id) async {
     try {
       emit(AnimeDetailEmpty());
-      //final related = await _getRelatedAnimes(id);
-      final loadedOrFailure =
-          await getAnimeById.call(GetAnimeByIdParams(id: id));
-      loadedOrFailure.fold(
+      final animeDetails = await getAnimeById.call(
+        GetAnimeByIdParams(id: id),
+      );
+      final relatedAnimes = await getRelatedAnimes.call(
+        GetRelatedParams(id: id),
+      );
+      animeDetails.fold(
         (error) => {
-          emit(AnimeDetailError(errorMessage: error.toString())),
-        },
-        (loaded) => {
           emit(
-            AnimeDetailLoaded(animeDetails: loaded, related: []),
+            AnimeDetailError(
+              errorMessage: error.toString(),
+            ),
           ),
+        },
+        (loaded) async {
+          final url = '${Env.shikimoriUrl}'
+              '${loaded.image?.original}';
+          final palette = await PaletteGenerator.fromImageProvider(
+            ResizeImage(
+              CachedNetworkImageProvider(url),
+              height: 50,
+              width: 50,
+            ),
+          );
+          emit(
+            AnimeDetailLoaded(
+              animeDetails: loaded,
+              related: [],
+              palette: palette,
+            ),
+          );
         },
       );
     } catch (ex) {
@@ -34,19 +58,4 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
       rethrow;
     }
   }
-
-  // Future<List<Related>> _getRelatedAnimes(int id) async {
-  //   try {
-  //     var response = <Related>[];
-  //     final loadedOrFailure =
-  //         await getRelatedAnimes.call(GetRelatedParams(id: id));
-  //     loadedOrFailure.fold(
-  //       (error) => throw ServerException(),
-  //       (loaded) => response = loaded,
-  //     );
-  //     return response;
-  //   } catch (ex) {
-  //     rethrow;
-  //   }
-  // }
 }

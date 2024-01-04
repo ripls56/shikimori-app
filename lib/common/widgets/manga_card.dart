@@ -7,7 +7,12 @@ import 'package:shikimoriapp/env/env.dart';
 
 class MangaCardWidget extends StatelessWidget {
   const MangaCardWidget({
-    required this.imageUrl, required this.title, required this.score, required this.episodes, required this.animeId, super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.score,
+    required this.episodes,
+    required this.animeId,
+    super.key,
   });
 
   final String imageUrl;
@@ -59,7 +64,9 @@ class MangaCardWidget extends StatelessWidget {
                                 .textTheme
                                 .headlineLarge
                                 ?.copyWith(
-                                    fontSize: 16, fontWeight: FontWeight.w700,),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
                             maxLines: 3,
@@ -109,7 +116,7 @@ class MangaCardWidget extends StatelessWidget {
                 //     builder: (context) => AnimeDetailScreen(id: animeId)));
               },
             ),
-          )
+          ),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shikimoriapp/common/theme/app_colors.dart';
+import 'package:shikimoriapp/common/theme/extensions/action_button_theme.dart';
 
 ///App theme
 abstract final class AppTheme {
@@ -35,6 +36,19 @@ ThemeData _userTheme({
     );
 
 ThemeData _defaultDarkTheme = ThemeData(
+  extensions: [
+    ActionButtonTheme(
+      labelTextStyle: GoogleFonts.openSansTextTheme().bodySmall?.copyWith(
+                color: Colors.white70,
+                fontSize: 13,
+              ) ??
+          const TextStyle(
+            fontSize: 13,
+            color: Colors.white70,
+          ),
+      iconColor: Colors.white70,
+    ),
+  ],
   textTheme: TextTheme(
     bodySmall: GoogleFonts.openSansTextTheme().bodySmall?.copyWith(
           color: AppColors.purple.shade50,
@@ -62,6 +76,15 @@ ThemeData _defaultDarkTheme = ThemeData(
           color: AppColors.purple.shade50,
           fontSize: 22,
           fontWeight: FontWeight.w600,
+        ),
+    labelSmall: GoogleFonts.openSansTextTheme().labelSmall?.copyWith(
+          color: AppColors.violet,
+        ),
+    labelMedium: GoogleFonts.openSansTextTheme().labelMedium?.copyWith(
+          color: AppColors.violet,
+        ),
+    labelLarge: GoogleFonts.openSansTextTheme().labelLarge?.copyWith(
+          color: AppColors.violet,
         ),
   ),
   iconTheme: IconThemeData(

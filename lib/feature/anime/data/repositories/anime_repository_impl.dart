@@ -54,6 +54,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
         order: order,
         limit: limit,
         score: score,
+        status: status,
         season: season,
       ),
     );

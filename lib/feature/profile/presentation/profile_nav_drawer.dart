@@ -2,9 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shikimoriapp/feature/authorization/domain/models/user_auth.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/view/login_screen.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/injection.container.dart';
+import 'package:shikimoriapp/routes.dart';
 
 ///Profile navigation drawer
 class ProfileNavDrawer extends StatefulWidget {
@@ -29,9 +32,12 @@ class ProfileNavDrawer extends StatefulWidget {
 class _ProfileNavDrawerState extends State<ProfileNavDrawer> {
   @override
   void initState() {
-    context.read<ProfileCubit>().getAccessTokenFromStorage().then(
-          (token) => context.read<ProfileCubit>().getCreditionals(token),
-        );
+    final authData = context.read<UserAuth>();
+    if (authData.accessToken == null) {
+      context.replace(ScreenRoutes.login.path);
+    } else {
+      context.read<ProfileCubit>().getCredentials(authData.accessToken!);
+    }
     super.initState();
   }
 
@@ -64,7 +70,7 @@ class _ProfileNavDrawerState extends State<ProfileNavDrawer> {
                         radius: 70,
                         child: ClipOval(
                           child: CachedNetworkImage(
-                            imageUrl: state.creditional.image.x160,
+                            imageUrl: state.credential.image.x160,
                           ),
                         ),
                       ),
@@ -72,9 +78,9 @@ class _ProfileNavDrawerState extends State<ProfileNavDrawer> {
                         height: 8,
                       ),
                       Text(
-                        state.creditional.nickname,
+                        state.credential.nickname,
                         style: Theme.of(context).textTheme.titleLarge,
-                      )
+                      ),
                     ],
                   );
                 }

@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'creditional_image_dto.g.dart';
+part 'credential_image_dto.g.dart';
 
-///User creditional image data transfer object
+///User credential image data transfer object
 @JsonSerializable(fieldRename: FieldRename.snake)
-class CreditionalImageDTO {
+class CredentialImageDTO {
   ///Constructor
-  const CreditionalImageDTO({
+  const CredentialImageDTO({
     required this.x160,
     required this.x148,
     required this.x80,
@@ -16,8 +16,8 @@ class CreditionalImageDTO {
     required this.x16,
   });
 
-  factory CreditionalImageDTO.fromJson(Map<String, dynamic> json) =>
-      _$CreditionalImageDTOFromJson(json);
+  factory CredentialImageDTO.fromJson(Map<String, dynamic> json) =>
+      _$CredentialImageDTOFromJson(json);
 
   ///Image 160x160
   final String x160;

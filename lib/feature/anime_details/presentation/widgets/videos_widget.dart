@@ -25,7 +25,7 @@ class VideosWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HeadlineButton(
-      onPress: () => _navigate(context),
+      onTap: () => _navigate(context),
       title: 'Видео',
       child: SizedBox(
         height: 130,
@@ -34,25 +34,24 @@ class VideosWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              child: Align(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: animeDetails.videos.length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    width: 8,
-                  ),
-                  itemBuilder: (context, index) {
-                    return AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: ImageWidget(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: animeDetails.videos.length,
+                    separatorBuilder: (context, index) => const SizedBox(
+                      width: 8,
+                    ),
+                    itemBuilder: (context, index) {
+                      return ImageWidget(
+                        width: constraints.maxWidth / 2,
                         url: animeDetails.videos[index]?.imageUrl ?? '',
                         fit: BoxFit.fitWidth,
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
             Material(

@@ -5,7 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shikimoriapp/core/extension/context_extension.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/credential/credential_store.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home_drawer/home_drawer_store.dart';
 import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/change_theme_widget.dart';
 import 'package:shikimoriapp/feature/home/presentation/widgets/drawer/credential_widget.dart';
@@ -24,9 +24,10 @@ class HomeScreenDrawer extends StatefulWidget {
 
 class _HomeScreenDrawerState extends State<HomeScreenDrawer>
     with SingleTickerProviderStateMixin {
-  final Uri _settingsPath = Uri(path: '/${ScreenRoutes.settings}');
+  final Uri _settingsPath =
+      Uri(path: '${ScreenRoutes.home.path}${ScreenRoutes.settings.path}');
 
-  final Uri _loginPath = Uri(path: '/${ScreenRoutes.login}');
+  final Uri _loginPath = Uri(path: ScreenRoutes.login.path);
 
   @override
   void initState() {
@@ -35,7 +36,6 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer>
 
   @override
   Widget build(BuildContext context) {
-    // TODO(ripls56): запровайдить [Creditional] после авторизация
     final theme = context.theme;
     return FractionallySizedBox(
       widthFactor: 0.6,
@@ -47,35 +47,34 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer>
             ColoredBox(
               color: theme.colorScheme.primary.withOpacity(.1),
               child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Observer(
-                      builder: (context) {
-                        final userCredential =
-                            context.read<CreditionalStore>().userCreditional;
-                        if (userCredential == null) {
-                          return const NoCreditionalWidget();
-                        } else {
-                          return CredentialWidget(
-                            profileImgUrl: userCredential.image.x160,
-                            nickname: userCredential.nickname,
-                            userProfileUrl: userCredential.url,
-                          );
-                        }
-                      },
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).viewPadding.top,
-                        ),
-                        const ChangeThemeWidget(),
-                      ],
-                    ),
-                  ],
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).viewPadding.top,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Stack(
+                    children: [
+                      Observer(
+                        builder: (context) {
+                          final userCredential =
+                              context.read<CredentialStore>().userCredential;
+                          if (userCredential == null) {
+                            return const NoCreditionalWidget();
+                          } else {
+                            return CredentialWidget(
+                              profileImgUrl: userCredential.image.x160,
+                              nickname: userCredential.nickname,
+                              userProfileUrl: userCredential.url,
+                            );
+                          }
+                        },
+                      ),
+                      const Align(
+                        alignment: Alignment.topRight,
+                        child: ChangeThemeWidget(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

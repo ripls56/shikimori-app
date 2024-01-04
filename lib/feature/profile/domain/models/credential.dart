@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:shikimoriapp/feature/profile/domain/models/creditional_image.dart';
+import 'package:shikimoriapp/feature/profile/domain/models/credential_image.dart';
 
 ///Credential model
-class Creditional extends Equatable {
+class Credential extends Equatable {
   ///Constructor
-  const Creditional({
+  const Credential({
     required this.id,
     required this.nickname,
     required this.avatar,
@@ -29,7 +29,7 @@ class Creditional extends Equatable {
   final String avatar;
 
   ///User image
-  final CreditionalImage image;
+  final CredentialImage image;
 
   ///User last online at
   final DateTime lastOnlineAt;

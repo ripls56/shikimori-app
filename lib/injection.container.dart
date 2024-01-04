@@ -35,8 +35,9 @@ import 'package:shikimoriapp/feature/authorization/domain/use_cases/get_refresh_
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/refresh_access_token.dart';
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/save_access_token.dart';
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/save_refresh_token.dart';
-import 'package:shikimoriapp/feature/authorization/presentation/controller/creditional/creditional_store.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/credential/credential_store.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/login/login_screen_cubit.dart';
+import 'package:shikimoriapp/feature/authorization/presentation/controller/token/token_store.dart';
 import 'package:shikimoriapp/feature/character/data/datasources/character_remote_data_source.dart';
 import 'package:shikimoriapp/feature/character/data/datasources/character_remote_data_source_impl.dart';
 import 'package:shikimoriapp/feature/character/data/repositories/character_repository_impl.dart';
@@ -46,12 +47,12 @@ import 'package:shikimoriapp/feature/character/presentation/controller/character
 import 'package:shikimoriapp/feature/download/service/download_service.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home/home_store.dart';
 import 'package:shikimoriapp/feature/home/presentation/controller/home_drawer/home_drawer_store.dart';
-import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source.dart';
-import 'package:shikimoriapp/feature/profile/data/datasources/creditional_remote_data_source_impl.dart';
-import 'package:shikimoriapp/feature/profile/data/repositories/creditional_repository_impl.dart';
+import 'package:shikimoriapp/feature/profile/data/datasources/credential_remote_data_source.dart';
+import 'package:shikimoriapp/feature/profile/data/datasources/credential_remote_data_source_impl.dart';
+import 'package:shikimoriapp/feature/profile/data/repositories/credential_repository_impl.dart';
 import 'package:shikimoriapp/feature/profile/data/repositories/user_auth_repository_impl.dart';
-import 'package:shikimoriapp/feature/profile/domain/repositories/creditional_repository.dart';
-import 'package:shikimoriapp/feature/profile/domain/use_cases/get_creditional.dart';
+import 'package:shikimoriapp/feature/profile/domain/repositories/credential_repository.dart';
+import 'package:shikimoriapp/feature/profile/domain/use_cases/get_credential.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
 import 'package:shikimoriapp/feature/related/data/datasources/related_remote_data_source.dart';
 import 'package:shikimoriapp/feature/related/data/datasources/related_remote_data_source_impl.dart';
@@ -106,23 +107,24 @@ Future<void> init() async {
   sl.registerLazySingleton(() => storage);
 
   //Services
-  sl.registerLazySingleton(() => DownloadService());
+  sl.registerLazySingleton(DownloadService.new);
 
   //Theme
-  sl.registerLazySingleton(() => ThemeProvider());
+  sl.registerLazySingleton(ThemeProvider.new);
 
   //Stores
   sl.registerFactory(() => HomeStore(sl()));
   sl.registerFactory(() => HomeDrawerStore(sl()));
-  sl.registerFactory(() => CreditionalStore(sl(), sl()));
+  sl.registerFactory(() => CredentialStore(sl(), sl()));
   sl.registerFactory(() => UpdateStore(sl(), sl(), sl()));
+  sl.registerFactory(() => TokenStore(sl(), sl(), sl()));
 
   //Cubit
   sl.registerFactory(() => AnimePageCubit(sl()));
   sl.registerFactory(() => VideosCubit(sl()));
-  sl.registerFactory(() => ProfileCubit(sl(), sl(), sl()));
+  sl.registerFactory(() => ProfileCubit(sl()));
   sl.registerFactory(() => AnimeDetailCubit(sl(), sl()));
-  sl.registerFactory(() => LoginScreenCubit(sl(), sl(), sl()));
+  sl.registerFactory(() => LoginScreenCubit(sl(), sl(), sl(), storage));
   sl.registerFactory(() => ScreenshotsCubit(sl()));
   sl.registerFactory(() => SearchBloc(sl()));
   sl.registerFactory(() => CharacterCubit(sl()));
@@ -135,7 +137,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAccessTokenFromStorage(sl()));
   sl.registerLazySingleton(() => GetRefreshTokenFromStorage(sl()));
   sl.registerLazySingleton(() => GetVideos(sl()));
-  sl.registerLazySingleton(() => GetCreditional(sl()));
+  sl.registerLazySingleton(() => GetCredential(sl()));
   sl.registerLazySingleton(() => GetAnimeById(sl()));
   sl.registerLazySingleton(() => GetCharacterById(sl()));
   sl.registerLazySingleton(() => GetAnimeByName(sl()));
@@ -149,8 +151,8 @@ Future<void> init() async {
 
   //Repositories
   sl.registerLazySingleton<AnimeRepository>(() => AnimeRepositoryImpl(sl()));
-  sl.registerLazySingleton<CreditionalRepository>(
-    () => CreditionalRepositoryImpl(sl()),
+  sl.registerLazySingleton<CredentialRepository>(
+    () => CredentialRepositoryImpl(sl()),
   );
   sl.registerLazySingleton<AnimeDetailsRepository>(
     () => AnimeDetailsRepositoryImpl(sl()),
@@ -178,7 +180,7 @@ Future<void> init() async {
   sl.registerLazySingleton<AnimeDetailsRemoteDataSource>(
     () => AnimeDetailsRemoteDataSourceImpl(sl()),
   );
-  sl.registerLazySingleton<CreditionalRemoteDataSource>(
+  sl.registerLazySingleton<CredentialRemoteDataSource>(
     () => CreditionalRemoteDataSourceImpl(sl()),
   );
   sl.registerLazySingleton<UserAuthRemoteDataSource>(
@@ -199,6 +201,6 @@ Future<void> init() async {
     () => TokenLocalDataSourceImpl(sl()),
   );
   sl.registerLazySingleton<UpdateLocalDataSource>(
-    () => UpdateLocalDataSourceImpl(),
+    UpdateLocalDataSourceImpl.new,
   );
 }

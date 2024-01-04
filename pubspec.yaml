@@ -45,7 +45,6 @@ dependencies:
   url_launcher:
   provider:
   oauth2:
-  uni_links:
   talker_dio_logger:
   cached_network_image:
   rxdart:
@@ -57,39 +56,39 @@ dependencies:
   fl_chart:
   flutter_rating_bar:
   palette_generator:
-  flutter_cache_manager:
   flutter_displaymode:
   flutter_html:
   flutter_svg:
   flutter_secure_storage:
   flutter_native_splash:
   json_serializable:
-  chewie:
   flutter_colorpicker:
   go_router:
   intl:
   google_fonts:
   flutter_markdown:
   interactiveviewer_gallery:
-# animations
+  # animations
   animations:
   flutter_staggered_animations:
   flutter_animate:
-# for update
+  # for update
   path_provider:
   package_info_plus:
   permission_handler:
   install_plugin:
-# crashlytics
+  # crashlytics
   firebase_core:
   talker_flutter:
   talker_bloc_logger:
   firebase_crashlytics:
   envied:
-
-  #mobx
+  # theme
+  theme_tailor_annotation:
+  # mobx
   mobx:
   flutter_mobx:
+  firebase_performance: ^0.9.3+8
 
 dev_dependencies:
   flutter_test:
@@ -104,6 +103,7 @@ dev_dependencies:
   mobx_codegen:
   build_runner:
   very_good_analysis:
+  theme_tailor:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

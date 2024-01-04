@@ -31,7 +31,7 @@ abstract class ApiEndpoints {
   static String get token => Env.tokenEndpoint;
 
   ///Endpoint on _host/users/whoami
-  static String get creditional => '$_host/users/whoami';
+  static String get credential => '$_host/users/whoami';
 
   ///Endpoint on _host/comments
   static String get comments => '$_host/comments';

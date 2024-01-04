@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class CreditionalImage extends Equatable {
-  const CreditionalImage({
+class CredentialImage extends Equatable {
+  const CredentialImage({
     required this.x160,
     required this.x148,
     required this.x80,

@@ -8,21 +8,13 @@ class InformationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
 
-    String buildGenresString(List<AnimeDetailsGenre?> genres) {
-      var genresString = '';
-      for (var i = 0; i < genres.length; i++) {
-        i != 0
-            ? genresString += ', ${genres[i]?.russian?.toLowerCase() ?? ''}'
-            : genresString += genres[i]?.russian ?? '';
-      }
-      return genresString;
-    }
-
     final titleTextStyle = theme.textTheme.bodyMedium?.copyWith(
       color: theme.textTheme.bodyMedium?.color?.withOpacity(.6),
     );
 
-    final genresString = buildGenresString(animeDetails.genres);
+    final primaryTextStyle = theme.textTheme.bodyLarge?.copyWith(
+      fontWeight: FontWeight.w500,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,6 +36,7 @@ class InformationWidget extends StatelessWidget {
                   Flexible(
                     child: Text(
                       animeDetails.kind?.capitalize ?? '',
+                      style: primaryTextStyle,
                     ),
                   ),
                 ],
@@ -57,6 +50,7 @@ class InformationWidget extends StatelessWidget {
                   Flexible(
                     child: Text(
                       animeDetails.episodes.toString(),
+                      style: primaryTextStyle,
                     ),
                   ),
                 ],
@@ -70,6 +64,7 @@ class InformationWidget extends StatelessWidget {
                   Flexible(
                     child: Text(
                       animeDetails.duration.toString(),
+                      style: primaryTextStyle,
                     ),
                   ),
                 ],
@@ -83,20 +78,7 @@ class InformationWidget extends StatelessWidget {
                   Flexible(
                     child: Text(
                       animeDetails.status.toString().capitalize,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Жанры: ',
-                    style: titleTextStyle,
-                  ),
-                  Flexible(
-                    child: Text(
-                      genresString,
-                      textAlign: TextAlign.center,
+                      style: primaryTextStyle,
                     ),
                   ),
                 ],

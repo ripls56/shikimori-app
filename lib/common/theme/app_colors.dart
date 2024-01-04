@@ -13,11 +13,14 @@ abstract final class AppColors {
   ///
   static Color get darkGrey => const Color(0xFF09020f);
 
+  ///
+  static Color get violet => const Color(0xFF9C989E);
+
   ///Purple color variations
   static MaterialColor get purple => const MaterialColor(
         _purple,
         <int, Color>{
-          50: Color(0xfffceeff),
+          50: Color(0xfffef7ff),
           100: Color(0xFFEED1FB),
           200: Color(0xFFE0AAFF),
           300: Color(0xFFC77DFF),

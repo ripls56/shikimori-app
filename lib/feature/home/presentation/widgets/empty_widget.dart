@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shikimoriapp/common/widgets/loading_card.dart';
 
+///Widget for loading
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({super.key});
 

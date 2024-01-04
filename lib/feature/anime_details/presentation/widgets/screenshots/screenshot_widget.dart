@@ -28,7 +28,7 @@ class ScreenshotsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HeadlineButton(
-      onPress: () => _navigate(context),
+      onTap: () => _navigate(context),
       title: 'Кадры',
       child: SizedBox(
         height: 130,
@@ -37,27 +37,25 @@ class ScreenshotsWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              child: Align(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: animeDetails.screenshots.length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    width: 8,
-                  ),
-                  itemBuilder: (context, index) {
-                    return AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: ImageWidget(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: animeDetails.screenshots.length,
+                    separatorBuilder: (context, index) => const SizedBox(
+                      width: 8,
+                    ),
+                    itemBuilder: (context, index) {
+                      return ImageWidget(
+                        width: constraints.maxWidth / 2,
                         url: '${Env.shikimoriUrl}'
-                                '${animeDetails.screenshots[index]?.original}' ??
-                            '',
+                            '${animeDetails.screenshots[index]?.original}',
                         fit: BoxFit.fitWidth,
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
             Material(
@@ -65,7 +63,7 @@ class ScreenshotsWidget extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => _navigate(context),
               ),
-            )
+            ),
           ],
         ),
       ),

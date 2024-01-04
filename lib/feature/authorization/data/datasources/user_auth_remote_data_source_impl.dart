@@ -28,7 +28,7 @@ class UserAuthRemoteDataSourceImpl implements UserAuthRemoteDataSource {
         'client_id': identifier,
         'client_secret': secret,
         'code': code,
-        'redirect_uri': redirectUri.toString()
+        'redirect_uri': redirectUri.toString(),
       },
     );
     if (response.statusCode == 200) {

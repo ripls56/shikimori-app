@@ -8,7 +8,7 @@ class HeadlineButton extends StatelessWidget {
   /// Constructor
   HeadlineButton({
     required this.title,
-    required this.onPress,
+    required this.onTap,
     this.child,
     super.key,
     this.height,
@@ -25,7 +25,7 @@ class HeadlineButton extends StatelessWidget {
   final double? height;
 
   /// Function to call when the button is pressed
-  final void Function() onPress;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class HeadlineButton extends StatelessWidget {
         Material(
           color: theme.colorScheme.primaryContainer.withOpacity(.7),
           child: InkWell(
-            onTap: onPress,
+            onTap: onTap,
             child: Stack(
               alignment: Alignment.center,
               children: [

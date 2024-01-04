@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
 import 'package:shikimoriapp/feature/anime/domain/use_cases/get_animes.dart';
 
@@ -26,17 +26,17 @@ abstract class _HomeStore with Store {
   @action
   Future<void> _getAnimes() async {
     final response = await _getAnimesUseCase.call(
-      const GetAnimesParams(
+      GetAnimesParams(
         page: 1,
         limit: 10,
-        season: 'summer_2023',
+        season: '${DateTime.now().year}',
         status: 'ongoing',
         order: 'ranked',
       ),
     );
     response.fold(
       (error) {
-        throw FlutterError('animes doesn\'t get');
+        throw ServerException(message: "animes doesn't get");
       },
       (loaded) => animes = loaded,
     );

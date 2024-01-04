@@ -18,6 +18,7 @@ class GetAnimes extends UseCase<List<Anime>, GetAnimesParams> {
       params.page,
       order: params.order,
       limit: params.limit,
+      status: params.status,
       score: params.score,
       season: params.season,
     );

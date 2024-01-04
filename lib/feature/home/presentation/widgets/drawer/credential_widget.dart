@@ -33,9 +33,6 @@ class CredentialWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: MediaQuery.of(context).viewPadding.top,
-        ),
         GestureDetector(
           onTap: () => Navigator.of(context).push(
             HeroDialogRoute(

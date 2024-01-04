@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shikimoriapp/feature/profile/data/dto/creditional_image_dto.dart';
+import 'package:shikimoriapp/feature/profile/data/dto/credential_image_dto.dart';
 
-part 'creditional_dto.g.dart';
+part 'credential_dto.g.dart';
 
 ///Credential data transfer object
 @JsonSerializable(fieldRename: FieldRename.snake)
-class CreditionalDTO {
+class CredentialDTO {
   ///Constructor
-  const CreditionalDTO({
+  const CredentialDTO({
     required this.id,
     required this.nickname,
     required this.avatar,
@@ -22,8 +22,8 @@ class CreditionalDTO {
     this.birthOn,
   });
 
-  factory CreditionalDTO.fromJson(Map<String, dynamic> json) =>
-      _$CreditionalDTOFromJson(json);
+  factory CredentialDTO.fromJson(Map<String, dynamic> json) =>
+      _$CredentialDTOFromJson(json);
 
   ///User id
   final int id;
@@ -35,7 +35,7 @@ class CreditionalDTO {
   final String avatar;
 
   ///User image
-  final CreditionalImageDTO image;
+  final CredentialImageDTO image;
 
   ///User last online at
   final DateTime lastOnlineAt;

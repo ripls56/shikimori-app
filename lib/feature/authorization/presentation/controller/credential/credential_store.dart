@@ -1,43 +1,43 @@
 import 'package:mobx/mobx.dart';
 import 'package:shikimoriapp/core/usecase/no_params.dart';
 import 'package:shikimoriapp/feature/authorization/domain/use_cases/get_access_token_from_storage.dart';
-import 'package:shikimoriapp/feature/profile/domain/models/creditional.dart';
-import 'package:shikimoriapp/feature/profile/domain/use_cases/get_creditional.dart';
+import 'package:shikimoriapp/feature/profile/domain/models/credential.dart';
+import 'package:shikimoriapp/feature/profile/domain/use_cases/get_credential.dart';
 
-part 'creditional_store.g.dart';
+part 'credential_store.g.dart';
 
-class CreditionalStore = _CreditionalStoreBase with _$CreditionalStore;
+class CredentialStore = _CredentialStoreBase with _$CredentialStore;
 
-abstract class _CreditionalStoreBase with Store {
-  _CreditionalStoreBase(
-    this._getCreditionalUseCase,
+abstract class _CredentialStoreBase with Store {
+  _CredentialStoreBase(
+    this._getCredentialUseCase,
     this._accessTokenFromStorageUseCase,
   );
 
-  final GetCreditional _getCreditionalUseCase;
+  final GetCredential _getCredentialUseCase;
   final GetAccessTokenFromStorage _accessTokenFromStorageUseCase;
 
   @observable
-  ObservableFuture<void> creditionalFuture = ObservableFuture.value({});
+  ObservableFuture<void> credentialFuture = ObservableFuture.value({});
 
   @observable
-  Creditional? userCreditional;
+  Credential? userCredential;
 
   @action
   Future<void> fetchCreditional() async {
-    creditionalFuture = ObservableFuture(_getCreditional());
+    credentialFuture = ObservableFuture(_getCreditional());
   }
 
   Future<void> _getCreditional() async {
     final token = await _getAccessToken();
-    final response = await _getCreditionalUseCase.call(
-      GetCreditionalParams(
+    final response = await _getCredentialUseCase.call(
+      GetCredentialParams(
         accessToken: token,
       ),
     );
     response.fold(
-      (error) => throw MobXException(error.message ?? 'Get creditional failed'),
-      (loaded) => userCreditional = loaded,
+      (error) => throw MobXException(error.message ?? 'Get credential failed'),
+      (loaded) => userCredential = loaded,
     );
   }
 
