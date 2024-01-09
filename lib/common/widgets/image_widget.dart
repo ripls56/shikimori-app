@@ -53,14 +53,8 @@ class ImageWidget extends StatelessWidget {
       width: width,
       height: height,
       alignment: alignment ?? Alignment.center,
-      fadeInDuration: fadeInDuration ?? const Duration(milliseconds: 200),
+      fadeInDuration: fadeInDuration ?? const Duration(milliseconds: 300),
       fadeOutDuration: fadeOutDuration,
-      progressIndicatorBuilder: (context, url, progress) => const Center(
-        child: SizedBox.square(
-          dimension: 26,
-          child: CircularProgressIndicator.adaptive(),
-        ),
-      ),
       color: color,
       colorBlendMode: colorBlendMode,
       httpHeaders: const {

@@ -21,6 +21,9 @@ abstract class ApiEndpoints {
   ///Endpoint on _host/animes/$id/related
   static String animeRelateds(int id) => '$_host/animes/$id/related';
 
+  ///Endpoint on _host/animes/$id/roles
+  static String animeRoles(int id) => '$_host/animes/$id/roles';
+
   ///Endpoint on _host/characters/$id
   static String characterById(int id) => '$_host/characters/$id';
 

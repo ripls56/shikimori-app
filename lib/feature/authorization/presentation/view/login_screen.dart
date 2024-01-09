@@ -86,78 +86,81 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Positioned.fill(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Spacer(),
-                  Image.asset(
-                    AppAssets.loginPageBg,
-                    color: AppColors.purple.shade50,
-                    width: 280,
-                  ),
-                  const SizedBox(
-                    height: 48,
-                  ),
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (Platform.isAndroid)
-                        const SizedBox(
-                          width: 66,
-                        ),
-                      OutlinedButton(
-                        onPressed: () => context.replace(
-                          ScreenRoutes.home.path,
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.purple.shade50,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
-                              color: AppColors.purple.shade50,
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    Image.asset(
+                      AppAssets.loginPageBg,
+                      color: AppColors.purple.shade50,
+                      width: 280,
+                    ),
+                    const SizedBox(
+                      height: 48,
+                    ),
+                    const Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (Platform.isAndroid)
+                          const SizedBox(
+                            width: 66,
+                          ),
+                        OutlinedButton(
+                          onPressed: () => context.replace(
+                            ScreenRoutes.home.path,
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.purple.shade50,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(
+                                color: AppColors.purple.shade50,
+                              ),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 14,
+                            ),
+                            child: Text(
+                              'Гость',
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.purple.shade50,
+                              ),
                             ),
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 14,
+                        if (Platform.isAndroid)
+                          const SizedBox(
+                            width: 14,
                           ),
-                          child: Text(
-                            'Гость',
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.purple.shade50,
+                        if (Platform.isAndroid)
+                          IconButton(
+                            style: IconButton.styleFrom(
+                              backgroundColor: AppColors.purple.shade50,
+                            ),
+                            onPressed: () =>
+                                context.read<LoginScreenCubit>().login(),
+                            icon: Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: SvgPicture.asset(
+                                AppAssets.shikimoriLogo,
+                                height: 26,
+                                width: 26,
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 14,
-                      ),
-                      if (Platform.isAndroid)
-                        IconButton(
-                          style: IconButton.styleFrom(
-                            backgroundColor: AppColors.purple.shade50,
-                          ),
-                          onPressed: () =>
-                              context.read<LoginScreenCubit>().login(),
-                          icon: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: SvgPicture.asset(
-                              AppAssets.shikimoriLogo,
-                              height: 26,
-                              width: 26,
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 112,
-                  ),
-                ],
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 112,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

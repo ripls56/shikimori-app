@@ -13,10 +13,14 @@ class HtmlDescriptionWidget extends StatelessWidget {
   const HtmlDescriptionWidget({
     required this.data,
     super.key,
+    this.linkColor,
   });
 
   ///Description in html tags
   final String? data;
+
+  ///Color for links
+  final Color? linkColor;
 
   Uri _characterDetailsPath(int id) => Uri(
         path: '${ScreenRoutes.home.path}${ScreenRoutes.characterDetails.path}',
@@ -35,11 +39,25 @@ class HtmlDescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
+    final textStyle = theme.textTheme.bodyMedium;
+    final htmlStyle = Style(
+      textAlign: TextAlign.justify,
+      padding: HtmlPaddings.zero,
+      margin: Margins.zero,
+      fontWeight: textStyle?.fontWeight,
+      fontSize: FontSize(textStyle?.fontSize ?? 14),
+      fontFamily: textStyle?.fontFamily,
+      lineHeight: LineHeight(textStyle?.height),
+      display: Display.inlineBlock,
+    );
+
     return Html(
       style: {
-        'div': Style(textAlign: TextAlign.justify),
-        'a': Style(
-          color: theme.colorScheme.primary,
+        'div': htmlStyle,
+        'body': htmlStyle,
+        'p': htmlStyle,
+        'a': htmlStyle.copyWith(
+          color: linkColor ?? theme.colorScheme.primary,
           textDecoration: TextDecoration.none,
         ),
       },

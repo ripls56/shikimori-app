@@ -1,35 +1,52 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:shikimoriapp/core/error/failure.dart';
 import 'package:shikimoriapp/env/env.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_related.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_roles.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_anime_by_id.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_related.dart';
-import 'package:shikimoriapp/feature/related/domain/models/related.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_roles.dart';
 
 part 'anime_detail_state.dart';
 
+///Cubit for anime details
 class AnimeDetailCubit extends Cubit<AnimeDetailState> {
-  AnimeDetailCubit(this.getAnimeById, this.getRelatedAnimes)
-      : super(AnimeDetailEmpty());
+  ///Constructor
+  AnimeDetailCubit(this._getAnimeById, this._getRelatedAnimes, this._getRoles)
+      : super(
+          AnimeDetailState.empty(),
+        );
 
-  final GetAnimeById getAnimeById;
-  final GetRelatedAnimes getRelatedAnimes;
+  final GetAnimeById _getAnimeById;
+  final GetRelatedAnimes _getRelatedAnimes;
 
+  final GetRoles _getRoles;
+
+  ///Get anime details
   Future<void> getAnimeDetails(int id) async {
     try {
-      emit(AnimeDetailEmpty());
-      final animeDetails = await getAnimeById.call(
+      emit(AnimeDetailState.empty());
+      final animeDetails = await _getAnimeById.call(
         GetAnimeByIdParams(id: id),
       );
-      final relatedAnimes = await getRelatedAnimes.call(
+      final relatedAnimes = await _getRelatedAnimes.call(
         GetRelatedParams(id: id),
       );
+      final roles = _foldRoles(
+        await _getRoles.call(
+          GetRolesParams(id: id),
+        ),
+      );
+
       animeDetails.fold(
         (error) => {
           emit(
-            AnimeDetailError(
+            AnimeDetailState.error(
               errorMessage: error.toString(),
             ),
           ),
@@ -45,9 +62,10 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
             ),
           );
           emit(
-            AnimeDetailLoaded(
+            AnimeDetailState.loaded(
               animeDetails: loaded,
               related: [],
+              roles: roles,
               palette: palette,
             ),
           );
@@ -57,5 +75,24 @@ class AnimeDetailCubit extends Cubit<AnimeDetailState> {
       emit(AnimeDetailError(errorMessage: ex.toString()));
       rethrow;
     }
+  }
+
+  List<AnimeDetailsRoles> _foldRoles(
+    Either<Failure, List<AnimeDetailsRoles>> roles,
+  ) {
+    return roles.fold(
+      (error) {
+        emit(
+          AnimeDetailState.error(
+            errorMessage: error.toString(),
+          ),
+        );
+        return List<AnimeDetailsRoles>.empty();
+      },
+      (loaded) {
+        loaded.removeWhere((element) => element.character == null);
+        return loaded;
+      },
+    );
   }
 }

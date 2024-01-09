@@ -2,7 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shikimoriapp/feature/anime/presentation/view/anime/anime_screen.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_screenshot.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/view/anime_details.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/view/screenshots_page.dart';
+import 'package:shikimoriapp/feature/anime_details/presentation/view/videos_page.dart';
 import 'package:shikimoriapp/feature/authorization/domain/models/user_auth.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/login/login_screen_cubit.dart';
 import 'package:shikimoriapp/feature/authorization/presentation/controller/token/token_store.dart';
@@ -55,6 +58,18 @@ abstract class ScreenRoutes {
   static ScreenRoute get animeDetails => ScreenRoute(
         name: 'anime_details',
         path: 'anime_details',
+      );
+
+  ///[ScreenshotsPage] route
+  static ScreenRoute get screenshots => ScreenRoute(
+        name: 'screenshots',
+        path: 'screenshots',
+      );
+
+  ///[VideosPage] route
+  static ScreenRoute get videos => ScreenRoute(
+        name: 'videos',
+        path: 'videos',
       );
 
   ///[CharacterScreen] route
@@ -160,6 +175,32 @@ final router = GoRouter(
               id: id,
             );
           },
+          routes: [
+            GoRoute(
+              name: ScreenRoutes.videos.name,
+              path: ScreenRoutes.videos.path,
+              builder: (context, state) {
+                final id = int.parse(
+                  state.uri.queryParameters['id'] ?? '0',
+                );
+                return ScreenshotsPage(
+                  id: id,
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: ':index',
+                  pageBuilder: (context, state) {
+                    final screenshots =
+                        state.extra! as List<AnimeDetailsScreenshot>;
+                    final index = int.parse(state.pathParameters['index']!);
+                    // TODO(ripls56): change to video view page
+                    throw UnimplementedError();
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
         GoRoute(
           name: ScreenRoutes.characterDetails.name,

@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       drawer: HomeScreenDrawer(),
+      drawerEdgeDragWidth: context.screenWidth * .1,
       appBar: CustomAppBar(
         title: 'Главная',
         actions: [
@@ -64,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SafeArea(
-        child: RefreshIndicator(
+        child: RefreshIndicator.adaptive(
           onRefresh: () async {
             await context.read<HomeStore>().fetch();
           },
@@ -89,6 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             delegate: HeadlineHeaderDelegate(
                               title: 'Сейчас на экранах',
                               onTap: () {},
+                              minimalExtent: 50,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 10,
+                              ),
                             ),
                           ),
                           SliverToBoxAdapter(
@@ -97,7 +103,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: width,
                               child: AnimationLimiter(
                                 child: ListView.separated(
-                                  padding: const EdgeInsets.all(10),
+                                  primary: true,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 6,
+                                  ),
                                   scrollDirection: Axis.horizontal,
                                   itemCount: animes.length,
                                   itemBuilder: (context, index) {
@@ -137,6 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 case FutureStatus.rejected:
                   return Center(
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           'Что-то пошло не так ≡(▔﹏▔)≡',

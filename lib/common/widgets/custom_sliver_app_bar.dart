@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shikimoriapp/common/theme/app_colors.dart';
@@ -12,6 +14,7 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
     this.title,
     this.background,
     this.expandedHeight = 300,
+    this.onTitleTap,
   }) : assert(
           expandedHeight != null && expandedHeight >= kToolbarHeight,
           'Maximum expanded height can`t be null, '
@@ -25,6 +28,9 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
   final Widget? background;
 
   final String? title;
+
+  ///Title tap callback
+  final VoidCallback? onTitleTap;
 
   @override
   Widget build(
@@ -86,27 +92,30 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
                       }
                     },
                     icon: Icon(
-                      Icons.arrow_back,
+                      Platform.isIOS ? CupertinoIcons.back : Icons.arrow_back,
                       color: AppColors.purple.shade50,
                     ),
                   ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 8),
-                      child: Opacity(
-                        opacity: clampDouble(
-                          shrinkOffset / expandedHeight! * 2,
-                          0,
-                          1,
-                        ),
-                        child: Text(
-                          title ?? '',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          softWrap: false,
-                          style:
-                              context.theme.textTheme.headlineSmall?.copyWith(
-                            color: AppColors.purple.shade50,
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: onTitleTap,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 4, right: 8),
+                        child: Opacity(
+                          opacity: clampDouble(
+                            shrinkOffset / expandedHeight! * 2,
+                            0,
+                            1,
+                          ),
+                          child: Text(
+                            title ?? '',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            softWrap: false,
+                            style:
+                                context.theme.textTheme.headlineSmall?.copyWith(
+                              color: AppColors.purple.shade50,
+                            ),
                           ),
                         ),
                       ),
@@ -129,6 +138,8 @@ class CustomSliverAppBar extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant CustomSliverAppBar oldDelegate) {
-    return true;
+    return maxExtent != oldDelegate.maxExtent ||
+        minExtent != oldDelegate.minExtent ||
+        child != oldDelegate.child;
   }
 }

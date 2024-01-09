@@ -24,43 +24,35 @@ class VideosWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (animeDetails.videos.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return HeadlineButton(
       onTap: () => _navigate(context),
-      title: 'Видео',
-      child: SizedBox(
-        height: 130,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: animeDetails.videos.length,
-                    separatorBuilder: (context, index) => const SizedBox(
-                      width: 8,
-                    ),
-                    itemBuilder: (context, index) {
-                      return ImageWidget(
-                        width: constraints.maxWidth / 2,
-                        url: animeDetails.videos[index]?.imageUrl ?? '',
-                        fit: BoxFit.fitWidth,
-                      );
-                    },
+      label: 'Видео',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14),
+        child: SizedBox(
+          height: 120,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return ListView.separated(
+                scrollDirection: Axis.horizontal,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: animeDetails.videos.length,
+                separatorBuilder: (context, index) => const SizedBox(
+                  width: 8,
+                ),
+                itemBuilder: (context, index) {
+                  return ImageWidget(
+                    width: constraints.maxWidth / 2,
+                    url: animeDetails.videos[index]?.imageUrl ?? '',
+                    fit: BoxFit.fitWidth,
                   );
                 },
-              ),
-            ),
-            Material(
-              color: Colors.transparent,
-              child: GestureDetector(
-                onTap: () => _navigate(context),
-              ),
-            )
-          ],
+              );
+            },
+          ),
         ),
       ),
     );

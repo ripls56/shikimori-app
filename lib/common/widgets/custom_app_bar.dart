@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -52,7 +55,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             AppAssets.shikimoriLogo,
             height: logoSize,
             width: logoSize,
-            color: theme.brightness != Brightness.dark ? Colors.black : Colors.white,
+            colorFilter: ColorFilter.mode(
+              theme.brightness != Brightness.dark ? Colors.black : Colors.white,
+              BlendMode.srcIn,
+            ),
           ),
           onPressed: () => Scaffold.of(context).openDrawer(),
         );
@@ -63,7 +69,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             context.pop();
           }
         },
-        icon: const Icon(Icons.arrow_back),
+        icon: Icon(
+          Platform.isIOS ? CupertinoIcons.back : Icons.arrow_back,
+        ),
       );
     }
 

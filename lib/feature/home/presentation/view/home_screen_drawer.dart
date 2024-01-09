@@ -83,6 +83,7 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer>
                   child: SafeArea(
                     top: false,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ListTile(
                           onTap: () => context.go(
@@ -114,14 +115,10 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer>
                                     .status;
                                 switch (status) {
                                   case FutureStatus.pending:
-                                    return ElevatedButton(
-                                      onPressed: () {},
-                                      child: const SizedBox(
-                                        height: 16,
-                                        width: 16,
-                                        child: CircularProgressIndicator
-                                            .adaptive(),
-                                      ),
+                                    return const Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child:
+                                          CircularProgressIndicator.adaptive(),
                                     );
                                   case FutureStatus.fulfilled:
                                     return const ExitButton();

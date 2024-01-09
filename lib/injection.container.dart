@@ -16,6 +16,7 @@ import 'package:shikimoriapp/feature/anime_details/data/repositories/anime_detai
 import 'package:shikimoriapp/feature/anime_details/domain/repositories/anime_details_repository.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_anime_by_id.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_related.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_roles.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_screenshots.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/use_cases/get_videos.dart';
 import 'package:shikimoriapp/feature/anime_details/presentation/controller/details/anime_detail_cubit.dart';
@@ -54,10 +55,6 @@ import 'package:shikimoriapp/feature/profile/data/repositories/user_auth_reposit
 import 'package:shikimoriapp/feature/profile/domain/repositories/credential_repository.dart';
 import 'package:shikimoriapp/feature/profile/domain/use_cases/get_credential.dart';
 import 'package:shikimoriapp/feature/profile/presentation/controller/profile_cubit.dart';
-import 'package:shikimoriapp/feature/related/data/datasources/related_remote_data_source.dart';
-import 'package:shikimoriapp/feature/related/data/datasources/related_remote_data_source_impl.dart';
-import 'package:shikimoriapp/feature/related/data/repositories/related_repository_impl.dart';
-import 'package:shikimoriapp/feature/related/domain/repositories/related_repository.dart';
 import 'package:shikimoriapp/feature/search/presentation/bloc/search_bloc.dart';
 import 'package:shikimoriapp/feature/update_app/data/datasources/local/update_local_data_source.dart';
 import 'package:shikimoriapp/feature/update_app/data/datasources/local/update_local_data_source_impl.dart';
@@ -123,7 +120,7 @@ Future<void> init() async {
   sl.registerFactory(() => AnimePageCubit(sl()));
   sl.registerFactory(() => VideosCubit(sl()));
   sl.registerFactory(() => ProfileCubit(sl()));
-  sl.registerFactory(() => AnimeDetailCubit(sl(), sl()));
+  sl.registerFactory(() => AnimeDetailCubit(sl(), sl(), sl()));
   sl.registerFactory(() => LoginScreenCubit(sl(), sl(), sl(), storage));
   sl.registerFactory(() => ScreenshotsCubit(sl()));
   sl.registerFactory(() => SearchBloc(sl()));
@@ -145,6 +142,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAccessToken(sl()));
   sl.registerLazySingleton(() => RefreshAccessToken(sl()));
   sl.registerLazySingleton(() => GetScreenshots(sl()));
+  sl.registerLazySingleton(() => GetRoles(sl()));
   sl.registerLazySingleton(() => GetUpdate(sl()));
   sl.registerLazySingleton(() => GetUpdateInformation(sl()));
   sl.registerLazySingleton(() => UpdateApp(sl()));
@@ -159,9 +157,6 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<UserAuthRepository>(
     () => UserAuthRepositoryImpl(sl()),
-  );
-  sl.registerLazySingleton<RelatedRepository>(
-    () => RelatedRepositoryImpl(sl()),
   );
   sl.registerLazySingleton<CharacterRepository>(
     () => CharacterRepositoryImpl(sl()),
@@ -185,9 +180,6 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<UserAuthRemoteDataSource>(
     () => UserAuthRemoteDataSourceImpl(sl()),
-  );
-  sl.registerLazySingleton<RelatedRemoteDataSource>(
-    () => RelatedRemoteDataSourceImpl(sl()),
   );
   sl.registerLazySingleton<CharacterRemoteDataSource>(
     () => CharacterRemoteDataSourceImpl(sl()),

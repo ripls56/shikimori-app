@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
@@ -51,6 +53,10 @@ Future<void> main() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     runApp(const MyApp());
   }, (error, stack) {
     sl<Talker>().handle(error, stack);
@@ -59,6 +65,7 @@ Future<void> main() async {
 
 ///Set frame rate to 120Hz if device support it
 Future<void> _frameRate() async {
+  if (Platform.isIOS) return;
   try {
     await FlutterDisplayMode.setHighRefreshRate();
   } catch (_) {
@@ -75,7 +82,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();

@@ -14,45 +14,14 @@ class ExitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.theme;
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
-        return CupertinoButton(
-          color: Color.lerp(
-                theme.colorScheme.background,
-                theme.colorScheme.primary,
-                0.1,
-              ) ??
-              theme.colorScheme.background,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.logout,
-                color: theme.colorScheme.onSurface,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(
-                'Выйти',
-                style: TextStyle(
-                  color: theme.colorScheme.onSurface,
-                ),
-              ),
-            ],
-          ),
-          onPressed: () {},
+        return _ExitButtonIOS(
+          onPress: () => context.read<HomeDrawerStore>().deleteTokens(),
         );
       case TargetPlatform.android:
-        return ElevatedButton.icon(
-          onPressed: () {
-            context.read<HomeDrawerStore>().deleteTokens();
-          },
-          icon: const Icon(
-            Icons.exit_to_app,
-          ),
-          label: const Text('Выйти'),
+        return _ExitButtonAndroid(
+          onPress: () => context.read<HomeDrawerStore>().deleteTokens(),
         );
       case _:
         return ElevatedButton.icon(
@@ -65,5 +34,69 @@ class ExitButton extends StatelessWidget {
           label: const Text('Выйти'),
         );
     }
+  }
+}
+
+class _ExitButtonIOS extends StatelessWidget {
+  const _ExitButtonIOS({required this.onPress, super.key});
+
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    return CupertinoButton(
+      color: Color.lerp(
+            theme.colorScheme.background,
+            theme.colorScheme.primary,
+            0.1,
+          ) ??
+          theme.colorScheme.background,
+      onPressed: onPress,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.logout,
+            color: theme.colorScheme.onSurface,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            'Выйти',
+            style: TextStyle(
+              color: theme.colorScheme.onSurface,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ExitButtonAndroid extends StatelessWidget {
+  const _ExitButtonAndroid({required this.onPress, super.key});
+
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.lerp(
+              theme.colorScheme.background,
+              theme.colorScheme.primary,
+              0.1,
+            ) ??
+            theme.colorScheme.background,
+      ),
+      onPressed: onPress,
+      icon: const Icon(
+        Icons.logout,
+      ),
+      label: const Text('Выйти'),
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interactiveviewer_gallery/interactiveviewer_gallery.dart';
 import 'package:shikimoriapp/common/hero_dialog_route.dart';
+import 'package:shikimoriapp/common/widgets/custom_app_bar.dart';
 import 'package:shikimoriapp/common/widgets/custom_loading_bar.dart';
 import 'package:shikimoriapp/common/widgets/image_widget.dart';
 import 'package:shikimoriapp/env/env.dart';
@@ -12,6 +13,7 @@ class ScreenshotsPage extends StatefulWidget {
   const ScreenshotsPage({required this.id, super.key});
 
   final int id;
+
   @override
   State<ScreenshotsPage> createState() => _ScreenshotsPageState();
 }
@@ -29,84 +31,86 @@ class _ScreenshotsPageState extends State<ScreenshotsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Кадры'),
-        centerTitle: true,
+      appBar: const CustomAppBar(
+        title: 'Кадры',
       ),
-      body: BlocBuilder<ScreenshotsCubit, ScreenshotsState>(
-        builder: (context, state) {
-          if (state is ScreenshotsError) {
-            return Center(child: Text(state.errorMessage));
-          }
-          if (state is ScreenshotsLoaded) {
-            return GridView.builder(
-              padding: const EdgeInsets.all(12),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 14 / 8,
-              ),
-              itemCount: state.screenshots.length,
-              itemBuilder: (context, index) {
-                final screenshotUrl = _screenshotUrl(index, state.screenshots);
-                return Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Hero(
-                          tag: screenshotUrl,
-                          child: ImageWidget(
-                            url: screenshotUrl,
+      body: SafeArea(
+        child: BlocBuilder<ScreenshotsCubit, ScreenshotsState>(
+          builder: (context, state) {
+            if (state is ScreenshotsError) {
+              return Center(child: Text(state.errorMessage));
+            }
+            if (state is ScreenshotsLoaded) {
+              return GridView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 16 / 9,
+                ),
+                itemCount: state.screenshots.length,
+                itemBuilder: (context, index) {
+                  final screenshotUrl =
+                      _screenshotUrl(index, state.screenshots);
+                  return Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Hero(
+                            tag: screenshotUrl,
+                            child: ImageWidget(
+                              fit: BoxFit.cover,
+                              url: screenshotUrl,
+                            ),
                           ),
                         ),
-                      ),
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              HeroDialogRoute(
-                                builder: (context) => RepaintBoundary(
-                                  child: InteractiveviewerGallery(
-                                    maxScale: 5,
-                                    sources: state.screenshots,
-                                    initIndex: index,
-                                    itemBuilder: (
-                                      BuildContext context,
-                                      int imageIndex,
-                                      bool isFocus,
-                                    ) {
-                                      return Center(
-                                        child: Hero(
-                                          tag: _screenshotUrl(
-                                            imageIndex,
-                                            state.screenshots,
-                                          ),
-                                          child: ImageWidget(
-                                            url: _screenshotUrl(
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                HeroDialogRoute(
+                                  builder: (context) => RepaintBoundary(
+                                    child: InteractiveviewerGallery(
+                                      maxScale: 5,
+                                      sources: state.screenshots,
+                                      initIndex: index,
+                                      itemBuilder: (
+                                        BuildContext context,
+                                        int imageIndex,
+                                        bool isFocus,
+                                      ) {
+                                        return Center(
+                                          child: Hero(
+                                            tag: _screenshotUrl(
                                               imageIndex,
                                               state.screenshots,
                                             ),
+                                            child: ImageWidget(
+                                              url: _screenshotUrl(
+                                                imageIndex,
+                                                state.screenshots,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
-          }
-          return const CustomLoadingIndicator();
-        },
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+            return const CustomLoadingIndicator();
+          },
+        ),
       ),
     );
   }

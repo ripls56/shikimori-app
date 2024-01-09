@@ -2,13 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:shikimoriapp/feature/anime/domain/models/anime.dart';
 
 ///Related model
-class Related extends Equatable {
+class AnimeDetailsRelated extends Equatable {
   ///Constructor
-  const Related({
+  const AnimeDetailsRelated({
     this.relation,
     this.relationRussian,
     this.anime,
-    //this.manga,
   });
 
   ///Relation
@@ -19,8 +18,6 @@ class Related extends Equatable {
 
   ///Anime
   final Anime? anime;
-
-  //final Manga? manga;
 
   @override
   List<Object?> get props => [];

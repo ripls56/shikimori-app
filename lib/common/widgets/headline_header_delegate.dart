@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shikimoriapp/common/widgets/headline_button.dart';
+import 'package:shikimoriapp/core/extension/context_extension.dart';
 
 ///Sliver header delegate for use with
 ///[SliverMainAxisGroup]
@@ -8,6 +9,8 @@ class HeadlineHeaderDelegate extends SliverPersistentHeaderDelegate {
   const HeadlineHeaderDelegate({
     required this.title,
     required this.onTap,
+    required this.minimalExtent,
+    this.padding,
   });
 
   ///Headline title
@@ -16,15 +19,25 @@ class HeadlineHeaderDelegate extends SliverPersistentHeaderDelegate {
   ///Headline on tap callback
   final VoidCallback onTap;
 
+  ///Height of headline delegate
+  final double minimalExtent;
+
+  final EdgeInsets? padding;
+
   @override
   Widget build(
     BuildContext context,
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return HeadlineButton(
-      title: title,
-      onTap: onTap,
+    final theme = context.theme;
+    return Center(
+      child: HeadlineButton(
+        label: title,
+        onTap: onTap,
+        height: minimalExtent,
+        padding: padding,
+      ),
     );
   }
 
@@ -32,7 +45,7 @@ class HeadlineHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => minExtent;
 
   @override
-  double get minExtent => 34;
+  double get minExtent => minimalExtent;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>

@@ -67,6 +67,8 @@ dependencies:
   google_fonts:
   flutter_markdown:
   interactiveviewer_gallery:
+  webview_flutter:
+  flutter_cache_manager:
   # animations
   animations:
   flutter_staggered_animations:

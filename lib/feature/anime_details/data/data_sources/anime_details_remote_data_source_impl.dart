@@ -3,15 +3,20 @@ import 'package:shikimoriapp/core/endpoints/api_endpoints.dart';
 import 'package:shikimoriapp/core/error/exception.dart';
 import 'package:shikimoriapp/feature/anime_details/data/data_sources/anime_details_remote_data_source.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_dto.dart';
+import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_related_dto.dart';
+import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_roles_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_screenshot_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/dto/anime_details_video_dto.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_mapper.dart';
+import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_related_mapper.dart';
+import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_roles_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_screenshot_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/data/mappers/anime_details_video_mapper.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_related.dart';
+import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_roles.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_screenshot.dart';
 import 'package:shikimoriapp/feature/anime_details/domain/models/anime_details_video.dart';
-import 'package:shikimoriapp/feature/related/domain/models/related.dart';
 
 ///Anime details data source implementation
 class AnimeDetailsRemoteDataSourceImpl implements AnimeDetailsRemoteDataSource {
@@ -32,15 +37,17 @@ class AnimeDetailsRemoteDataSourceImpl implements AnimeDetailsRemoteDataSource {
   }
 
   @override
-  Future<List<Related>> getRelatedAnime(int id) async {
+  Future<List<AnimeDetailsRelated>> getRelated(int id) async {
     final response = await _dio.get(
       ApiEndpoints.animeRelateds(id),
     );
     if (response.statusCode == 200) {
-      // return (response.data as List<dynamic>)
-      //     .map((e) => RelatedModel.fromJson(e as Map<String, dynamic>))
-      //     .toList();
-      throw UnimplementedError();
+      return (response.data as List<dynamic>)
+          .map(
+            (e) => AnimeDetailsRelatedDTO.fromJson(e as Map<String, dynamic>)
+                .toEntity(),
+          )
+          .toList();
     } else {
       throw ServerException();
     }
@@ -72,6 +79,23 @@ class AnimeDetailsRemoteDataSourceImpl implements AnimeDetailsRemoteDataSource {
       return (response.data as List<dynamic>)
           .map(
             (e) => AnimeDetailsScreenshotDTO.fromJson(e as Map<String, dynamic>)
+                .toEntity(),
+          )
+          .toList();
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<AnimeDetailsRoles>> getRoles(int id) async {
+    final response = await _dio.get(
+      ApiEndpoints.animeRoles(id),
+    );
+    if (response.statusCode == 200) {
+      return (response.data as List<dynamic>)
+          .map(
+            (e) => AnimeDetailsRolesDTO.fromJson(e as Map<String, dynamic>)
                 .toEntity(),
           )
           .toList();

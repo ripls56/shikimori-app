@@ -3,7 +3,7 @@ part of '../view/anime_details.dart';
 class RelatedWidget extends StatelessWidget {
   const RelatedWidget({required this.relateds, super.key});
 
-  final List<Related> relateds;
+  final List<AnimeDetailsRelated> relateds;
 
   @override
   Widget build(BuildContext context) {

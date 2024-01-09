@@ -13,7 +13,7 @@ class ScreenshotsWidget extends StatelessWidget {
       return;
     } else {
       Navigator.of(context).push(
-        MaterialPageRoute(
+        MaterialPageRoute<void>(
           builder: (context) => ScreenshotsPage(
             id: animeDetails.id!,
           ),
@@ -27,16 +27,18 @@ class ScreenshotsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (animeDetails.screenshots.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return HeadlineButton(
       onTap: () => _navigate(context),
-      title: 'Кадры',
-      child: SizedBox(
-        height: 130,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      label: 'Кадры',
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            child: SizedBox(
+              height: 120,
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   return ListView.separated(
@@ -58,51 +60,9 @@ class ScreenshotsWidget extends StatelessWidget {
                 },
               ),
             ),
-            Material(
-              color: Colors.transparent,
-              child: GestureDetector(
-                onTap: () => _navigate(context),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
-
-// HeadlineButton(
-//       onPress: () => Navigator.of(context).push(MaterialPageRoute(
-//         builder: (context) => ScreenshotsPage(
-//           id: animeDetails.id ?? 1,
-//         ),
-//       )),
-//       title: 'Кадры',
-//       height: 30,
-//       child: SizedBox(
-//         height: 110,
-//         width: MediaQuery.of(context).size.width,
-//         child: Align(
-//           alignment: Alignment.center,
-//           child: ListView.builder(
-//             shrinkWrap: true,
-//             scrollDirection: Axis.horizontal,
-//             physics: const NeverScrollableScrollPhysics(),
-//             itemCount: animeDetails.screenshots.length,
-//             itemBuilder: (context, index) {
-//               return Padding(
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: AspectRatio(
-//                   aspectRatio: 16 / 9,
-//                   child: CachedNetworkImage(
-//                     fit: BoxFit.fitWidth,
-//                     imageUrl:
-//                         '$SHIKIMORI_URL${animeDetails.screenshots[index]!.original}',
-//                   ),
-//                 ),
-//               );
-//             },
-//           ),
-//         ),
-//       ),
-//     );
